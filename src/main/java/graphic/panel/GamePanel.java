@@ -47,7 +47,7 @@ public class GamePanel extends MarioPanel {
         super.paintComponent(g);
         g2 = (Graphics2D) g;
         System.out.println("here repainting game panel 51");
-//        Camera.getCamera().paintCamera(g2);
+        Camera.getCamera().paintCamera(g2);
 }
 
 }

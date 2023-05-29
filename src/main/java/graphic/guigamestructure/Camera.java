@@ -7,6 +7,7 @@ import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.Pipe;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.worldtiles.BackgroundMap;
+import util.Constant;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -32,14 +33,14 @@ public class Camera {
     private Camera() {
         startPaintingX = 0;
         // need to be change
-        endPaintingX = 900;
+        endPaintingX = Constant.PANEL_WIDTH;
         minasXLength = 0;
     }
     public void paintCamera(Graphics2D g2) {
         System.out.println("line 34,Camera");
         updateCameraLocation();
         //paint Background
-        for (int i = startPaintingX/48;i< endPaintingX/48;i++){
+        for (int i = startPaintingX/Constant.BACKGROUND_TILE_SIZE;i< endPaintingX/Constant.BACKGROUND_TILE_SIZE;i++){
             for (int j = 0; j< guiGameState.getCurrentGuiSection().getBackgroundMap().getBackGroundTiles()[i].length;j++){
                 Image image;
                 try {
@@ -50,7 +51,7 @@ public class Camera {
                 }
 //                System.out.println("camera line 38");
                 System.out.println(minasXLength);
-                g2.drawImage(image,(i*48)-minasXLength,j * 48,48,48,null);
+                g2.drawImage(image,(i* Constant.BACKGROUND_TILE_SIZE)-minasXLength,j * Constant.BACKGROUND_TILE_SIZE,Constant.BACKGROUND_TILE_SIZE,Constant.BACKGROUND_TILE_SIZE,null);
             }
         }
 //        drawing enemies

@@ -10,6 +10,7 @@ public class GuiGameState{
     private GuiSection currentGuiSection;
     private GuiPlayer guiplayer;
     private int levelNumber;
+    private int sectionNumber;
     private int coins;
     private int score;
     private int remainingHeart;
@@ -86,5 +87,13 @@ public class GuiGameState{
 
     public void setPaused(boolean paused) {
         isPaused = paused;
+    }
+
+    public int getSectionNumber() {
+        return sectionNumber;
+    }
+
+    public void setSectionNumber(int sectionNumber) {
+        this.sectionNumber = sectionNumber;
     }
 }

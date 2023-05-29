@@ -11,6 +11,7 @@ public class GameState {
     private Section currentSection;
     private Player player;
     private int levelNumber;
+    private int sectionNumber;
     private int coins;
     private int score;
     private int remainingHeart;
@@ -25,6 +26,7 @@ public class GameState {
         currentSection = currentLevel.getSections()[0];
         this.player = player;
         levelNumber = 1;
+        sectionNumber = 1;
         coins = 0;
         score = 0;
         remainingHeart = game.getHearts();
@@ -110,5 +112,13 @@ public class GameState {
 
     public void setPaused(boolean paused) {
         isPaused = paused;
+    }
+
+    public int getSectionNumber() {
+        return sectionNumber;
+    }
+
+    public void setSectionNumber(int sectionNumber) {
+        this.sectionNumber = sectionNumber;
     }
 }
