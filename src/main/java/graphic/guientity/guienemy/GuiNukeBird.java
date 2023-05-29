@@ -1,0 +1,19 @@
+package graphic.guientity.guienemy;
+
+import graphic.guientity.GuiEntity;
+import logic.modelstructure.entity.enemy.NukeBird;
+
+import java.awt.*;
+
+public class GuiNukeBird extends GuiEnemy{
+    private NukeBird nukeBird;
+    @Override
+    public void draw(Graphics2D g2) {
+
+    }
+
+    @Override
+    public void loadImages() {
+
+    }
+}
