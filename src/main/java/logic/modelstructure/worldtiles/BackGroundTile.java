@@ -4,31 +4,32 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BackGroundTile {
-    private int x,y;
+    private int col,row;
     private TileName name;
+    private boolean isCollisionOn;
     public BackGroundTile(){
     }
 
-    public BackGroundTile(int x, int y, TileName name) {
-        this.x = x;
-        this.y = y;
+    public BackGroundTile(int col, int row, TileName name) {
+        this.col = col;
+        this.row = row;
         this.name = name;
     }
 
-    public int getX() {
-        return x;
+    public int getCol() {
+        return col;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setCol(int col) {
+        this.col = col;
     }
 
-    public int getY() {
-        return y;
+    public int getRow() {
+        return row;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setRow(int row) {
+        this.row = row;
     }
 
     public TileName getName() {

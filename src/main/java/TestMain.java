@@ -1,14 +1,22 @@
 import graphic.GraphicManager;
 import graphic.guigamestructure.Camera;
+import graphic.guigamestructure.GuiGameCreator;
 import graphic.panel.Frame;
+import logic.gamestrucure.GameState;
+import logic.levelstructure.Section;
+import logic.modelstructure.entity.player.Mario;
+import logic.modelstructure.worldtiles.BackgroundMap;
 
 
 public class TestMain {
     public static void main(String[] args) {
-//        GameState gameState = new GameState();
-//        gameState.setPlayer(new Mario(0,0));
-////        System.out.println("here");
-//        Camera.getCamera().setGameState(gameState);
+        GameState gameState = new GameState();
+        BackgroundMap backgroundMap = new BackgroundMap(1,1,26* 4,15);
+        gameState.setPlayer(new Mario(0,0));
+        gameState.setCurrentSection(new Section());
+        gameState.getCurrentSection().setBackgroundMap(backgroundMap);
+//        System.out.println("here");
+        Camera.getCamera().setGuiGameState(GuiGameCreator.CreateGameState(gameState));
         Frame frame = new Frame(new GraphicManager());
         Camera.getCamera().setGamePanel(frame.getPanelsManagerCard().getGamePanel());
 //        try {

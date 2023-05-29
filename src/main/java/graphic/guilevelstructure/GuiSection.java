@@ -3,13 +3,13 @@ package graphic.guilevelstructure;
 
 import graphic.guibackgroundobject.guiblock.GuiBlock;
 import graphic.guibackgroundobject.guipipe.GuiPipe;
+import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundMap;
 import graphic.guientity.guienemy.GuiEnemy;
-import logic.modelstructure.worldtiles.BackgroundMap;
 
 public class GuiSection {
     private int length;
     private int time;
-    private BackgroundMap backgroundMap;
+    private GuiBackgroundMap guibackgroundMap;
     private GuiBlock[] guiBlocks;
     private GuiEnemy[] guiEnemies;
     private GuiPipe[] guiPipes;
@@ -33,12 +33,12 @@ public class GuiSection {
         this.time = time;
     }
 
-    public BackgroundMap getBackgroundMap() {
-        return backgroundMap;
+    public GuiBackgroundMap getGuibackgroundMap() {
+        return guibackgroundMap;
     }
 
-    public void setBackgroundMap(BackgroundMap backgroundMap) {
-        this.backgroundMap = backgroundMap;
+    public void setGuiBackgroundMap(GuiBackgroundMap guibackgroundMap) {
+        this.guibackgroundMap = guibackgroundMap;
     }
 
     public GuiBlock[] getGuiBlocks() {
