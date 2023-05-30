@@ -10,19 +10,9 @@ public class Camera {
     // world button column which it have to start painting from
     private GuiGameState guiGameState;
     private int startPaintingX ,endPaintingX;
-    private static Camera camera;
     private int minasXLength;
-    GamePanel gamePanel;
 
-    public void setGamePanel(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
-    }
-
-    public GamePanel getGamePanel() {
-        return gamePanel;
-    }
-
-    private Camera() {
+    public Camera() {
         startPaintingX = 0;
         // need to be change
         endPaintingX = Constant.PANEL_WIDTH;
@@ -72,12 +62,6 @@ public class Camera {
             return true;
         }
         return false;
-    }
-    public static Camera getCamera() {
-        if (camera == null){
-            camera = new Camera();
-        }
-        return camera;
     }
     public void updateCameraLocation(){
         if (guiGameState != null) {

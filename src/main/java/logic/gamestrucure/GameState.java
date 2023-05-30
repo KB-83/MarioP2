@@ -4,12 +4,14 @@ import logic.levelstructure.Level;
 import logic.levelstructure.Section;
 import logic.modelstructure.entity.player.Player;
 import logic.userstructure.User;
+import util.Loop;
 
 public class GameState {
     private User currentUser;
     private Level currentLevel;
     private Section currentSection;
     private Player player;
+    private Loop gameloop;
     private int levelNumber;
     private int sectionNumber;
     private int coins;
@@ -18,11 +20,10 @@ public class GameState {
     private int remainingTime;
     private boolean isPaused;
     // todo : test
-    private static GameState gameState;
 
-    private GameState() {
+    public GameState() {
     }
-    private GameState(User user , Game game , Player player) {
+    public GameState(User user , Game game , Player player) {
         currentUser = user;
         currentLevel = game.getLevels()[0];
         currentSection = currentLevel.getSections()[0];
@@ -34,22 +35,6 @@ public class GameState {
         remainingHeart = game.getHearts();
         remainingTime = currentSection.getTime();
         isPaused = false;
-    }
-    public static GameState getGameState(){
-        if (gameState == null) {
-            gameState = new GameState();
-
-        }
-        return gameState;
-    }
-    public static GameState getGameState(User user , Game game , Player player){
-        if (gameState == null) {
-            gameState = new GameState(user ,game ,player);
-        }
-        return gameState;
-    }
-    public void removeLastGameState() {
-        gameState = null;
     }
 
     public User getCurrentUser() {
@@ -138,5 +123,13 @@ public class GameState {
 
     public void setSectionNumber(int sectionNumber) {
         this.sectionNumber = sectionNumber;
+    }
+
+    public Loop getGameloop() {
+        return gameloop;
+    }
+
+    public void setGameLoop(Loop gameloop) {
+        this.gameloop = gameloop;
     }
 }

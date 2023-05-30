@@ -9,4 +9,5 @@ public class User {
     private Game[] games;
     private Player[] players;
     private int coins;
+    private int highScore;
 }

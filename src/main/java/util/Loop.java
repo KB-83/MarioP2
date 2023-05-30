@@ -1,11 +1,13 @@
 package util;
 
 import graphic.GraphicManager;
+import graphic.panel.GamePanel;
 import logic.LogicManager;
+import logic.gamestrucure.GameState;
 
 public class Loop implements Runnable{
-    private LogicManager lM;
-    private GraphicManager gM;
+    private GameState gameState;// to update
+    private GamePanel gamePanel;// to repaint
     private Thread gameThread;
     private int FPS;
     private boolean running;
@@ -13,9 +15,9 @@ public class Loop implements Runnable{
 //    this int is to test app rendering
     private int tryFps;
 
-    public Loop(LogicManager lM, GraphicManager gM,int FPS) {
-        this.lM = lM;
-        this.gM = gM;
+    public Loop(GameState gameState,GamePanel gamePanel,int FPS) {
+        this.gamePanel = gamePanel;
+        this.gameState = gameState;
         this.FPS = FPS;
     }
 
@@ -51,8 +53,8 @@ public class Loop implements Runnable{
             delta = (currentTime - lastTime) / drawInterval ;
             if(delta >= 1){
                 tryFps++;
-//                lM.updateAll();
-//                gM.paintAll();
+//                gameState.update
+                gamePanel.repaint();
                 lastTime = System.nanoTime();
             }
             if (System.nanoTime()-startfPS >= 1000000000){

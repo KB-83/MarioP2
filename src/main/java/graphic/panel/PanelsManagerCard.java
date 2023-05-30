@@ -18,10 +18,6 @@ public class PanelsManagerCard extends MarioPanel {
     private LastGamesPanel lastGamesPanel;
     //layout
     private CardLayout cardLayout;
-    // variables
-    private final int COL = 26;
-    public final int ROW = 15;
-    public final int TILE_SIZE = 48;
     public PanelsManagerCard(Frame frame){
         this.frame = frame;
         setDependencies();
