@@ -10,13 +10,14 @@ import logic.modelstructure.worldtiles.BackgroundMap;
 
 public class TestMain {
     public static void main(String[] args) {
-        GameState gameState = new GameState();
+        GameState gameState =  GameState.getGameState();
         BackgroundMap backgroundMap = new BackgroundMap(1,1,26* 4,15);
         gameState.setPlayer(new Mario(0,0));
         gameState.setCurrentSection(new Section());
         gameState.getCurrentSection().setBackgroundMap(backgroundMap);
 //        System.out.println("here");
-        Camera.getCamera().setGuiGameState(GuiGameCreator.CreateGameState(gameState));
+        GuiGameCreator guiGameCreator = new GuiGameCreator();
+        Camera.getCamera().setGuiGameState(guiGameCreator.createGameState(gameState));
         Frame frame = new Frame(new GraphicManager());
         Camera.getCamera().setGamePanel(frame.getPanelsManagerCard().getGamePanel());
 //        try {

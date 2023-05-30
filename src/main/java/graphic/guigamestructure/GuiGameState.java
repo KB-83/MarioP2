@@ -33,11 +33,11 @@ public class GuiGameState{
         this.currentGuiSection = currentGuiSection;
     }
 
-    public GuiPlayer getGuiplayer() {
+    public GuiPlayer getGuiPlayer() {
         return guiplayer;
     }
 
-    public void setGuiplayer(GuiPlayer guiplayer) {
+    public void setGuiPlayer(GuiPlayer guiplayer) {
         this.guiplayer = guiplayer;
     }
 

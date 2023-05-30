@@ -6,26 +6,24 @@ import logic.modelstructure.entity.player.Player;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Locale;
 
 public class PlayerRequestHandler extends Request{
     private PlayerController playerController = new PlayerController();
-    private Player player;
     public void JumpRequest(){
         int time;
         int xV;
         int yV;
         int g;
         int m;
-        returnResponse("jump");
+        returnResponse("JUMP");
         System.out.println("jump request");
     }
     public void RightRequest(){
 //        player.setX(player.getX()+4);
-//        returnResponse("JUMP");
-//        Camera.getCamera().getGameState().getPlayer().setCameraX(Camera.getCamera().getGameState().getPlayer().getCameraX()+4);
-//        Camera.getCamera().getGameState().getPlayer().setWorldX(Camera.getCamera().getGameState().getPlayer().getWorldX()+14);
-        Camera.getCamera().updateCameraLocation();
-        Camera.getCamera().getGamePanel().repaint();
+        returnResponse("RIGHT");
+        // todo : handle it in logic
+
 
 
 
@@ -42,7 +40,7 @@ public class PlayerRequestHandler extends Request{
     public Response returnResponse(String s){
         Class c = playerController.getClass();
         try {
-            Method m = c.getMethod(s);
+            Method m = c.getMethod(s.toLowerCase());
             m.invoke(c.newInstance());
         } catch (NoSuchMethodException | InvocationTargetException
                  | IllegalAccessException | InstantiationException e) {

@@ -17,10 +17,12 @@ public class GameState {
     private int remainingHeart;
     private int remainingTime;
     private boolean isPaused;
+    // todo : test
+    private static GameState gameState;
 
-    public GameState() {
+    private GameState() {
     }
-    public GameState(User user , Game game , Player player) {
+    private GameState(User user , Game game , Player player) {
         currentUser = user;
         currentLevel = game.getLevels()[0];
         currentSection = currentLevel.getSections()[0];
@@ -32,6 +34,22 @@ public class GameState {
         remainingHeart = game.getHearts();
         remainingTime = currentSection.getTime();
         isPaused = false;
+    }
+    public static GameState getGameState(){
+        if (gameState == null) {
+            gameState = new GameState();
+
+        }
+        return gameState;
+    }
+    public static GameState getGameState(User user , Game game , Player player){
+        if (gameState == null) {
+            gameState = new GameState(user ,game ,player);
+        }
+        return gameState;
+    }
+    public void removeLastGameState() {
+        gameState = null;
     }
 
     public User getCurrentUser() {

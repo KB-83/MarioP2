@@ -29,7 +29,6 @@ public class Camera {
         minasXLength = 0;
     }
     public void paintCamera(Graphics2D g2) {
-        System.out.println("line 34,Camera");
         updateCameraLocation();
         //paint Background
         for (int i = startPaintingX/Constant.BACKGROUND_TILE_SIZE;i< endPaintingX/Constant.BACKGROUND_TILE_SIZE;i++){
@@ -82,11 +81,11 @@ public class Camera {
     }
     public void updateCameraLocation(){
         if (guiGameState != null) {
-            startPaintingX = guiGameState.getGuiplayer().getWorldX();//- game panel size;
+            startPaintingX = guiGameState.getGuiPlayer().getWorldX();//- game panel size;
             // todo: player camera x doesnt need to be initialize in logic player im goinig to creat it in graphic
 
-            endPaintingX = startPaintingX + 1600;//+ 2 gamePanel Size
-            minasXLength = gameState.getPlayer().getWorldX() - gameState.getPlayer().getCameraX();
+            endPaintingX = startPaintingX + 2 * Constant.PANEL_WIDTH;//+ 2 gamePanel Size
+            minasXLength = guiGameState.getGuiPlayer().getWorldX() - guiGameState.getGuiPlayer().getCameraX();
         }
     }
 
