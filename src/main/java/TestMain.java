@@ -3,6 +3,7 @@ import graphic.guigamestructure.Camera;
 import graphic.guigamestructure.GuiGameCreator;
 import graphic.panel.Frame;
 import graphic.requestlistener.PlayerListener;
+import logic.LogicManager;
 import logic.datahandler.Loader;
 import logic.gamestrucure.GameState;
 import logic.levelstructure.Section;
@@ -20,7 +21,7 @@ public class TestMain {
 //        gameState.setPlayer(new Mario(0,0));
 //        gameState.setCurrentSection(new Section());
 //        gameState.getCurrentSection().setBackgroundMap(backgroundMap);
-        Frame frame = new Frame(new GraphicManager());
+
 //        frame.getPanelsManagerCard().getGamePanel().getCamera().setGuiGameState(GuiGameCreator.createGameState(gameState));
 //        frame.getPanelsManagerCard().getGamePanel().addKeyListener(new PlayerListener(new PlayerRequestHandler(gameState.getPlayer())));
 //        try {
@@ -29,6 +30,7 @@ public class TestMain {
 //            throw new RuntimeException(e);
 //        }
 //        User user
+        LogicManager logicManager = new LogicManager();
     }
 
 }

@@ -1,0 +1,22 @@
+{
+  "username" : "user name:",
+  "password" : "pass:",
+  "games" : [ {
+    "name" : "default",
+    "levels" : [ {
+      "sections" : [ {
+        "length" : 0,
+        "time" : 0,
+        "blocks" : null,
+        "enemies" : null,
+        "pipes" : null,
+        "backgroundMap" : null
+      } ]
+    } ],
+    "hearts" : 0,
+    "marioState" : 0
+  } ],
+  "players" : null,
+  "coins" : 0,
+  "highScore" : 0
+}

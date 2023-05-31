@@ -29,7 +29,7 @@ public class GamePanel extends MarioPanel {
         this.cardPanel = cardPanel;
         this.camera = new Camera();
         // todo they are all test from 24 - 32
-//        addKeyListener(new PlayerListener(new PlayerRequestHandler(new Mario())));
+        addKeyListener(new PlayerListener(new PlayerRequestHandler(new Mario())));
         setFocusable(true);
     }
 
@@ -62,7 +62,6 @@ public class GamePanel extends MarioPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g2 = (Graphics2D) g;
-        System.out.println(camera.getGuiGameState());
         if (camera.getGuiGameState() != null) {
             camera.paintCamera(g2);
         }

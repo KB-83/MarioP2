@@ -140,7 +140,7 @@ public class StartPanel extends MarioPanel {
         getSignIn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                UserRequestHandler userRequestHandler = new UserRequestHandler();
+                UserRequestHandler userRequestHandler = new UserRequestHandler(cardPanel.getFrame().getGraphicManager().getLogicManager());
                 if (userRequestHandler.signInRequest(signName.getText(),signPass.getText())){
                     cardPanel.getCardLayout().show(cardPanel, "mainMenu");
                     cardPanel.getMainMenu().requestFocus();
@@ -152,7 +152,7 @@ public class StartPanel extends MarioPanel {
         getLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                UserRequestHandler userRequestHandler = new UserRequestHandler();
+                UserRequestHandler userRequestHandler = new UserRequestHandler(cardPanel.getFrame().getGraphicManager().getLogicManager());
                 if (userRequestHandler.loginRequest(loginName.getText(), loginPass.getText())){
                     cardPanel.getCardLayout().show(cardPanel, "mainMenu");
                     cardPanel.getMainMenu().requestFocus();

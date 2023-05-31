@@ -1,9 +1,13 @@
 package logic.userstructure;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import logic.LogicManager;
 import logic.gamestrucure.Game;
 import logic.modelstructure.entity.player.Player;
 
 public class User {
+    @JsonIgnore
+    private LogicManager logicManager;
     private String username;
     private String password;
     private Game[] games;
@@ -66,5 +70,13 @@ public class User {
 
     public void setHighScore(int highScore) {
         this.highScore = highScore;
+    }
+
+    public LogicManager getLogicManager() {
+        return logicManager;
+    }
+
+    public void setLogicManager(LogicManager logicManager) {
+        this.logicManager = logicManager;
     }
 }

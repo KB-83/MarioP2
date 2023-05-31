@@ -7,14 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Frame extends JFrame {
-    private GraphicManager gM;
+    private GraphicManager graphicManager;
     private PanelsManagerCard panelsManagerCard;
     public Frame(GraphicManager gM){
         setDependencies(gM);
         loadConfig(this.getClass().getSimpleName());
     }
-    private void setDependencies(GraphicManager gM){
-        this.gM = gM;
+    private void setDependencies(GraphicManager graphicManager){
+        this.graphicManager = graphicManager;
         this.panelsManagerCard = new PanelsManagerCard(this);
     }
     private void loadConfig(String name) {
@@ -45,5 +45,9 @@ public class Frame extends JFrame {
 
     public void setPanelsManagerCard(PanelsManagerCard panelsManagerCard) {
         this.panelsManagerCard = panelsManagerCard;
+    }
+
+    public GraphicManager getGraphicManager() {
+        return graphicManager;
     }
 }
