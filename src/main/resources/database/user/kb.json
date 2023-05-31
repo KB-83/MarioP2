@@ -1,0 +1,8 @@
+{
+  "username" : "a",
+  "password" : "b",
+  "games" :  null,
+  "players": null,
+  "coins": 10,
+  "highScore": 80
+}
