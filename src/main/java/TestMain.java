@@ -9,6 +9,7 @@ import logic.levelstructure.Section;
 import logic.modelstructure.entity.player.Mario;
 import logic.modelstructure.worldtiles.BackgroundMap;
 import logic.requsethandler.PlayerRequestHandler;
+import logic.requsethandler.UserRequestHandler;
 import logic.userstructure.User;
 
 
@@ -27,8 +28,6 @@ public class TestMain {
 //        } catch (InterruptedException e) {
 //            throw new RuntimeException(e);
 //        }
-        User user = Loader.getLoader().loadUser("kb");
-        System.out.println(user.getCoins());
 
 
     }
