@@ -1,6 +1,7 @@
 package graphic.panel;
 
 import graphic.requestlistener.PlayerListener;
+import logic.requsethandler.UserRequestHandler;
 import util.Config;
 
 import javax.swing.*;
@@ -87,9 +88,9 @@ public class StartPanel extends MarioPanel {
 
         LineBorder lineBorder = new LineBorder(Color.white, 8, true);
         loginName.setBorder(lineBorder);
-        loginName.setForeground(Color.LIGHT_GRAY);
+//        loginName.setForeground(Color.LIGHT_GRAY);
         loginPass.setBorder(lineBorder);
-        loginPass.setForeground(Color.LIGHT_GRAY);
+//        loginPass.setForeground(Color.LIGHT_GRAY);
         signName.setBorder(lineBorder);
         signName.setForeground(Color.LIGHT_GRAY);
         signPass.setBorder(lineBorder);
@@ -139,41 +140,23 @@ public class StartPanel extends MarioPanel {
         getSignIn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO : send signin request
-
-//                if(card.gM.lM.userManager.signInRequest(signName.getText() , signPass.getText())){
-                cardPanel.getCardLayout().show(cardPanel,"mainMenu");
-                cardPanel.getMainMenu().requestFocus();
-//                    if(card.gM.lM.logicGameState == null){
-
+                UserRequestHandler userRequestHandler = new UserRequestHandler();
+                if (userRequestHandler.signInRequest(signName.getText(),signPass.getText())){
+                    cardPanel.getCardLayout().show(cardPanel, "mainMenu");
+                    cardPanel.getMainMenu().requestFocus();
+                }
             }
-//                    else {
-//
-//                        card.gM.guiGameState.loop.start();
-//                    }
-//            }
-
-//                card.gamePanel.requestFocus();
 
         });
 
         getLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO : send login request
-//                if(card.gM.lM.userManager.loginRequest(loginName.getText() , loginPass.getText())){
-//                    card.cardLayout.show(card, "mainMenu");
-////                    if(card.gM.lM.logicGameState == null){
-//
-//                }
-//                if(card.gM.lM.userManager.loginRequest(loginName.getText(),loginPass.getText())) {
-//                    card.gM.lM.userManager.newGameRequest();
-//                    card.gamePanel.setKeyListener(card.gM.lM.userManager.currentUser.getSelectedPlayer().getPlayerListener());
-//                    GameLoop gameLoop = new GameLoop(card.gM.lM, card.gM);
-//                    gameLoop.start();
-                cardPanel.getCardLayout().show(cardPanel,"mainMenu");
-                cardPanel.getMainMenu().requestFocus();
-//                }
+                UserRequestHandler userRequestHandler = new UserRequestHandler();
+                if (userRequestHandler.loginRequest(loginName.getText(), loginPass.getText())){
+                    cardPanel.getCardLayout().show(cardPanel, "mainMenu");
+                    cardPanel.getMainMenu().requestFocus();
+                }
             }
         });
 

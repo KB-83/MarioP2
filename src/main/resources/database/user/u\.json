@@ -1,6 +1,6 @@
 {
-  "username" : "a",
-  "password" : "b",
+  "username" : "u\\",
+  "password" : "pass:",
   "games" : null,
   "players" : null,
   "coins" : 0,

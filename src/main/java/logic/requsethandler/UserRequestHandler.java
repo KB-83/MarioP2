@@ -19,11 +19,12 @@ public class UserRequestHandler {
         }
         return false;
     }
-    public void signInRequest(String username,String password){
+    public boolean signInRequest(String username, String password){
         User user = new User(username,password);
         boolean b = Saver.getSaver().saveUser(user);
         if (b){
 //             todo: do the things
               }
+        return b;
     }
 }

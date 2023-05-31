@@ -20,7 +20,7 @@ public class TestMain {
 //        gameState.setPlayer(new Mario(0,0));
 //        gameState.setCurrentSection(new Section());
 //        gameState.getCurrentSection().setBackgroundMap(backgroundMap);
-//        Frame frame = new Frame(new GraphicManager());
+        Frame frame = new Frame(new GraphicManager());
 //        frame.getPanelsManagerCard().getGamePanel().getCamera().setGuiGameState(GuiGameCreator.createGameState(gameState));
 //        frame.getPanelsManagerCard().getGamePanel().addKeyListener(new PlayerListener(new PlayerRequestHandler(gameState.getPlayer())));
 //        try {
@@ -28,8 +28,7 @@ public class TestMain {
 //        } catch (InterruptedException e) {
 //            throw new RuntimeException(e);
 //        }
-
-
+//        User user
     }
 
 }

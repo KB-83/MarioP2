@@ -50,8 +50,8 @@ public class PanelsManagerCard extends MarioPanel {
 
 
         //adding panels order is important
-        add(gamePanel, "gamePanel");
         add(startPanel , "startPanel");
+        add(gamePanel, "gamePanel");
         add(newGamePanel,"newGamePanel");
         add(lastGamesPanel,"lastGamesPanel");
         add(mainMenu,"mainMenu");
