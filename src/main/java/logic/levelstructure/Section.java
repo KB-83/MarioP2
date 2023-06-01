@@ -18,7 +18,7 @@ public class Section {
     //todo : test if it is nessesary
     private BackgroundMap backgroundMap;
     public Section(){
-        backgroundMap = new BackgroundMap(1,1,26*4, 15);    }
+        backgroundMap = new BackgroundMap(1,2,26*4, 15);    }
 
     public Section(int levelNum) {
         // todo: this is just a test

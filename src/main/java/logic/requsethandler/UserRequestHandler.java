@@ -8,6 +8,7 @@ import logic.gamestrucure.GameState;
 import logic.levelstructure.Level;
 import logic.levelstructure.Section;
 import logic.modelstructure.entity.player.Mario;
+import logic.modelstructure.entity.player.Player;
 import logic.userstructure.User;
 import util.Loop;
 
@@ -60,7 +61,10 @@ public class UserRequestHandler {
         // todo set game default
         if (game != null) {
             GameState gameState = new GameState();
-            gameState.setPlayer(new Mario());
+            Player player = new Mario();
+            gameState.setPlayer(player);
+            // todo: next line is really dirty
+            logicManager.getGraphicManager().getFrame().getPanelsManagerCard().getGamePanel().setKeyListener(player);
             gameState.setCurrentLevel(game.getLevels()[0]);
             gameState.setCurrentSection(game.getLevels()[0].getSections()[0]);
             gameState.setCoins(0);

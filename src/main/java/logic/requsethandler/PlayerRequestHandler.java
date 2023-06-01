@@ -23,11 +23,13 @@ public class PlayerRequestHandler extends Request{
         int m;
 //        returnResponse("JUMP");
         System.out.println("jump request");
+        System.out.println(player.getWorldX()+"----line 26 player request handler");
     }
     public void RightRequest(){
         System.out.println("rightrequest");
-        player.setCameraX(player.getCameraX()+4);
-        player.setWorldX(player.getWorldX()+4);
+//        player.setCameraX(player.getCameraX()+4);
+        player.setWorldX(player.getWorldX()+6);
+        System.out.println(player.getCameraX()+"----line 32 player request handler");
 //        player.setX(player.getX()+4);
 //        returnResponse("RIGHT");
         // todo : handle it in logic
@@ -36,7 +38,9 @@ public class PlayerRequestHandler extends Request{
 
 
     }
-    public void LeftRequest(){}
+    public void LeftRequest(){
+        player.setWorldX(player.getWorldX()-20);
+    }
     public void DownRequest(){}
     public void SwardRequest(){}
     public void BulletRequest(){}

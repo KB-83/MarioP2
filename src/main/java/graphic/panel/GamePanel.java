@@ -11,6 +11,7 @@ import logic.modelstructure.entity.enemy.Enemy;
 
 import logic.modelstructure.entity.enemy.Goomba;
 import logic.modelstructure.entity.player.Mario;
+import logic.modelstructure.entity.player.Player;
 import logic.requsethandler.PlayerRequestHandler;
 import util.Loop;
 
@@ -29,7 +30,6 @@ public class GamePanel extends MarioPanel {
         this.cardPanel = cardPanel;
         this.camera = new Camera();
         // todo they are all test from 24 - 32
-        addKeyListener(new PlayerListener(new PlayerRequestHandler(new Mario())));
         setFocusable(true);
     }
 
@@ -58,6 +58,9 @@ public class GamePanel extends MarioPanel {
 
     public void setCamera(Camera camera) {
         this.camera = camera;
+    }
+    public void setKeyListener(Player player) {
+        addKeyListener(new PlayerListener(new PlayerRequestHandler(player)));
     }
 
     public void paintComponent(Graphics g) {

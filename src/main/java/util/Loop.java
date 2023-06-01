@@ -1,6 +1,7 @@
 package util;
 
 import graphic.GraphicManager;
+import graphic.guigamestructure.GuiGameCreator;
 import graphic.panel.GamePanel;
 import logic.LogicManager;
 import logic.gamestrucure.GameState;
@@ -54,6 +55,7 @@ public class Loop implements Runnable{
             if(delta >= 1){
                 tryFps++;
 //                gameState.update
+                gamePanel.setGuiGameState(GuiGameCreator.createGameState(gameState));
                 gamePanel.repaint();
                 lastTime = System.nanoTime();
             }

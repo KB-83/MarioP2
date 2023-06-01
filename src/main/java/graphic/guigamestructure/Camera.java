@@ -67,7 +67,6 @@ public class Camera {
         if (guiGameState != null) {
             startPaintingX = guiGameState.getGuiPlayer().getWorldX();//- game panel size;
             // todo: player camera x doesnt need to be initialize in logic player im goinig to creat it in graphic
-
             endPaintingX = startPaintingX + 2 * Constant.PANEL_WIDTH;//+ 2 gamePanel Size
             minasXLength = guiGameState.getGuiPlayer().getWorldX() - guiGameState.getGuiPlayer().getCameraX();
         }
