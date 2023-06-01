@@ -14,6 +14,7 @@ import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.Pipe;
 import logic.modelstructure.entity.enemy.Enemy;
+import logic.modelstructure.entity.player.Mario;
 import logic.modelstructure.entity.player.Player;
 import logic.modelstructure.worldtiles.BackgroundMap;
 
@@ -37,7 +38,10 @@ public class GuiGameCreator {
     public void updateGuiGameState(GameState gameState) {
     }
     private static GuiPlayer createGuiPlayer(Player player){
-        GuiPlayer guiPlayer = new GuiMario();// todo : let player to be mario luigi or etc...
+        GuiMario guiPlayer = new GuiMario();// todo : let player to be mario luigi or etc...
+        System.out.println(player.getImageAddress());
+        System.out.println("42---guigame creator--- "+guiPlayer.getImageByItsAddress(player.getImageAddress()));
+        guiPlayer.setCurrentImage(guiPlayer.getImageByItsAddress(player.getImageAddress()));
         guiPlayer.setCameraX(player.getCameraX());
         guiPlayer.setCameraY(player.getCameraY());
         guiPlayer.setWorldX(player.getWorldX());

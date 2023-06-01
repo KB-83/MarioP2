@@ -18,10 +18,7 @@ public class GuiPoker extends GuiPlayer{
 //    }
 //
 //    @Override
-    public void setImage(int imageNum) {
 
-//        this.image = images[imageNum];
-    }
 
 
     public void loadImages() {
@@ -40,4 +37,8 @@ public class GuiPoker extends GuiPlayer{
 //        }
     }
 
+    @Override
+    public void setImage(String imageAddress) {
+
+    }
 }

@@ -56,6 +56,11 @@ public class Camera {
 //                // draw pipes
 //            }
 //        }
+        //todo : drying player
+        System.out.println(guiGameState.getGuiPlayer());
+        g2.drawImage(guiGameState.getGuiPlayer().getCurrentImage(),getGuiGameState().getGuiPlayer().getCameraX()
+                ,getGuiGameState().getGuiPlayer().getCameraY()
+                ,Constant.BACKGROUND_TILE_SIZE,Constant.BACKGROUND_TILE_SIZE,null );
     }
     private boolean checkBound (int x , int y) {
         if(x < endPaintingX && x > startPaintingX) {

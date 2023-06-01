@@ -43,8 +43,9 @@ public class GuiLuigi extends GuiPlayer{
 //        }
 //    }
 
+
     @Override
-    public void setImage(int imageNum) {
+    public void setImage(String imageAddress) {
 
     }
 

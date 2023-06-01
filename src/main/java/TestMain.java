@@ -1,4 +1,5 @@
 import graphic.GraphicManager;
+import graphic.guientity.guiplayer.GuiMario;
 import graphic.guigamestructure.Camera;
 import graphic.guigamestructure.GuiGameCreator;
 import graphic.panel.Frame;
@@ -31,6 +32,7 @@ public class TestMain {
 //        }
 //        User user
         LogicManager logicManager = new LogicManager();
+//        GuiMario guiMario = new GuiMario();
     }
 
 }

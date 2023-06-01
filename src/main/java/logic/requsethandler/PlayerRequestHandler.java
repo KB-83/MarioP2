@@ -10,6 +10,7 @@ import java.util.Locale;
 
 public class PlayerRequestHandler extends Request{
     private Player player;
+    private int counter;
 
     public PlayerRequestHandler(Player player) {
         this.player = player;
@@ -26,6 +27,17 @@ public class PlayerRequestHandler extends Request{
         System.out.println(player.getWorldX()+"----line 26 player request handler");
     }
     public void RightRequest(){
+        if(counter<=12){
+            player.setImageAddress("Right1");
+            counter++;
+        }
+        else if(counter < 26) {
+            player.setImageAddress("Right2");
+            counter++;
+        }
+        else {
+            counter = 0;
+        }
         System.out.println("rightrequest");
 //        player.setCameraX(player.getCameraX()+4);
         player.setWorldX(player.getWorldX()+6);
@@ -44,6 +56,7 @@ public class PlayerRequestHandler extends Request{
     public void DownRequest(){}
     public void SwardRequest(){}
     public void BulletRequest(){}
+    //todo : maybe pause request is for a user not a player
     public void PauseRequest(){}
 
 

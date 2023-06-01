@@ -3,6 +3,7 @@ package logic.modelstructure.entity.player;
 public abstract class Player {
     private int worldX,worldY;
     private int cameraX,cameraY;
+    private String imageAddress;
 
     public int getWorldX() {
         return worldX;
@@ -34,5 +35,13 @@ public abstract class Player {
 
     public void setCameraY(int cameraY) {
         this.cameraY = cameraY;
+    }
+
+    public String getImageAddress() {
+        return imageAddress;
+    }
+
+    public void setImageAddress(String imageAddress) {
+        this.imageAddress = imageAddress;
     }
 }

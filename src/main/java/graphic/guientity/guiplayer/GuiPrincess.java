@@ -18,11 +18,7 @@ public class GuiPrincess extends GuiPlayer{
 //        image = images[0];
 //    }
 
-    @Override
-    public void setImage(int imageNum) {
 
-//        this.image = images[imageNum];
-    }
 
 
     public void loadImages() {
@@ -41,4 +37,8 @@ public class GuiPrincess extends GuiPlayer{
 //        }
     }
 
+    @Override
+    public void setImage(String imageAddress) {
+
+    }
 }

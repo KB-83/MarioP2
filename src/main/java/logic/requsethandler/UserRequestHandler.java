@@ -62,6 +62,7 @@ public class UserRequestHandler {
         if (game != null) {
             GameState gameState = new GameState();
             Player player = new Mario();
+            player.setImageAddress("Right1");
             gameState.setPlayer(player);
             // todo: next line is really dirty
             logicManager.getGraphicManager().getFrame().getPanelsManagerCard().getGamePanel().setKeyListener(player);
