@@ -1,5 +1,6 @@
 package graphic.panel;
 
+import graphic.guigamestructure.GuiGameCreator;
 import logic.gamestrucure.Game;
 import logic.gamestrucure.GameState;
 import logic.requsethandler.UserRequestHandler;
@@ -89,7 +90,9 @@ public class NewGamePanel extends MarioPanel {
                 //todo : do every thing
                 String s = "";
                 //  pass this s to user request handler
-                userRequestHandler.newGameRequest("default");
+                // this process is like a request response process
+                GameState gameState = userRequestHandler.newGameRequest("default");
+                cardPanel.getGamePanel().setGuiGameState(GuiGameCreator.createGameState(gameState));
 //                Loop gameLoop = new Loop(new GameState(),cardPanel.getGamePanel(),60);
                 cardPanel.getCardLayout().show(cardPanel,"gamePanel");
                 cardPanel.getGamePanel().requestFocus();

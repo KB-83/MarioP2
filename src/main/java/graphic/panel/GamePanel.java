@@ -49,6 +49,7 @@ public class GamePanel extends MarioPanel {
 
     public void setGuiGameState(GuiGameState guiGameState) {
         this.guiGameState = guiGameState;
+        camera.setGuiGameState(guiGameState);
     }
 
     public Camera getCamera() {

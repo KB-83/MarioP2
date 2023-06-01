@@ -9,8 +9,7 @@
         "time" : 0,
         "blocks" : null,
         "enemies" : null,
-        "pipes" : null,
-        "backgroundMap" : null
+        "pipes" : null
       } ]
     } ],
     "hearts" : 0,
