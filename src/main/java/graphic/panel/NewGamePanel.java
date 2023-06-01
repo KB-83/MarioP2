@@ -1,8 +1,10 @@
 package graphic.panel;
 
 import logic.gamestrucure.Game;
+import logic.gamestrucure.GameState;
 import logic.requsethandler.UserRequestHandler;
 import util.Constant;
+import util.Loop;
 
 import javax.swing.*;
 import java.awt.*;
@@ -85,7 +87,10 @@ public class NewGamePanel extends MarioPanel {
             public void actionPerformed(ActionEvent e) {
                 UserRequestHandler userRequestHandler = new UserRequestHandler(cardPanel.getFrame().getGraphicManager().getLogicManager());
                 //todo : do every thing
+                String s = "";
+                //  pass this s to user request handler
                 userRequestHandler.newGameRequest("default");
+//                Loop gameLoop = new Loop(new GameState(),cardPanel.getGamePanel(),60);
                 cardPanel.getCardLayout().show(cardPanel,"gamePanel");
                 cardPanel.getGamePanel().requestFocus();
 //

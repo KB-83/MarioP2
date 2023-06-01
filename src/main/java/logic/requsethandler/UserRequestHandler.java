@@ -9,6 +9,7 @@ import logic.levelstructure.Level;
 import logic.levelstructure.Section;
 import logic.modelstructure.entity.player.Mario;
 import logic.userstructure.User;
+import util.Loop;
 
 
 public class UserRequestHandler {
@@ -69,6 +70,9 @@ public class UserRequestHandler {
             gameState.setRemainingHeart(game.getHearts());
             gameState.setRemainingTime(gameState.getCurrentSection().getTime());
             gameState.setScore(0);
+            Loop gameLoop = new Loop(gameState,logicManager.getGraphicManager().getFrame()
+                    .getPanelsManagerCard().getGamePanel(),60);
+            gameLoop.start();
             return gameState;
         }
         return null;
