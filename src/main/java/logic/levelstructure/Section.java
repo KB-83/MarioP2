@@ -3,6 +3,7 @@ package logic.levelstructure;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.Pipe;
+import logic.modelstructure.backgroundobject.pipe.SpawnPipe;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.worldtiles.BackgroundMap;
 import util.Constant;
@@ -14,6 +15,7 @@ public class Section {
     private Block[] blocks;
     private Enemy[] enemies;
     private Pipe[] pipes;
+    private Pipe spawnPipe;
     @JsonIgnore
     //todo : test if it is nessesary
     private BackgroundMap backgroundMap;
@@ -71,5 +73,13 @@ public class Section {
 
     public void setBackgroundMap(BackgroundMap backgroundMap) {
         this.backgroundMap = backgroundMap;
+    }
+
+    public Pipe getSpawnPipe() {
+        return spawnPipe;
+    }
+
+    public void setSpawnPipe(Pipe spawnPipe) {
+        this.spawnPipe = spawnPipe;
     }
 }

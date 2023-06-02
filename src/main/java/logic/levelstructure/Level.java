@@ -1,5 +1,9 @@
 package logic.levelstructure;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import logic.datahandler.CustomLevelLoader;
+
+@JsonDeserialize(using = CustomLevelLoader.class)
 public class Level {
     private Section[] sections;
 

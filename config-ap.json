@@ -8,13 +8,13 @@
                     "x": 10,
                     "y": 4,
                     "type": "QUESTION",
-                    "item": "STAR"                },
+                    "item": "COIN"
+                },
                 {
                     "x": 12,
                     "y": 4,
                     "type": "QUESTION",
-                    "item": {
-                        "type" :"STAR"}
+                    "item": "STAR"
                 },
                 {
                     "x": 14,

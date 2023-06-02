@@ -1,4 +1,4 @@
 package logic.modelstructure.backgroundobject.pipe;
 
-public class SimplePipe {
+public class SimplePipe extends Pipe{
 }

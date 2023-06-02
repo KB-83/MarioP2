@@ -2,6 +2,7 @@ package logic.datahandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import logic.gamestrucure.Game;
 import logic.levelstructure.Level;
 import logic.userstructure.User;
 
@@ -34,5 +35,8 @@ public class Loader {
             e.printStackTrace();
         }
         return user;
+    }
+    public Game LoadGame() {
+        return null;
     }
 }
