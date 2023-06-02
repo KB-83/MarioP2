@@ -49,13 +49,14 @@ public class Loop implements Runnable{
         long currentTime;
         while (running){
             // sorry but it is the best i can design fo pause mechanisem :(
-            while (isPaused){}
+            while (gameState.isPaused()){}
             currentTime = System.nanoTime();
             delta = (currentTime - lastTime) / drawInterval ;
             if(delta >= 1){
                 tryFps++;
 //                gameState.update
-                gamePanel.setGuiGameState(GuiGameCreator.createGameState(gameState));
+                gamePanel.setGuiGameState(GuiGameCreator.createGameState(gameState,gamePanel.getGuiGameState()));
+                System.out.println(gamePanel.getGuiGameState()+"-----loop59");
                 gamePanel.repaint();
                 lastTime = System.nanoTime();
             }

@@ -4,10 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import logic.LogicManager;
 import logic.gamestrucure.Game;
 import logic.modelstructure.entity.player.Player;
+import logic.requsethandler.UserRequestHandler;
 
 public class User {
     @JsonIgnore
     private LogicManager logicManager;
+    @JsonIgnore
+    private UserRequestHandler userRequestHandler;
     private String username;
     private String password;
     private Game[] games;
@@ -78,5 +81,13 @@ public class User {
 
     public void setLogicManager(LogicManager logicManager) {
         this.logicManager = logicManager;
+    }
+
+    public UserRequestHandler getUserRequestHandler() {
+        return userRequestHandler;
+    }
+
+    public void setUserRequestHandler(UserRequestHandler userRequestHandler) {
+        this.userRequestHandler = userRequestHandler;
     }
 }

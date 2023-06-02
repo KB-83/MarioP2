@@ -14,14 +14,16 @@ import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.Pipe;
 import logic.modelstructure.entity.enemy.Enemy;
-import logic.modelstructure.entity.player.Mario;
 import logic.modelstructure.entity.player.Player;
 import logic.modelstructure.worldtiles.BackgroundMap;
 
+
 public class GuiGameCreator {
     private GuiGameCreator(){}
-    public static GuiGameState createGameState (GameState gameState) {
-        GuiGameState guiGameState = new GuiGameState();
+    public static GuiGameState createGameState (GameState gameState,GuiGameState guiGameState) {
+        if (guiGameState == null) {
+            guiGameState = new GuiGameState();
+        }
         guiGameState.setCoins(gameState.getCoins());
         guiGameState.setPaused(gameState.isPaused());
         guiGameState.setLevelNumber(gameState.getLevelNumber());
@@ -30,37 +32,44 @@ public class GuiGameCreator {
         guiGameState.setRemainingHeart(gameState.getRemainingHeart());
         guiGameState.setRemainingTime(gameState.getRemainingTime());
 //        guiGameState.setCurrentGuiLevel(createGuiLevel(gameState.getCurrentLevel()));
-        guiGameState.setCurrentGuiSection(createGuiSection(gameState.getCurrentSection()));
-        guiGameState.setGuiPlayer(createGuiPlayer(gameState.getPlayer()));
+        guiGameState.setCurrentGuiSection(createGuiSection(gameState.getCurrentSection(),
+                guiGameState.getCurrentGuiSection()));
+        guiGameState.setGuiPlayer(createGuiPlayer(gameState.getPlayer(),guiGameState.getGuiPlayer()));
 
         return guiGameState;
     }
     public void updateGuiGameState(GameState gameState) {
     }
-    private static GuiPlayer createGuiPlayer(Player player){
-        GuiMario guiPlayer = new GuiMario();// todo : let player to be mario luigi or etc...
-        System.out.println(player.getImageAddress());
-        System.out.println("42---guigame creator--- "+guiPlayer.getImageByItsAddress(player.getImageAddress()));
-        guiPlayer.setCurrentImage(guiPlayer.getImageByItsAddress(player.getImageAddress()));
+    private static GuiPlayer createGuiPlayer(Player player,GuiPlayer guiPlayer){
+        if (guiPlayer == null) {
+            guiPlayer = new GuiMario();// todo : let player to be mario luigi or etc...
+        }
+        guiPlayer.setCurrentImage((((GuiMario) guiPlayer).getImageByItsAddress(player.getImageAddress())));
         guiPlayer.setCameraX(player.getCameraX());
         guiPlayer.setCameraY(player.getCameraY());
         guiPlayer.setWorldX(player.getWorldX());
         guiPlayer.setWorldY(player.getWorldY());
         return guiPlayer;
     }
-    private static GuiLevel createGuiLevel(Level level){
-        GuiLevel guiLevel = new GuiLevel();
-        GuiSection[] guiSection = new GuiSection[level.getSections().length];
-        int i = 0;
-        for (Section section : level.getSections()){
-            guiSection[i] = createGuiSection(section);
-            i++;
+    private static GuiLevel createGuiLevel(Level level,GuiLevel guiLevel,GuiSection guiSection[]){
+        if (guiLevel == null) {
+            guiLevel = new GuiLevel();
         }
+        if (guiSection == null) {
+            guiSection = new GuiSection[level.getSections().length];
+        }
+        int i = 0;
+//        for (Section section : level.getSections()){
+//            guiSection[i] = createGuiSection(section);
+//            i++;
+//        }
         guiLevel.setGuiSections(guiSection);
         return guiLevel;
     }
-    private static GuiSection createGuiSection(Section section){
-        GuiSection guiSection = new GuiSection();
+    private static GuiSection createGuiSection(Section section,GuiSection guiSection){
+        if (guiSection == null) {
+            guiSection = new GuiSection();
+        }
 //        guiSection.setTime(section.getTime());
 //        guiSection.setLength(section.getLength());
 //        guiSection.setGuiEnemies(createGuiEnemies(section.getEnemies()));
@@ -69,6 +78,14 @@ public class GuiGameCreator {
         guiSection.setGuiBackgroundMap(createGuiBackgroundMap(section.getBackgroundMap()));// todo : maybe it has to be diffrent in gui part
         return guiSection;
     }
+
+//    public static GuiGameState updateGameState(GameState gameState, GuiGameState guiGameState){
+//        //todo : what things do have to be updated here? ==> player, section,level enemies blocks
+//        // todo : ok what is the diffrence with GuiGameCreator? it doesnt initialize a new object 60 time per second
+//        // todo : oh it is a huge diffrence but wouldnt it make duplicated code?
+//        // // todo :yes you can handel it there with a null
+//        return guiGameState;
+//    }
     private static GuiBlock[] createGuiBlocks(Block[] blocks){
         return null;
     }

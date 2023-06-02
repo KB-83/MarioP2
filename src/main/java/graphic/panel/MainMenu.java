@@ -63,15 +63,8 @@ public class MainMenu extends MarioPanel {
         startNewGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                card.gM.lM.userManager.newGameRequest();
                 cardPanel.getCardLayout().show(cardPanel,"newGamePanel");
                 cardPanel.getNewGamePanel().requestFocus();
-//                card.gM.lM.userManager.newGameRequest(" from main menu");
-//                    card.gamePanel.setKeyListener(card.gM.lM.userManager.currentUser.getSelectedPlayer().getPlayerListener());
-//                    GameLoop gameLoop = new GameLoop(card.gM.lM, card.gM);
-//                    gameLoop.start();
-//                    card.cardLayout.show(card,"gamePanel");
-//                    card.gamePanel.requestFocus();
             }
         });
 

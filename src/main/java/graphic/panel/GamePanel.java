@@ -1,16 +1,9 @@
 package graphic.panel;
 
 import graphic.guigamestructure.Camera;
-import graphic.guigamestructure.GuiGameCreator;
 import graphic.guigamestructure.GuiGameState;
 import graphic.requestlistener.PlayerListener;
 import logic.gamestrucure.GameState;
-import logic.levelstructure.Level;
-import logic.levelstructure.Section;
-import logic.modelstructure.entity.enemy.Enemy;
-
-import logic.modelstructure.entity.enemy.Goomba;
-import logic.modelstructure.entity.player.Mario;
 import logic.modelstructure.entity.player.Player;
 import logic.requsethandler.PlayerRequestHandler;
 import util.Loop;
@@ -29,7 +22,6 @@ public class GamePanel extends MarioPanel {
 
         this.cardPanel = cardPanel;
         this.camera = new Camera();
-        // todo they are all test from 24 - 32
         setFocusable(true);
     }
 
@@ -59,8 +51,8 @@ public class GamePanel extends MarioPanel {
     public void setCamera(Camera camera) {
         this.camera = camera;
     }
-    public void setKeyListener(Player player) {
-        addKeyListener(new PlayerListener(new PlayerRequestHandler(player)));
+    public void setKeyListener(GameState gameState) {
+        addKeyListener(new PlayerListener(new PlayerRequestHandler(gameState)));
     }
 
     public void paintComponent(Graphics g) {

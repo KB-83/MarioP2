@@ -86,14 +86,12 @@ public class NewGamePanel extends MarioPanel {
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                UserRequestHandler userRequestHandler = new UserRequestHandler(cardPanel.getFrame().getGraphicManager().getLogicManager());
+                UserRequestHandler userRequestHandler = cardPanel.getFrame().getGraphicManager().getLogicManager().getUser().getUserRequestHandler();
                 //todo : do every thing
-                String s = "";
+                String s = "default";
                 //  pass this s to user request handler
                 // this process is like a request response process
-                GameState gameState = userRequestHandler.newGameRequest("default");
-                cardPanel.getGamePanel().setGuiGameState(GuiGameCreator.createGameState(gameState));
-//                Loop gameLoop = new Loop(new GameState(),cardPanel.getGamePanel(),60);
+                GameState gameState = userRequestHandler.newGameRequest(s);
                 cardPanel.getCardLayout().show(cardPanel,"gamePanel");
                 cardPanel.getGamePanel().requestFocus();
 //
