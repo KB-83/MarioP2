@@ -1,10 +1,16 @@
 package graphic.guigamestructure;
 
+import graphic.guibackgroundobject.guiblock.GuiBlock;
+import graphic.guibackgroundobject.guipipe.GuiPipe;
 import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundMap;
+import graphic.guientity.guienemy.GuiEnemy;
 import graphic.panel.GamePanel;
+import logic.modelstructure.entity.enemy.Enemy;
 import util.Constant;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.IOException;
 
 public class Camera {
     // world button column which it have to start painting from
@@ -30,32 +36,31 @@ public class Camera {
             }
         }
 //        drawing enemies
-//        for (Enemy enemy : gameState.getCurrentSection().getEnemies()){
+        for (GuiEnemy guiEnemy : guiGameState.getCurrentGuiSection().getGuiEnemies()){
 //            if(checkBound(enemy.getX(), enemy.getY())){
-//                Image image;
-//                //draw enemy
-//                try {
-//                    image = ImageIO.read(getClass().getResourceAsStream(enemy.getImageAddress()));
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//                g2.drawImage(image,50,50,50,50,null);
-//                g2.drawString("test from camera",100,200);
-//            }
+                //draw enemy
+                g2.drawImage(guiEnemy.getCurrentImage(),guiEnemy.getWorldX()-minasXLength,guiEnemy.getWorldY(),Constant.BACKGROUND_TILE_SIZE,Constant.BACKGROUND_TILE_SIZE,null);
+            }
 //        }
-//        //paintBackgroundObjects
+//        //paint blocks
 //        //todo: add all of this things to an array of background objects then you can add flag and bla bla ...
-//        for (Block block : gameState.getCurrentSection().getBlocks()) {
+        for (GuiBlock guiBlock : guiGameState.getCurrentGuiSection().getGuiBlocks()) {
 //            if(checkBound(block.getX(), block.getY())) {
 //                // draw blocks
 //            }
-//        }
+            g2.drawImage(guiBlock.getCurrentImage(),(guiBlock.getWorldX()*Constant.BACKGROUND_TILE_SIZE )- minasXLength,
+                    guiBlock.getWorldY()*Constant.BACKGROUND_TILE_SIZE,
+                    Constant.BACKGROUND_TILE_SIZE,Constant.BACKGROUND_TILE_SIZE,null);
+        }
 ////         drawing pipes
-//        for (Pipe pipe: gameState.getCurrentSection().getPipes()) {
+        for (GuiPipe guiPipe: guiGameState.getCurrentGuiSection().getGuiPipes()) {
 //            if(checkBound(pipe.getX(), pipe.getY())) {
 //                // draw pipes
 //            }
-//        }
+            g2.drawImage(guiPipe.getCurrentImage(),(guiPipe.getWorldX()*Constant.BACKGROUND_TILE_SIZE )- minasXLength,
+                    guiPipe.getWorldY()*Constant.BACKGROUND_TILE_SIZE,
+                    Constant.BACKGROUND_TILE_SIZE *2,Constant.BACKGROUND_TILE_SIZE *3,null);
+        }
         // drying player
         g2.drawImage(guiGameState.getGuiPlayer().getCurrentImage(),getGuiGameState().getGuiPlayer().getCameraX()
                 ,getGuiGameState().getGuiPlayer().getCameraY()

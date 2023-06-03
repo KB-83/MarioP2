@@ -53,7 +53,7 @@ public class PlayerRequestHandler extends Request{
         }
         System.out.println("rightrequest");
 //        player.setCameraX(player.getCameraX()+4);
-        player.setWorldX(player.getWorldX()+6);
+        player.setWorldX(player.getWorldX()+16);
         System.out.println(player.getCameraX()+"----line 32 player request handler");
 //        player.setX(player.getX()+4);
 //        returnResponse("RIGHT");

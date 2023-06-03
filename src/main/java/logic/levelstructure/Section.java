@@ -3,11 +3,8 @@ package logic.levelstructure;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.Pipe;
-import logic.modelstructure.backgroundobject.pipe.SpawnPipe;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.worldtiles.BackgroundMap;
-import util.Constant;
-import util.Loop;
 
 public class Section {
     private int length;
@@ -20,7 +17,7 @@ public class Section {
     //todo : test if it is nessesary
     private BackgroundMap backgroundMap;
     public Section(){
-        backgroundMap = new BackgroundMap(1,2,26*4, 15);    }
+        backgroundMap = new BackgroundMap(1,1,26*4, 15);    }
 
     public Section(int levelNum) {
         // todo: this is just a test

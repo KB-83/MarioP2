@@ -48,8 +48,5 @@ public class GuiMario extends GuiPlayer{
         }
         setImages(imageHashMap);
     }
-    public Image getImageByItsAddress(String imageAddress) {
-        return getImages().get(imageAddress);
-    }
 
 }

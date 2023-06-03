@@ -2,10 +2,10 @@ package logic.modelstructure.backgroundobject.pipe;
 
 import logic.levelstructure.Section;
 
-public class TelePiranhaPipe extends Pipe{
+public class TelePlantPipe extends Pipe{
     private Section section;
 
-    public TelePiranhaPipe() {
+    public TelePlantPipe() {
     }
 
     public Section getSection() {

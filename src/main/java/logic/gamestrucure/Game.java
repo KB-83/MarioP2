@@ -6,7 +6,6 @@ import logic.modelstructure.entity.player.Player;
 
 public class Game {
     // todo : check if it is nessesary
-    @JsonIgnore
     private String name;
     private Player player;
     // todo : till here

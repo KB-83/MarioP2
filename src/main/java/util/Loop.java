@@ -56,7 +56,6 @@ public class Loop implements Runnable{
                 tryFps++;
 //                gameState.update
                 gamePanel.setGuiGameState(GuiGameCreator.createGameState(gameState,gamePanel.getGuiGameState()));
-                System.out.println(gamePanel.getGuiGameState()+"-----loop59");
                 gamePanel.repaint();
                 lastTime = System.nanoTime();
             }

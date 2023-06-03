@@ -3,17 +3,33 @@ package graphic.guientity.guienemy;
 import graphic.guientity.GuiEntity;
 import logic.modelstructure.entity.enemy.Koopa;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.util.HashMap;
 
 public class GuiKoopa extends GuiEnemy {
-    private Koopa koopa;
-    @Override
-    public void draw(Graphics2D g2) {
 
+    public GuiKoopa() {
+        loadImages();
     }
+//    @Override
+//    public void draw(Graphics2D g2) {
+//
+//    }
 
     @Override
     public void loadImages() {
 
+        HashMap<String,Image> imageHashMap = new HashMap<>();
+        Image image;
+        try{
+            image = ImageIO.read(getClass().getResourceAsStream("/image/enemy/KoopaR.png"));
+            imageHashMap.put("Right",image);
+            image = ImageIO.read(getClass().getResourceAsStream("/image/enemy/KoopaL.png"));
+            imageHashMap.put("Left",image);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        setImages(imageHashMap);
     }
 }

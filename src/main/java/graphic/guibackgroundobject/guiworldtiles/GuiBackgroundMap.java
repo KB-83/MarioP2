@@ -9,7 +9,7 @@ public class GuiBackgroundMap {
     private static Image[] images ;
     private int[][] backGroundTiles;
     private static void setImages() {
-        images = new Image[5];
+        images = new Image[4];
         for (int i = 0; i < images.length;i++) {
             try {
                 images[i] = ImageIO.read(GuiBackgroundMap.class.getResourceAsStream("/image/backgroundtiles/Tile"+i+".png"));

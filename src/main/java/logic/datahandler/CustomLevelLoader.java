@@ -8,9 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import logic.levelstructure.Level;
 import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.block.*;
-import logic.modelstructure.backgroundobject.pipe.Pipe;
-import logic.modelstructure.backgroundobject.pipe.SimplePipe;
-import logic.modelstructure.backgroundobject.pipe.TelePiranhaPipe;
+import logic.modelstructure.backgroundobject.pipe.*;
 import logic.modelstructure.entity.enemy.*;
 import logic.modelstructure.entity.item.*;
 
@@ -122,24 +120,24 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
                     break;
 
                     case "TELE_PIRANHA":
-                    pipe = new TelePiranhaPipe();
+                    pipe = new TelePlantPipe();
                     JsonNode sectionNode = pipeNode.get("section");
                     if (sectionNode != null) {
                         Section section = createSection(sectionNode);
-                        ((TelePiranhaPipe) pipe).setSection(section);
+                        ((TelePlantPipe) pipe).setSection(section);
                     }
                     break;
                 // todo : initialize this pipes
                 case "TELE_SIMPLE":
-                    pipe = new SimplePipe();
+                    pipe = new SimpleTelePipe();
                     break;
 
                     case "PIRANHA_TRAP":
-                    pipe = new SimplePipe();
+                    pipe = new SimplePlantPipe();
                     break;
                     //todo add this
                     case "DECEIT":
-                    pipe = new SimplePipe();
+                    pipe = new DeceitPipe();
                     break;
 //                /PIRANHA_TRAP/TELE_SIMPLE//DECEIT
 

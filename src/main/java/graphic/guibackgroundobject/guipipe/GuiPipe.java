@@ -1,4 +1,6 @@
 package graphic.guibackgroundobject.guipipe;
 
-public abstract class GuiPipe {
+import graphic.GuiModel;
+
+public abstract class GuiPipe extends GuiModel {
 }
