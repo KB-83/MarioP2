@@ -53,14 +53,19 @@ public class Camera {
                     Constant.BACKGROUND_TILE_SIZE,Constant.BACKGROUND_TILE_SIZE,null);
         }
 ////         drawing pipes
-        for (GuiPipe guiPipe: guiGameState.getCurrentGuiSection().getGuiPipes()) {
+//        todo check i something is null
+//        todo : clean camera class and functionize it
+        if(guiGameState.getCurrentGuiSection().getGuiPipes() != null) {
+            for (GuiPipe guiPipe : guiGameState.getCurrentGuiSection().getGuiPipes()) {
 //            if(checkBound(pipe.getX(), pipe.getY())) {
 //                // draw pipes
 //            }
-            g2.drawImage(guiPipe.getCurrentImage(),(guiPipe.getWorldX()*Constant.BACKGROUND_TILE_SIZE )- minasXLength,
-                    guiPipe.getWorldY()*Constant.BACKGROUND_TILE_SIZE,
-                    Constant.BACKGROUND_TILE_SIZE *2,Constant.BACKGROUND_TILE_SIZE *3,null);
+                g2.drawImage(guiPipe.getCurrentImage(), (guiPipe.getWorldX() * Constant.BACKGROUND_TILE_SIZE) - minasXLength,
+                        guiPipe.getWorldY() * Constant.BACKGROUND_TILE_SIZE,
+                        Constant.BACKGROUND_TILE_SIZE * 2, Constant.BACKGROUND_TILE_SIZE * 3, null);
+            }
         }
+
         // drying player
         g2.drawImage(guiGameState.getGuiPlayer().getCurrentImage(),getGuiGameState().getGuiPlayer().getCameraX()
                 ,getGuiGameState().getGuiPlayer().getCameraY()

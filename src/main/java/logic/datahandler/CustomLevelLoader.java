@@ -11,6 +11,7 @@ import logic.modelstructure.backgroundobject.block.*;
 import logic.modelstructure.backgroundobject.pipe.*;
 import logic.modelstructure.entity.enemy.*;
 import logic.modelstructure.entity.item.*;
+import util.Constant;
 
 import java.io.IOException;
 
@@ -65,7 +66,7 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
             }
             // todo : set it as col and row then
             block.setX(blockNode.get("x").asInt());
-            block.setY(blockNode.get("y").asInt());
+            block.setY((Constant.PANEL_ROWS-Constant.GROUND_BLOCKS-1)-blockNode.get("y").asInt());
 
             JsonNode itemNode = blockNode.get("item");
             if (itemNode != null && itemNode.isTextual()) {
@@ -104,8 +105,8 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
                     break;
             }
 
-            enemy.setX(enemyNode.get("x").asInt());
-            enemy.setY(enemyNode.get("y").asInt());
+            enemy.setX(enemyNode.get("x").asInt() * Constant.BACKGROUND_TILE_SIZE);
+            enemy.setY(((Constant.PANEL_ROWS-Constant.GROUND_BLOCKS-1)-enemyNode.get("y").asInt())*Constant.BACKGROUND_TILE_SIZE);
 
             return enemy;
         }
@@ -148,8 +149,9 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
                     break;
             }
             // todo : change these to col and row
+            //todo 3 is pipe length
             pipe.setX(pipeNode.get("x").asInt());
-            pipe.setY(pipeNode.get("y").asInt());
+            pipe.setY((Constant.PANEL_ROWS-Constant.GROUND_BLOCKS-3)-pipeNode.get("y").asInt());
 
             return pipe;
         }

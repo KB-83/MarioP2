@@ -163,6 +163,9 @@ public class GuiGameCreator {
         return guiEnemies;
     }
     private static GuiPipe[] createGuiPipes(Pipe[] pipes){
+        if (pipes == null){
+            return null;
+        }
         GuiPipe[] guiPipes = new GuiPipe[pipes.length];
         int index = 0;
         for (Pipe pipe: pipes){
