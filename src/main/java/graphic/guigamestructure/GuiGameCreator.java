@@ -3,6 +3,7 @@ package graphic.guigamestructure;
 import graphic.guibackgroundobject.guiblock.*;
 import graphic.guibackgroundobject.guipipe.*;
 import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundMap;
+import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundTile;
 import graphic.guientity.guienemy.*;
 import graphic.guientity.guiplayer.GuiMario;
 import graphic.guientity.guiplayer.GuiPlayer;
@@ -18,7 +19,10 @@ import logic.modelstructure.backgroundobject.pipe.SimplePipe;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.entity.enemy.Goomba;
 import logic.modelstructure.entity.player.Player;
+import logic.modelstructure.worldtiles.BackGroundTile;
 import logic.modelstructure.worldtiles.BackgroundMap;
+
+import java.util.ArrayList;
 
 
 public class GuiGameCreator {
@@ -199,8 +203,14 @@ public class GuiGameCreator {
         return guiPipes;
     }
     private static GuiBackgroundMap createGuiBackgroundMap(BackgroundMap backgroundMap){
+        //todo : change background map
         GuiBackgroundMap guiBackgroundMap = new GuiBackgroundMap();
-        guiBackgroundMap.setBackGroundTiles(backgroundMap.getBackGroundTiles());
+        ArrayList<GuiBackgroundTile> guiBackgroundTiles = new ArrayList<>();
+        for (BackGroundTile backGroundTile : backgroundMap.getBackGroundTiles()){
+            GuiBackgroundTile guiBackgroundTile = new GuiBackgroundTile(backGroundTile.getCol(),backGroundTile.getRow(),backGroundTile.getNum());
+            guiBackgroundTiles.add(guiBackgroundTile);
+        }
+        guiBackgroundMap.setGuiBackGroundTiles(guiBackgroundTiles);
         return guiBackgroundMap;
     }
 

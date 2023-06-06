@@ -1,5 +1,6 @@
 package logic.gamestrucure;
 
+import logic.gamestrucure.gameworldoption.collision.PlayerCollisionChecker;
 import logic.levelstructure.Level;
 import logic.levelstructure.Section;
 import logic.modelcontroller.GameStateController;
@@ -14,6 +15,7 @@ public class GameState {
     private Section currentSection;
     private Player player;
     private Loop gameloop;
+    private PlayerCollisionChecker playerCollisionChecker;
     private int levelNumber;
     private int sectionNumber;
     private int coins;
@@ -144,5 +146,13 @@ public class GameState {
 
     public void setGameStateController(GameStateController gameStateController) {
         this.gameStateController = gameStateController;
+    }
+
+    public PlayerCollisionChecker getPlayerCollisionChecker() {
+        return playerCollisionChecker;
+    }
+
+    public void setPlayerCollisionChecker(PlayerCollisionChecker playerCollisionChecker) {
+        this.playerCollisionChecker = playerCollisionChecker;
     }
 }

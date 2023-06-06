@@ -23,6 +23,8 @@ public class PlayerRequestHandler extends Request{
 
     public PlayerRequestHandler(GameState gameState) {
         this.player = gameState.getPlayer();
+        //todo : clean this line
+        gameState.getPlayer().setPlayerRequestHandler(this);
         this.gameState = gameState;
         setActonListeners();
 
@@ -65,7 +67,6 @@ public class PlayerRequestHandler extends Request{
         else {
             counter = 0;
         }
-        System.out.println("rightrequest");
         player.setVX(400);
 
     }
@@ -169,4 +170,7 @@ public class PlayerRequestHandler extends Request{
         return null;
     }
 
+    public Timer getJumpTimer() {
+        return jumpTimer;
+    }
 }

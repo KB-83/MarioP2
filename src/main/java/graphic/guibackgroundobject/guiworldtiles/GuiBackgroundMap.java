@@ -4,10 +4,11 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GuiBackgroundMap {
     private static Image[] images ;
-    private int[][] backGroundTiles;
+    private ArrayList<GuiBackgroundTile> guiBackGroundTiles;
     private static void setImages() {
         images = new Image[4];
         for (int i = 0; i < images.length;i++) {
@@ -26,11 +27,11 @@ public class GuiBackgroundMap {
         return images;
     }
 
-    public int[][] getBackGroundTiles() {
-        return backGroundTiles;
+    public void setGuiBackGroundTiles(ArrayList<GuiBackgroundTile> guiBackGroundTiles) {
+        this.guiBackGroundTiles = guiBackGroundTiles;
     }
 
-    public void setBackGroundTiles(int[][] backGroundTiles) {
-        this.backGroundTiles = backGroundTiles;
+    public ArrayList<GuiBackgroundTile> getGuiBackGroundTiles() {
+        return guiBackGroundTiles;
     }
 }

@@ -3,6 +3,7 @@ package logic.modelcontroller;
 import logic.LogicManager;
 import logic.gamestrucure.Game;
 import logic.gamestrucure.GameState;
+import logic.gamestrucure.gameworldoption.collision.PlayerCollisionChecker;
 import logic.modelstructure.entity.player.Mario;
 import logic.modelstructure.entity.player.Player;
 import util.Constant;
@@ -12,8 +13,10 @@ public class GameStateController {
     private GameState gameState;
     private Game game;
     public void update(){
+        //check collision
+        gameState.getPlayerCollisionChecker().applyCollisionEffects();
         //playerUpdates
-        if(gameState.getPlayer().getVX() < 0 && gameState.getPlayer().getCameraX() < 1){
+        if(gameState.getPlayer().getVX() < 0 && gameState.getPlayer().getCameraX() < 10){
             gameState.getPlayer().setVX(0);
         }
         gameState.getPlayer().setWorldX((int) (gameState.getPlayer().getWorldX()+(1.0/Constant.FPS * gameState.getPlayer().getVX())));
@@ -26,6 +29,8 @@ public class GameStateController {
     public void changeSection() {
         if(gameState.getSectionNumber() < game.getLevels()[gameState.getLevelNumber()-1].getSections()[gameState.getSectionNumber()-1].getLength()) {
             gameState.setCurrentSection(game.getLevels()[gameState.getLevelNumber() - 1].getSections()[gameState.getSectionNumber() - 1 + 1]);
+            gameState.setPlayerCollisionChecker(new PlayerCollisionChecker(game.getLevels()[gameState.getLevelNumber() - 1].
+                    getSections()[gameState.getSectionNumber() - 1 + 1], gameState.getPlayer()));
             gameState.setSectionNumber(gameState.getSectionNumber() + 1);
             gameState.setRemainingTime(gameState.getCurrentSection().getTime());
             gameState.getPlayer().setCameraX(0);
@@ -46,6 +51,7 @@ public class GameStateController {
         gameState.setPlayer(player);
         gameState.setCurrentLevel(game.getLevels()[0]);
         gameState.setCurrentSection(game.getLevels()[0].getSections()[0]);
+        gameState.setPlayerCollisionChecker(new PlayerCollisionChecker(game.getLevels()[0].getSections()[0],player));
         gameState.setCoins(0);
         gameState.setLevelNumber(1);
         gameState.setSectionNumber(1);

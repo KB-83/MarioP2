@@ -14,14 +14,13 @@ public class Section {
     private Pipe[] pipes;
     private Pipe spawnPipe;
     @JsonIgnore
-    //todo : test if it is nessesary
     private BackgroundMap backgroundMap;
     public Section(){
         backgroundMap = new BackgroundMap(1,1,26*4, 15);    }
 
-    public Section(int levelNum) {
+    public Section(int levelNum,int sectionNum) {
         // todo: this is just a test
-        backgroundMap = new BackgroundMap(levelNum,1,26*4, 15);
+        backgroundMap = new BackgroundMap(levelNum,sectionNum,26*4, 15);
     }
 
     public int getLength() {

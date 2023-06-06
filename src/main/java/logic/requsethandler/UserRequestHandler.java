@@ -47,7 +47,7 @@ public class UserRequestHandler {
         Game game = new Game();
         game.setName("default");
         Level level = new Level();
-        level.setSections(new Section[]{new Section(1)});
+        level.setSections(new Section[]{new Section(1,1)});
         game.setLevels(new Level[]{level});
 
         Game[] games = {game};

@@ -5,15 +5,16 @@ import java.util.List;
 
 public class BackGroundTile {
     private int col,row;
-    private TileName name;
-    private boolean isCollisionOn;
+    private TileNum num;
+    private boolean isSolid;
     public BackGroundTile(){
     }
 
-    public BackGroundTile(int col, int row, TileName name) {
+    public BackGroundTile(int col, int row, TileNum num, boolean isSolid) {
         this.col = col;
         this.row = row;
-        this.name = name;
+        this.num = num;
+        this.isSolid = isSolid;
     }
 
     public int getCol() {
@@ -32,11 +33,11 @@ public class BackGroundTile {
         this.row = row;
     }
 
-    public TileName getName() {
-        return name;
+    public TileNum getNum() {
+        return num;
     }
 
-    public void setName(TileName name) {
-        this.name = name;
+    public void setNum(TileNum num) {
+        this.num = num;
     }
 }

@@ -1,10 +1,13 @@
 package logic.modelstructure.entity.player;
 
+import logic.modelcontroller.PlayerController;
 import logic.modelstructure.entity.Entity;
+import logic.requsethandler.PlayerRequestHandler;
 
 public abstract class Player extends Entity {
     private int worldX,worldY;
     private int cameraX,cameraY;
+    private PlayerRequestHandler playerRequestHandler;
     private String imageAddress;
     // todo : test if you load a game which player is during jump what happens
     private boolean isDuringJump;
@@ -55,5 +58,13 @@ public abstract class Player extends Entity {
 
     public void setDuringJump(boolean duringJump) {
         isDuringJump = duringJump;
+    }
+
+    public PlayerRequestHandler getPlayerRequestHandler() {
+        return playerRequestHandler;
+    }
+
+    public void setPlayerRequestHandler(PlayerRequestHandler playerRequestHandler) {
+        this.playerRequestHandler = playerRequestHandler;
     }
 }
