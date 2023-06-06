@@ -41,6 +41,23 @@ public class PlayerListener implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+//        if(e.getKeyCode() == KeyEvent.VK_UP){
+//            playerRequestHandler.JumpRequest();
+//        }
+//        if(e.getKeyCode() == KeyEvent.VK_DOWN){
+//            playerRequestHandler.DownRequest();
+//        }
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+            playerRequestHandler.rightDoneRequest();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_LEFT){
+            playerRequestHandler.leftDoneRequest();
+        }
+//        else if(e.getKeyCode() == KeyEvent.VK_SHIFT){
+//            playerRequestHandler.BulletRequest();
+//        }
+//        else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+//            playerRequestHandler.PauseRequest();
+//        }
     }
 }

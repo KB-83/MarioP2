@@ -2,11 +2,13 @@ package logic.gamestrucure;
 
 import logic.levelstructure.Level;
 import logic.levelstructure.Section;
+import logic.modelcontroller.GameStateController;
 import logic.modelstructure.entity.player.Player;
 import logic.userstructure.User;
 import util.Loop;
 
 public class GameState {
+    private GameStateController gameStateController;
     private User currentUser;
     private Level currentLevel;
     private Section currentSection;
@@ -22,6 +24,9 @@ public class GameState {
     // todo : test
 
     public GameState() {
+    }
+    public GameState(GameStateController gameStateController) {
+        this.gameStateController = gameStateController;
     }
     public GameState(User user , Game game , Player player) {
         currentUser = user;
@@ -131,5 +136,13 @@ public class GameState {
 
     public void setGameLoop(Loop gameloop) {
         this.gameloop = gameloop;
+    }
+
+    public GameStateController getGameStateController() {
+        return gameStateController;
+    }
+
+    public void setGameStateController(GameStateController gameStateController) {
+        this.gameStateController = gameStateController;
     }
 }

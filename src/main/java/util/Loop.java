@@ -54,7 +54,7 @@ public class Loop implements Runnable{
             delta = (currentTime - lastTime) / drawInterval ;
             if(delta >= 1){
                 tryFps++;
-//                gameState.update
+                gameState.getGameStateController().update();
                 gamePanel.setGuiGameState(GuiGameCreator.createGameState(gameState,gamePanel.getGuiGameState()));
                 gamePanel.repaint();
                 lastTime = System.nanoTime();

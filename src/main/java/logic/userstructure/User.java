@@ -3,6 +3,7 @@ package logic.userstructure;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import logic.LogicManager;
 import logic.gamestrucure.Game;
+import logic.gamestrucure.GameState;
 import logic.modelstructure.entity.player.Player;
 import logic.requsethandler.UserRequestHandler;
 
@@ -11,6 +12,10 @@ public class User {
     private LogicManager logicManager;
     @JsonIgnore
     private UserRequestHandler userRequestHandler;
+    @JsonIgnore
+    private Game currentGame;
+    @JsonIgnore
+    private GameState currentGameState;
     private String username;
     private String password;
     private Game[] games;
@@ -89,5 +94,21 @@ public class User {
 
     public void setUserRequestHandler(UserRequestHandler userRequestHandler) {
         this.userRequestHandler = userRequestHandler;
+    }
+
+    public Game getCurrentGame() {
+        return currentGame;
+    }
+
+    public void setCurrentGame(Game currentGame) {
+        this.currentGame = currentGame;
+    }
+
+    public GameState getCurrentGameState() {
+        return currentGameState;
+    }
+
+    public void setCurrentGameState(GameState currentGameState) {
+        this.currentGameState = currentGameState;
     }
 }

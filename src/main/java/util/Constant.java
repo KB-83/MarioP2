@@ -8,6 +8,7 @@ public class Constant {
     public static final int GAME_ROWS = 20;
     public static final int GROUND_BLOCKS= 3;
     public static final int PANEL_ROWS = 15;
+    public static final int FPS = 60;
     private Constant(){}
 
 }
