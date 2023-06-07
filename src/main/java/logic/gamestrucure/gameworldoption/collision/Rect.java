@@ -11,20 +11,13 @@ public class Rect extends Polygon{
     private int width, height;
     private Polygon polygon;
     private int unit;
-    public Rect(int leftX, int rightX, int topY, int bottomY,int unit) {
+    public Rect(int leftX, int rightX, int topY, int bottomY) {
         this.leftX = leftX;
         this.rightX = rightX;
         this.topY = topY;
         this.bottomY = bottomY;
         width = Math.abs(rightX - leftX);
         height = Math.abs(topY-bottomY);
-    }
-
-    public Rect(int leftX, int rightX, int topY, int bottomY) {
-        this.leftX = leftX;
-        this.rightX = rightX;
-        this.topY = topY;
-        this.bottomY = bottomY;
     }
     public Polygon getPolygon (){
         if (polygon == null) {
@@ -36,9 +29,9 @@ public class Rect extends Polygon{
     }
     public void updatePosition(int leftX,int topY) {
         this.leftX = leftX;
-        this.rightX = leftX+ Constant.BACKGROUND_TILE_SIZE;
+        this.rightX = leftX+width;
         this.topY = topY;
-        this.bottomY = topY+Constant.BACKGROUND_TILE_SIZE;
+        this.bottomY = topY+height;
     }
 
     public void setWidth(int width) {

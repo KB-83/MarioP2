@@ -13,6 +13,9 @@ public class GameStateController {
     private GameState gameState;
     private Game game;
     public void update(){
+        if (gameState.isPaused()) {
+            return;
+        }
         //check collision
         gameState.getPlayerCollisionChecker().applyCollisionEffects();
         //playerUpdates
