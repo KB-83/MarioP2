@@ -40,4 +40,12 @@ public class BackGroundTile {
     public void setNum(TileNum num) {
         this.num = num;
     }
+
+    public boolean isSolid() {
+        return isSolid;
+    }
+
+    public void setSolid(boolean solid) {
+        isSolid = solid;
+    }
 }

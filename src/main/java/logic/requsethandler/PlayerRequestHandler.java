@@ -138,7 +138,7 @@ public class PlayerRequestHandler extends Request{
 //                    player.setCameraY((int) (jumpStartY -deltaY));
                 }
                 else {
-                    player.setVY(0);
+//                    player.setVY(0);
                     deltaY = 0;
                     t = 0;
                     // here means jump completed

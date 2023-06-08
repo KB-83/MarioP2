@@ -3,6 +3,7 @@ package logic.modelcontroller;
 import logic.LogicManager;
 import logic.gamestrucure.Game;
 import logic.gamestrucure.GameState;
+import logic.gamestrucure.gameworldoption.Gravity;
 import logic.gamestrucure.gameworldoption.collision.PlayerCollisionChecker;
 import logic.modelstructure.entity.player.Mario;
 import logic.modelstructure.entity.player.Player;
@@ -15,6 +16,11 @@ public class GameStateController {
     public void update(){
         if (gameState.isPaused()) {
             return;
+        }
+        // this is gravity
+        // todo : improve it
+        if (gameState.getPlayer().isDuringJump() == false) {
+            gameState.getPlayer().setVY(gameState.getPlayer().getVY()+ (-Gravity.MARIO_GAME*1/Constant.FPS));
         }
         //check collision
         gameState.getPlayerCollisionChecker().applyCollisionEffects();

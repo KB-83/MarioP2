@@ -1,8 +1,8 @@
 package logic.modelstructure.worldtiles;
 
 public enum TileNum {
-    Sky(1),
-    Tile1(0),
+    Sky(0),
+    Tile1(1),
     Tile2(2),
     Tile3(3),
     Tile4(4),
