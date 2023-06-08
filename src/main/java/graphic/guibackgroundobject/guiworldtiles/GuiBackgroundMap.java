@@ -2,13 +2,12 @@ package graphic.guibackgroundobject.guiworldtiles;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class GuiBackgroundMap {
     private static Image[] images ;
-    private ArrayList<GuiBackgroundTile> guiBackGroundTiles;
+    private GuiBackgroundTile[][] guiBackGroundTiles;
     private static void setImages() {
         images = new Image[4];
         for (int i = 0; i < images.length;i++) {
@@ -27,11 +26,11 @@ public class GuiBackgroundMap {
         return images;
     }
 
-    public void setGuiBackGroundTiles(ArrayList<GuiBackgroundTile> guiBackGroundTiles) {
+    public void setGuiBackGroundTiles(GuiBackgroundTile[][] guiBackGroundTiles) {
         this.guiBackGroundTiles = guiBackGroundTiles;
     }
 
-    public ArrayList<GuiBackgroundTile> getGuiBackGroundTiles() {
+    public GuiBackgroundTile[][] getGuiBackGroundTiles() {
         return guiBackGroundTiles;
     }
 }

@@ -17,8 +17,8 @@ import logic.modelstructure.entity.item.*;
 })
 
 public abstract class Block {
-    private int x;
-    private int y;
+    private int col;
+    private int row;
     private Item item;
 
 //    میتونید تو سوپرکلس بذارید و یه مقدار دیفالت یا نال بدید و اگه تو ساب کلس مقدارش داده شد تو کانستراکتور، تغییر داده بشه
@@ -27,20 +27,20 @@ public abstract class Block {
     public Block() {
     }
 
-    public int getX() {
-        return x;
+    public int getCol() {
+        return col;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setCol(int col) {
+        this.col = col;
     }
 
-    public int getY() {
-        return y;
+    public int getRow() {
+        return row;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setRow(int row) {
+        this.row = row;
     }
 
     public Item getItem() {

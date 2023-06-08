@@ -13,16 +13,10 @@ import logic.gamestrucure.GameState;
 import logic.levelstructure.Level;
 import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.block.Block;
-import logic.modelstructure.backgroundobject.block.SimpleBlock;
 import logic.modelstructure.backgroundobject.pipe.Pipe;
-import logic.modelstructure.backgroundobject.pipe.SimplePipe;
 import logic.modelstructure.entity.enemy.Enemy;
-import logic.modelstructure.entity.enemy.Goomba;
 import logic.modelstructure.entity.player.Player;
-import logic.modelstructure.worldtiles.BackGroundTile;
 import logic.modelstructure.worldtiles.BackgroundMap;
-
-import java.util.ArrayList;
 
 
 public class GuiGameCreator {
@@ -79,6 +73,7 @@ public class GuiGameCreator {
         }
 //        guiSection.setTime(section.getTime());
 //        guiSection.setLength(section.getLength());
+        //todo : isnt it better to change theme if nessesary?
         guiSection.setGuiEnemies(createGuiEnemies(section.getEnemies()));
         guiSection.setGuiBlocks(createGuiBlocks(section.getBlocks()));
         guiSection.setGuiPipes(createGuiPipes(section.getPipes()));
@@ -124,8 +119,8 @@ public class GuiGameCreator {
                     break;
             }
             guiBlock.setCurrentImage(guiBlock.getImageByItsAddress("Block"));
-            guiBlock.setWorldX(block.getX());
-            guiBlock.setWorldY(block.getY());
+            guiBlock.setWorldX(block.getCol());
+            guiBlock.setWorldY(block.getRow());
             guiBlocks[index] = guiBlock;
             index++;
 
@@ -194,8 +189,8 @@ public class GuiGameCreator {
 
             }
             guiPipe.setCurrentImage(guiPipe.getImageByItsAddress("PipeB"));
-            guiPipe.setWorldX(pipe.getX());
-            guiPipe.setWorldY(pipe.getY());
+            guiPipe.setWorldX(pipe.getCol());
+            guiPipe.setWorldY(pipe.getRow());
             guiPipes[index] = guiPipe;
             index++;
 
@@ -203,12 +198,15 @@ public class GuiGameCreator {
         return guiPipes;
     }
     private static GuiBackgroundMap createGuiBackgroundMap(BackgroundMap backgroundMap){
-        //todo : change background map
+        //todo : why is it updating all the time?
         GuiBackgroundMap guiBackgroundMap = new GuiBackgroundMap();
-        ArrayList<GuiBackgroundTile> guiBackgroundTiles = new ArrayList<>();
-        for (BackGroundTile backGroundTile : backgroundMap.getBackGroundTiles()){
-            GuiBackgroundTile guiBackgroundTile = new GuiBackgroundTile(backGroundTile.getCol(),backGroundTile.getRow(),backGroundTile.getNum());
-            guiBackgroundTiles.add(guiBackgroundTile);
+        GuiBackgroundTile[][] guiBackgroundTiles = new GuiBackgroundTile[backgroundMap.getBackGroundTiles().length]
+                [backgroundMap.getBackGroundTiles()[0].length];
+        for (int i = 0;i < backgroundMap.getBackGroundTiles().length; i++) {
+            for (int j = 0; j < backgroundMap.getBackGroundTiles()[i].length;j++) {
+                GuiBackgroundTile guiBackgroundTile = new GuiBackgroundTile(i,j,backgroundMap.getBackGroundTiles()[i][j].getNum());
+                guiBackgroundTiles[i][j] = guiBackgroundTile;
+            }
         }
         guiBackgroundMap.setGuiBackGroundTiles(guiBackgroundTiles);
         return guiBackgroundMap;

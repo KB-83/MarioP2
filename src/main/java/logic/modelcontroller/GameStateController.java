@@ -50,7 +50,9 @@ public class GameStateController {
         GameState gameState = new GameState(this);
         //todo : let player use its own selected player :)
         Player player = new Mario();
-        player.setImageAddress("Left1");
+        player.setWorldY(11 * 48);
+        player.setCameraY(11 * 48);
+        player.setImageAddress("Right1");
         gameState.setPlayer(player);
         gameState.setCurrentLevel(game.getLevels()[0]);
         gameState.setCurrentSection(game.getLevels()[0].getSections()[0]);

@@ -6,12 +6,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class BackgroundMap {
-    private ArrayList<BackGroundTile> backGroundTiles;
+    private BackGroundTile[][] backGroundTiles;
     public BackgroundMap(int levelNum ,int sectionNum,int sectionCols,int sectionRows){
         loadMap(levelNum,sectionNum,sectionCols,sectionRows);
     }
     public void loadMap(int levelNum ,int sectionNum,int sectionCols,int sectionRows){
-        backGroundTiles = new ArrayList<>();
+        backGroundTiles = new BackGroundTile[sectionRows][sectionCols];
 
         try {
 
@@ -32,7 +32,7 @@ public class BackgroundMap {
 
                     num = Integer.parseInt(numbers[col]);
                     BackGroundTile backGroundTile = new BackGroundTile(col,row,TileNum.getByIndex(num),(TileNum.getByIndex(num) != TileNum.NightSky && TileNum.getByIndex(num) != TileNum.Sky));
-                    backGroundTiles.add(backGroundTile);
+                    backGroundTiles[row][col] = backGroundTile;
                     col++;
                 }
                 if(col >= sectionCols) {
@@ -49,7 +49,7 @@ public class BackgroundMap {
         }
     }
 
-    public ArrayList<BackGroundTile> getBackGroundTiles() {
+    public BackGroundTile[][] getBackGroundTiles() {
         return backGroundTiles;
     }
 }

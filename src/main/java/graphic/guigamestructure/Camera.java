@@ -30,19 +30,19 @@ public class Camera {
         updateCameraLocation();
         //paint Background
         //todo : make it behine
-//        for (int i = startPaintingX/Constant.BACKGROUND_TILE_SIZE;i< endPaintingX/Constant.BACKGROUND_TILE_SIZE;i++){
-//            for (int j = 0; j< guiGameState.getCurrentGuiSection().getGuibackgroundMap().getGuiBackGroundTiles()[i].length;j++){
-//                g2.drawImage(GuiBackgroundMap.getImages()[guiGameState.getCurrentGuiSection().getGuibackgroundMap().
-//                        getBackGroundTiles()[i][j]], (i* Constant.BACKGROUND_TILE_SIZE)-minasXLength,
-//                        j * Constant.BACKGROUND_TILE_SIZE,Constant.BACKGROUND_TILE_SIZE,
-//                        Constant.BACKGROUND_TILE_SIZE,null);
-//            }
-//        }
-        for (GuiBackgroundTile guiBackGroundTile: guiGameState.getCurrentGuiSection().getGuibackgroundMap().getGuiBackGroundTiles()) {
-            g2.drawImage(GuiBackgroundMap.getImages()[guiBackGroundTile.getNum().getIndex()], (guiBackGroundTile.getCol() * Constant.BACKGROUND_TILE_SIZE)-minasXLength,
-                        guiBackGroundTile.getRow() * Constant.BACKGROUND_TILE_SIZE,Constant.BACKGROUND_TILE_SIZE,
+            for (int i = 0; i< guiGameState.getCurrentGuiSection().getGuibackgroundMap().getGuiBackGroundTiles().length;i++){
+                for (int j = startPaintingX/Constant.BACKGROUND_TILE_SIZE;j< endPaintingX/Constant.BACKGROUND_TILE_SIZE;j++){
+                g2.drawImage(GuiBackgroundMap.getImages()[guiGameState.getCurrentGuiSection().getGuibackgroundMap().
+                        getGuiBackGroundTiles()[i][j].getNum().getIndex()], (j* Constant.BACKGROUND_TILE_SIZE)-minasXLength,
+                        i * Constant.BACKGROUND_TILE_SIZE,Constant.BACKGROUND_TILE_SIZE,
                         Constant.BACKGROUND_TILE_SIZE,null);
+            }
         }
+//        for (GuiBackgroundTile guiBackGroundTile: guiGameState.getCurrentGuiSection().getGuibackgroundMap().getGuiBackGroundTiles()) {
+//            g2.drawImage(GuiBackgroundMap.getImages()[guiBackGroundTile.getNum().getIndex()], (guiBackGroundTile.getCol() * Constant.BACKGROUND_TILE_SIZE)-minasXLength,
+//                        guiBackGroundTile.getRow() * Constant.BACKGROUND_TILE_SIZE,Constant.BACKGROUND_TILE_SIZE,
+//                        Constant.BACKGROUND_TILE_SIZE,null);
+//        }
 //        drawing enemies
         for (GuiEnemy guiEnemy : guiGameState.getCurrentGuiSection().getGuiEnemies()){
 //            if(checkBound(enemy.getX(), enemy.getY())){

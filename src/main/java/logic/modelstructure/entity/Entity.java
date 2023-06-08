@@ -24,7 +24,7 @@ public abstract class Entity {
         return vX;
     }
 
-    public void setVX(double vX) {
+    public synchronized void setVX(double vX) {
         this.vX = vX;
     }
 
@@ -32,7 +32,7 @@ public abstract class Entity {
         return vY;
     }
 
-    public void setVY(double vY) {
+    public synchronized void setVY(double vY) {
         this.vY = vY;
     }
 }

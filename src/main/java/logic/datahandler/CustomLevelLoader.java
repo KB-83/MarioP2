@@ -65,8 +65,8 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
                     break;
             }
             // todo : set it as col and row then
-            block.setX(blockNode.get("x").asInt());
-            block.setY((Constant.PANEL_ROWS-Constant.GROUND_BLOCKS-1)-blockNode.get("y").asInt());
+            block.setCol(blockNode.get("x").asInt());
+            block.setRow((Constant.PANEL_ROWS-Constant.GROUND_BLOCKS-1)-blockNode.get("y").asInt());
 
             JsonNode itemNode = blockNode.get("item");
             if (itemNode != null && itemNode.isTextual()) {
@@ -150,8 +150,8 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
             }
             // todo : change these to col and row
             //todo 3 is pipe length
-            pipe.setX(pipeNode.get("x").asInt());
-            pipe.setY((Constant.PANEL_ROWS-Constant.GROUND_BLOCKS-3)-pipeNode.get("y").asInt());
+            pipe.setCol(pipeNode.get("x").asInt());
+            pipe.setRow((Constant.PANEL_ROWS-Constant.GROUND_BLOCKS-3)-pipeNode.get("y").asInt());
 
             return pipe;
         }

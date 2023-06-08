@@ -8,6 +8,7 @@ import logic.modelstructure.entity.player.JumpV0;
 import logic.modelstructure.entity.player.Player;
 import util.Constant;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -23,8 +24,6 @@ public class PlayerRequestHandler extends Request{
 
     public PlayerRequestHandler(GameState gameState) {
         this.player = gameState.getPlayer();
-        //todo : clean this line
-        gameState.getPlayer().setPlayerRequestHandler(this);
         this.gameState = gameState;
         setActonListeners();
 
@@ -34,6 +33,7 @@ public class PlayerRequestHandler extends Request{
         if(gameState.isPaused() || player.isDuringJump()){
             return;
         }
+        player.setDuringJump(true);
         jumpTimer = new Timer(1000/Constant.FPS,jumpActionListener);
         player.setImageAddress("JumpRight");
         setJumpDependencies();
@@ -125,8 +125,7 @@ public class PlayerRequestHandler extends Request{
             double t = 0;
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (deltaY >=0.1){
-                    player.setDuringJump(true);
+                if (player.isDuringJump()){
                     t = ( System.currentTimeMillis() - jumpStartTime) / 1000;
                     player.setVY ((-(Gravity.MARIO_GAME) * (t)) + JumpV0.MARIO.returnV0());
                     deltaY = -(((Gravity.MARIO_GAME/2)) * Math.pow(t, 2)) + (JumpV0.MARIO.returnV0() * t);
@@ -140,11 +139,9 @@ public class PlayerRequestHandler extends Request{
                 }
                 else {
                     player.setVY(0);
-                    deltaY = 0.1;
+                    deltaY = 0;
                     t = 0;
                     // here means jump completed
-                    player.setWorldY(jumpStartY);
-                    player.setCameraY(jumpStartY);
                     player.setImageAddress("Right1");
                     jumpTimer.stop();
                     player.setDuringJump(false);

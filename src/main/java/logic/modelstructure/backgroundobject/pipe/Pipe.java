@@ -1,29 +1,25 @@
 package logic.modelstructure.backgroundobject.pipe;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import logic.modelstructure.entity.enemy.*;
-
 public abstract class Pipe {
-    private int x;
-    private int y;
+    private int col;
+    private int row;
 
     public Pipe() {
     }
 
-    public int getX() {
-        return x;
+    public int getCol() {
+        return col;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setCol(int col) {
+        this.col = col;
     }
 
-    public int getY() {
-        return y;
+    public int getRow() {
+        return row;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setRow(int row) {
+        this.row = row;
     }
 }
