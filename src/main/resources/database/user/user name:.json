@@ -10,7 +10,7 @@
           "time": 100,
           "blocks": [
             {
-              "x": 1,
+              "x": 10,
               "y": 4,
               "type": "QUESTION",
               "item": "COIN"

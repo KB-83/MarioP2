@@ -105,8 +105,8 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
                     break;
             }
 
-            enemy.setX(enemyNode.get("x").asInt() * Constant.BACKGROUND_TILE_SIZE);
-            enemy.setY(((Constant.PANEL_ROWS-Constant.GROUND_BLOCKS-1)-enemyNode.get("y").asInt())*Constant.BACKGROUND_TILE_SIZE);
+            enemy.setWorldX(enemyNode.get("x").asInt() * Constant.BACKGROUND_TILE_SIZE);
+            enemy.setWorldY(((Constant.PANEL_ROWS-Constant.GROUND_BLOCKS-1)-enemyNode.get("y").asInt())*Constant.BACKGROUND_TILE_SIZE);
 
             return enemy;
         }

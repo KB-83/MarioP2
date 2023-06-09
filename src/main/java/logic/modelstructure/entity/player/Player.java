@@ -5,26 +5,15 @@ import logic.modelstructure.entity.Entity;
 import logic.requsethandler.PlayerRequestHandler;
 
 public abstract class Player extends Entity {
-    private int worldX, worldY;
     private int cameraX, cameraY;
     private String imageAddress;
     // todo : test if you load a game which player is during jump what happens
     private boolean isDuringJump;
+    //todo: is it nessesart?
+    private PlayerRequestHandler playerRequestHandler;
 
-    public int getWorldX() {
-        return worldX;
-    }
-
-    public void setWorldX(int worldX) {
-        this.worldX = worldX;
-    }
-
-    public int getWorldY() {
-        return worldY;
-    }
-
-    public void setWorldY(int worldY) {
-        this.worldY = worldY;
+    public Player() {
+        setOnTopOfBlock(true);
     }
 
     public int getCameraX() {
@@ -57,5 +46,13 @@ public abstract class Player extends Entity {
 
     public void setDuringJump(boolean duringJump) {
         isDuringJump = duringJump;
+    }
+
+    public PlayerRequestHandler getPlayerRequestHandler() {
+        return playerRequestHandler;
+    }
+
+    public void setPlayerRequestHandler(PlayerRequestHandler playerRequestHandler) {
+        this.playerRequestHandler = playerRequestHandler;
     }
 }

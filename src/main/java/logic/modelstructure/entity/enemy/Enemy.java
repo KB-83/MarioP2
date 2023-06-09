@@ -1,39 +1,22 @@
 package logic.modelstructure.entity.enemy;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import logic.gamestrucure.gameworldoption.collision.EnemyCollisionHandler;
 import logic.modelstructure.entity.Entity;
 
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = Goomba.class, name = "GOOMBA"),
-        @JsonSubTypes.Type(value = Koopa.class, name = "KOOPA"),
-        @JsonSubTypes.Type(value = Spiny.class, name = "SPINY"),
-        @JsonSubTypes.Type(value = NukeBird.class, name ="NUKEBIRD"),
-        @JsonSubTypes.Type(value = Bowser.class, name = "BOWSER"),
-
-})
-
 public abstract class Enemy extends Entity {
-    private int x;
-    private int y;
+    @JsonIgnore
+    EnemyCollisionHandler enemyCollisionHandler;
     public Enemy() {
+        setOnTopOfBlock(true);
     }
 
-    public int getX() {
-        return x;
+    public EnemyCollisionHandler getEnemyCollisionHandler() {
+        return enemyCollisionHandler;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
+    public void setEnemyCollisionHandler(EnemyCollisionHandler enemyCollisionHandler) {
+        this.enemyCollisionHandler = enemyCollisionHandler;
     }
 }

@@ -2,8 +2,10 @@ package logic.modelstructure.entity;
 
 public abstract class Entity {
     private String imageAddress;
+    private int worldX,worldY;
     private double vX;
     private double vY;
+    private Boolean isOnTopOfBlock;
 
     public Entity() {
     }
@@ -34,5 +36,29 @@ public abstract class Entity {
 
     public synchronized void setVY(double vY) {
         this.vY = vY;
+    }
+
+    public int getWorldX() {
+        return worldX;
+    }
+
+    public void setWorldX(int worldX) {
+        this.worldX = worldX;
+    }
+
+    public int getWorldY() {
+        return worldY;
+    }
+
+    public void setWorldY(int worldY) {
+        this.worldY = worldY;
+    }
+
+    public Boolean getOnTopOfBlock() {
+        return isOnTopOfBlock;
+    }
+
+    public void setOnTopOfBlock(Boolean onTopOfBlock) {
+        isOnTopOfBlock = onTopOfBlock;
     }
 }

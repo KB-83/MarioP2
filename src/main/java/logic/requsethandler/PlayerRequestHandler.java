@@ -24,6 +24,7 @@ public class PlayerRequestHandler extends Request{
 
     public PlayerRequestHandler(GameState gameState) {
         this.player = gameState.getPlayer();
+        player.setPlayerRequestHandler(this);
         this.gameState = gameState;
         setActonListeners();
 
@@ -129,13 +130,6 @@ public class PlayerRequestHandler extends Request{
                     t = ( System.currentTimeMillis() - jumpStartTime) / 1000;
                     player.setVY ((-(Gravity.MARIO_GAME) * (t)) + JumpV0.MARIO.returnV0());
                     deltaY = -(((Gravity.MARIO_GAME/2)) * Math.pow(t, 2)) + (JumpV0.MARIO.returnV0() * t);
-//                    int deltaT = (int) (System.currentTimeMillis()/1000 - t);
-//                    System.out.println(player.getvY() * 60 / 1000+"----=vY");
-//                    System.out.println("delta y :" + deltaY + "vy : " + player.getVY() * 60/1000);
-//                    player.setWorldY((int) (player.getWorldY() - (player.getVY() * 1 / 60)));
-//                    player.setCameraY((int) (player.getCameraY() - (player.getVY() * 1 / 60)));
-//                    player.setWorldY((int) (jumpStartY - deltaY));
-//                    player.setCameraY((int) (jumpStartY -deltaY));
                 }
                 else {
 //                    player.setVY(0);

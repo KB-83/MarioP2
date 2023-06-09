@@ -154,8 +154,8 @@ public class GuiGameCreator {
                     break;
             }
             guiEnemy.setCurrentImage(guiEnemy.getImageByItsAddress("Right"));
-            guiEnemy.setWorldX(enemy.getX());
-            guiEnemy.setWorldY(enemy.getY());
+            guiEnemy.setWorldX(enemy.getWorldX());
+            guiEnemy.setWorldY(enemy.getWorldY());
             guiEnemies[index] = guiEnemy;
             index++;
         }

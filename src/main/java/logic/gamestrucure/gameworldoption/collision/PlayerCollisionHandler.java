@@ -5,12 +5,11 @@ import logic.modelstructure.backgroundobject.pipe.Pipe;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.entity.player.Player;
 import logic.modelstructure.worldtiles.BackGroundTile;
-import logic.modelstructure.worldtiles.BackgroundMap;
 import util.Constant;
 
-public class PlayerCollisionChecker implements CollisionChecker {
+public class PlayerCollisionHandler {
     //todo : improve this
-    BackgroundMap backgroundMap;
+    private CollisionChecker collisionChecker;
     private Player player;
     private Enemy[] enemies;
     private Pipe[] pipes;
@@ -21,7 +20,8 @@ public class PlayerCollisionChecker implements CollisionChecker {
     private Rect pipeRect = new Rect(0,96,0,48*3);
     private Rect enemyRect = new Rect(0,48,0,48);
     private Rect backgrounTileRect = new Rect(0,48,0,48);
-    public PlayerCollisionChecker(Section section,Player player) {
+    public PlayerCollisionHandler(Section section, Player player) {
+        collisionChecker = new CollisionDetector(player);
         enemies = section.getEnemies();
         pipes = section.getPipes();
         blocks = section.getBlocks();
@@ -35,11 +35,13 @@ public class PlayerCollisionChecker implements CollisionChecker {
     }
     public void applyCollisionEffects(){
         // blocks effects
+        //todo : improve it
+        player.setOnTopOfBlock(false);
         if (blocks != null) {
             playerRect.updatePosition(player.getWorldX(), player.getWorldY());
             for (Block block : blocks) {
                 blockRect.updatePosition(block.getCol() * 48, block.getRow() * 48);
-                if (didCollide(playerRect, blockRect)) {
+                if (collisionChecker.didCollide(playerRect, blockRect)) {
                     handelCollision(block.getCol() * Constant.BACKGROUND_TILE_SIZE, block.getRow() *
                             Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
                 }
@@ -51,7 +53,7 @@ public class PlayerCollisionChecker implements CollisionChecker {
             for (Pipe pipe : pipes) {
                 pipeRect.updatePosition(pipe.getCol() * 48, pipe.getRow() * 48);
                 //todo give thebiigger rect first
-                if (didCollide(pipeRect, playerRect)) {
+                if (collisionChecker.didCollide(playerRect, pipeRect)) {
                     handelCollision(pipe.getCol() * Constant.BACKGROUND_TILE_SIZE, pipe.getRow() *
                             Constant.BACKGROUND_TILE_SIZE, 2 * Constant.BACKGROUND_TILE_SIZE, 3 * Constant.BACKGROUND_TILE_SIZE);
                 }
@@ -61,9 +63,9 @@ public class PlayerCollisionChecker implements CollisionChecker {
         if (enemies != null) {
             playerRect.updatePosition(player.getWorldX(), player.getWorldY());
             for (Enemy enemy : enemies) {
-                enemyRect.updatePosition(enemy.getX(), enemy.getY());
-                if (didCollide(enemyRect, playerRect)) {
-                    handelCollision(enemy.getX(), enemy.getY(), Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
+                enemyRect.updatePosition(enemy.getWorldX(), enemy.getWorldY());
+                if (collisionChecker.didCollide(playerRect, enemyRect)) {
+                    handelCollision(enemy.getWorldX(), enemy.getWorldY(), Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
                     return;
                 }
             }
@@ -74,7 +76,7 @@ public class PlayerCollisionChecker implements CollisionChecker {
             for (int j = 0;j < backGroundTiles[i].length;j++) {
                 if (backGroundTiles[i][j].isSolid()){
                     backgrounTileRect.updatePosition(j*48,i*48);
-                    if(didCollide(playerRect,backgrounTileRect)){
+                    if(collisionChecker.didCollide(playerRect,backgrounTileRect)){
                         handelCollision(j*48,i*48,48,48);
                     }
                 }
@@ -106,27 +108,6 @@ public class PlayerCollisionChecker implements CollisionChecker {
                 player.setDuringJump(false);
             }
         }
-    }
-    @Override
-    public boolean didCollide(Rect biggerRect, Rect smallerRect) {
-        // todo <= or <
-        if(biggerRect.getLeftX() < smallerRect.getLeftX() && biggerRect.getRightX() > smallerRect.getLeftX()
-        && biggerRect.getTopY() < smallerRect.getTopY() && biggerRect.getBottomY() > smallerRect.getTopY()){
-            return true;
-        }
-        if(biggerRect.getLeftX() < smallerRect.getLeftX() && biggerRect.getRightX() > smallerRect.getLeftX()
-                && biggerRect.getTopY() < smallerRect.getBottomY() && biggerRect.getBottomY() > smallerRect.getBottomY()){
-            return true;
-        }
-        if(biggerRect.getLeftX() < smallerRect.getRightX() && biggerRect.getRightX() > smallerRect.getRightX()
-                && biggerRect.getTopY() < smallerRect.getTopY() && biggerRect.getBottomY() > smallerRect.getTopY()){
-            return true;
-        }
-        if(biggerRect.getLeftX() < smallerRect.getRightX() && biggerRect.getRightX() > smallerRect.getRightX()
-                && biggerRect.getTopY() < smallerRect.getBottomY() && biggerRect.getBottomY() > smallerRect.getBottomY()){
-            return true;
-        }
-        return false;
     }
 
 }

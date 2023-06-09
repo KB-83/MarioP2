@@ -4,7 +4,9 @@ import logic.LogicManager;
 import logic.gamestrucure.Game;
 import logic.gamestrucure.GameState;
 import logic.gamestrucure.gameworldoption.Gravity;
-import logic.gamestrucure.gameworldoption.collision.PlayerCollisionChecker;
+import logic.gamestrucure.gameworldoption.collision.EnemyCollisionHandler;
+import logic.gamestrucure.gameworldoption.collision.PlayerCollisionHandler;
+import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.entity.player.Mario;
 import logic.modelstructure.entity.player.Player;
 import util.Constant;
@@ -14,13 +16,15 @@ public class GameStateController {
     private GameState gameState;
     private Game game;
     public void update(){
+        //player updates
         if (gameState.isPaused()) {
             return;
         }
         // this is gravity
         // todo : improve it
-        if (gameState.getPlayer().isDuringJump() == false) {
+        if (gameState.getPlayer().isDuringJump() == false && gameState.getPlayer().getOnTopOfBlock() == false) {
             gameState.getPlayer().setVY(gameState.getPlayer().getVY()+ (-Gravity.MARIO_GAME*1/Constant.FPS));
+//
         }
         //check collision
         gameState.getPlayerCollisionChecker().applyCollisionEffects();
@@ -34,11 +38,27 @@ public class GameStateController {
         }
         gameState.getPlayer().setWorldY((int) (gameState.getPlayer().getWorldY() - (1.0/Constant.FPS * gameState.getPlayer().getVY())));
         gameState.getPlayer().setCameraY((int) (gameState.getPlayer().getCameraY() - (1.0/Constant.FPS * gameState.getPlayer().getVY())));
+
+        // enemies update
+        for (Enemy enemy: gameState.getCurrentSection().getEnemies()) {
+            enemy.setEnemyCollisionHandler(new EnemyCollisionHandler(gameState.getCurrentSection(),enemy));
+            enemy.getEnemyCollisionHandler().applyCollisionEffects();
+            enemy.setWorldX((int) (enemy.getWorldX()+(1.0/Constant.FPS * enemy.getVX())));
+            enemy.setWorldY((int) (enemy.getWorldY()+(1.0/Constant.FPS * enemy.getVY())));
+            if (enemy.getOnTopOfBlock() == false) {
+                enemy.setVY(enemy.getVY()+(1.0/Constant.FPS* Gravity.MARIO_GAME));
+            }
+            else {
+                enemy.setVY(0);
+            }
+
+        }
+
     }
     public void changeSection() {
         if(gameState.getSectionNumber() < game.getLevels()[gameState.getLevelNumber()-1].getSections()[gameState.getSectionNumber()-1].getLength()) {
             gameState.setCurrentSection(game.getLevels()[gameState.getLevelNumber() - 1].getSections()[gameState.getSectionNumber() - 1 + 1]);
-            gameState.setPlayerCollisionChecker(new PlayerCollisionChecker(game.getLevels()[gameState.getLevelNumber() - 1].
+            gameState.setPlayerCollisionChecker(new PlayerCollisionHandler(game.getLevels()[gameState.getLevelNumber() - 1].
                     getSections()[gameState.getSectionNumber() - 1 + 1], gameState.getPlayer()));
             gameState.setSectionNumber(gameState.getSectionNumber() + 1);
             gameState.setRemainingTime(gameState.getCurrentSection().getTime());
@@ -62,7 +82,7 @@ public class GameStateController {
         gameState.setPlayer(player);
         gameState.setCurrentLevel(game.getLevels()[0]);
         gameState.setCurrentSection(game.getLevels()[0].getSections()[0]);
-        gameState.setPlayerCollisionChecker(new PlayerCollisionChecker(game.getLevels()[0].getSections()[0],player));
+        gameState.setPlayerCollisionChecker(new PlayerCollisionHandler(game.getLevels()[0].getSections()[0],player));
         gameState.setCoins(0);
         gameState.setLevelNumber(1);
         gameState.setSectionNumber(1);
