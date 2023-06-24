@@ -1,7 +1,7 @@
 package logic.modelstructure.entity.enemy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import logic.gamestrucure.gameworldoption.collision.EnemyCollisionHandler;
+import logic.gamelogic.collisionlogic.EnemyCollisionHandler;
 import logic.modelstructure.entity.Entity;
 
 

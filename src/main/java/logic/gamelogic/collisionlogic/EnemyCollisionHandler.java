@@ -1,5 +1,7 @@
-package logic.gamestrucure.gameworldoption.collision;
+package logic.gamelogic.collisionlogic;
 
+import logic.gamestrucure.gameworldoption.collision.CollisionChecker;
+import logic.gamestrucure.gameworldoption.collision.Rect;
 import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.Pipe;

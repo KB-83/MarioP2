@@ -1,9 +1,9 @@
 package logic.gamestrucure;
 
-import logic.gamestrucure.gameworldoption.collision.PlayerCollisionHandler;
+import logic.gamelogic.collisionlogic.PlayerCollisionHandler;
 import logic.levelstructure.Level;
 import logic.levelstructure.Section;
-import logic.modelcontroller.GameStateController;
+import logic.gamelogic.GameStateController;
 import logic.modelstructure.entity.player.Player;
 import logic.userstructure.User;
 import util.Loop;

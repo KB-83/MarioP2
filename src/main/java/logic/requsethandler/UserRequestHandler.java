@@ -8,11 +8,8 @@ import logic.gamestrucure.Game;
 import logic.gamestrucure.GameState;
 import logic.levelstructure.Level;
 import logic.levelstructure.Section;
-import logic.modelcontroller.GameStateController;
-import logic.modelstructure.entity.player.Mario;
-import logic.modelstructure.entity.player.Player;
+import logic.gamelogic.GameStateController;
 import logic.userstructure.User;
-import util.Loop;
 
 
 public class UserRequestHandler {

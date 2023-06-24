@@ -1,4 +1,4 @@
-package logic.modelcontroller;
+package logic.gamelogic;
 
 import logic.modelstructure.entity.player.Player;
 

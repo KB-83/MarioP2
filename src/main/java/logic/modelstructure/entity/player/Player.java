@@ -1,6 +1,5 @@
 package logic.modelstructure.entity.player;
 
-import logic.modelcontroller.PlayerController;
 import logic.modelstructure.entity.Entity;
 import logic.requsethandler.PlayerRequestHandler;
 

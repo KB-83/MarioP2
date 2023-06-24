@@ -1,11 +1,13 @@
-package logic.gamestrucure.gameworldoption.collision;
+package logic.gamelogic.collisionlogic;
 
 
+import logic.gamestrucure.gameworldoption.collision.CollisionChecker;
+import logic.gamestrucure.gameworldoption.collision.Rect;
 import logic.modelstructure.entity.Entity;
 import logic.modelstructure.entity.player.Player;
 import util.Constant;
 
-public class CollisionDetector implements CollisionChecker{
+public class CollisionDetector implements CollisionChecker {
     private Entity entity;
 
     public CollisionDetector(Entity entity) {
@@ -13,7 +15,7 @@ public class CollisionDetector implements CollisionChecker{
     }
 
     @Override
-        public boolean didCollide(Rect entityRect,Rect biggerRect) {
+        public boolean didCollide(Rect entityRect, Rect biggerRect) {
             // todo <= or <
             if (entityRect.getTopY()/ Constant.BACKGROUND_TILE_SIZE ==(biggerRect.getTopY()/Constant.BACKGROUND_TILE_SIZE)-1
             && biggerRect.getLeftX()>=entityRect.getLeftX() && biggerRect.getLeftX()<=entityRect.getRightX()){

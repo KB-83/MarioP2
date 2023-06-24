@@ -21,6 +21,7 @@ public class PlayerRequestHandler extends Request{
     private Timer jumpTimer;
     private double jumpStartTime;
     private int jumpStartY;
+    //todo: behtareh inaro be logic game pass bede
 
     public PlayerRequestHandler(GameState gameState) {
         this.player = gameState.getPlayer();

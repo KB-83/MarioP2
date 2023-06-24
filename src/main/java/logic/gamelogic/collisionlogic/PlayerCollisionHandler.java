@@ -1,4 +1,6 @@
-package logic.gamestrucure.gameworldoption.collision;
+package logic.gamelogic.collisionlogic;
+import logic.gamestrucure.gameworldoption.collision.CollisionChecker;
+import logic.gamestrucure.gameworldoption.collision.Rect;
 import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.Pipe;
@@ -16,7 +18,7 @@ public class PlayerCollisionHandler {
     private Block[] blocks;
     private BackGroundTile[][] backGroundTiles;
     private Rect blockRect = new Rect(0,48, 0,48);
-    private Rect playerRect = new Rect(0,48, 0,48);
+    private Rect playerRect = new Rect(8,40, 0,48);
     private Rect pipeRect = new Rect(0,96,0,48*3);
     private Rect enemyRect = new Rect(0,48,0,48);
     private Rect backgrounTileRect = new Rect(0,48,0,48);
@@ -84,23 +86,23 @@ public class PlayerCollisionHandler {
         }
     }
     public void handelCollision(int itemLeftWorldX, int itemTopWorldY,int itemWidth,int itemHeight) {
-        if (player.getVX() > 0 && itemLeftWorldX < player.getWorldX()+Constant.BACKGROUND_TILE_SIZE
-                && itemLeftWorldX+itemWidth  > player.getWorldX()+Constant.BACKGROUND_TILE_SIZE) {
+        if (player.getVX() > 0 && itemLeftWorldX <= player.getWorldX()+Constant.BACKGROUND_TILE_SIZE
+                && itemLeftWorldX+itemWidth  >= player.getWorldX()+Constant.BACKGROUND_TILE_SIZE) {
             player.setVX(0);
         }
-        if (player.getVX() < 0 && itemLeftWorldX < player.getWorldX()
-                && (itemLeftWorldX+itemWidth > player.getWorldX())) {
+        if (player.getVX() < 0 && itemLeftWorldX <= player.getWorldX()
+                && (itemLeftWorldX+itemWidth >= player.getWorldX())) {
             player.setVX(0);
         }
-        if (player.getVY() > 0 && itemTopWorldY+itemHeight > player.getWorldY() &&
-                itemTopWorldY < player.getWorldY()) {
+        if (player.getVY() > 0 && itemTopWorldY+itemHeight >= player.getWorldY() &&
+                itemTopWorldY <= player.getWorldY()) {
             player.setVY(-player.getVY());
             if (player.isDuringJump()){
                 player.setDuringJump(false);
             }
         }
-        if (player.getVY() < 0 && itemTopWorldY < player.getWorldY()+Constant.BACKGROUND_TILE_SIZE &&
-                itemTopWorldY+itemHeight > player.getWorldY()+Constant.BACKGROUND_TILE_SIZE) {
+        if (player.getVY() < 0 && itemTopWorldY <= player.getWorldY()+Constant.BACKGROUND_TILE_SIZE &&
+                itemTopWorldY+itemHeight >= player.getWorldY()+Constant.BACKGROUND_TILE_SIZE) {
             player.setVY(0);
             player.setWorldY(itemTopWorldY - Constant.BACKGROUND_TILE_SIZE);
             player.setCameraY(itemTopWorldY-Constant.BACKGROUND_TILE_SIZE);

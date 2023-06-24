@@ -1,11 +1,14 @@
-package logic.modelcontroller;
+package logic.gamelogic;
 
 import logic.LogicManager;
+import logic.gamelogic.enemieslogic.EnemyMovementHandler;
+import logic.gamelogic.gravitylogic.GravityEffectsHandler;
+import logic.gamelogic.playerlogic.PlayerMovementHandler;
 import logic.gamestrucure.Game;
 import logic.gamestrucure.GameState;
 import logic.gamestrucure.gameworldoption.Gravity;
-import logic.gamestrucure.gameworldoption.collision.EnemyCollisionHandler;
-import logic.gamestrucure.gameworldoption.collision.PlayerCollisionHandler;
+import logic.gamelogic.collisionlogic.EnemyCollisionHandler;
+import logic.gamelogic.collisionlogic.PlayerCollisionHandler;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.entity.player.Mario;
 import logic.modelstructure.entity.player.Player;
@@ -15,6 +18,14 @@ import util.Loop;
 public class GameStateController {
     private GameState gameState;
     private Game game;
+    private EnemyMovementHandler enemyMovementHandler;
+    private PlayerMovementHandler playerMovementHandler;
+    private GravityEffectsHandler gravityEffectsHandler;
+
+    public GameStateController() {
+
+    }
+
     public void update(){
         //player updates
         if (gameState.isPaused()) {
@@ -22,37 +33,16 @@ public class GameStateController {
         }
         // this is gravity
         // todo : improve it
-        if (gameState.getPlayer().isDuringJump() == false && gameState.getPlayer().getOnTopOfBlock() == false) {
-            gameState.getPlayer().setVY(gameState.getPlayer().getVY()+ (-Gravity.MARIO_GAME*1/Constant.FPS));
-//
-        }
+        // todo : gamr logic can be handel here if you part it
+        gravityEffectsHandler.applyEffects();
         //check collision
         gameState.getPlayerCollisionChecker().applyCollisionEffects();
         //playerUpdates
-        if(gameState.getPlayer().getVX() < 0 && gameState.getPlayer().getCameraX() < 10){
-            gameState.getPlayer().setVX(0);
-        }
-        gameState.getPlayer().setWorldX((int) (gameState.getPlayer().getWorldX()+(1.0/Constant.FPS * gameState.getPlayer().getVX())));
-        if(gameState.getPlayer().getCameraX() < Constant.PANEL_WIDTH/2 || gameState.getPlayer().getVX() < 0) {
-            gameState.getPlayer().setCameraX((int) (gameState.getPlayer().getCameraX()+(1.0/Constant.FPS * gameState.getPlayer().getVX())));
-        }
-        gameState.getPlayer().setWorldY((int) (gameState.getPlayer().getWorldY() - (1.0/Constant.FPS * gameState.getPlayer().getVY())));
-        gameState.getPlayer().setCameraY((int) (gameState.getPlayer().getCameraY() - (1.0/Constant.FPS * gameState.getPlayer().getVY())));
+        playerMovementHandler.updatePlayerPosition();
 
         // enemies update
-        for (Enemy enemy: gameState.getCurrentSection().getEnemies()) {
-            enemy.setEnemyCollisionHandler(new EnemyCollisionHandler(gameState.getCurrentSection(),enemy));
-            enemy.getEnemyCollisionHandler().applyCollisionEffects();
-            enemy.setWorldX((int) (enemy.getWorldX()+(1.0/Constant.FPS * enemy.getVX())));
-            enemy.setWorldY((int) (enemy.getWorldY()+(1.0/Constant.FPS * enemy.getVY())));
-            if (enemy.getOnTopOfBlock() == false) {
-                enemy.setVY(enemy.getVY()+(1.0/Constant.FPS* Gravity.MARIO_GAME));
-            }
-            else {
-                enemy.setVY(0);
-            }
+        enemyMovementHandler.updateEnemiesPosition();
 
-        }
 
     }
     public void changeSection() {
@@ -75,6 +65,16 @@ public class GameStateController {
         this.game = game;
         GameState gameState = new GameState(this);
         //todo : let player use its own selected player :)
+        setGameStateDependencies(game, gameState);
+        setGameStateControllerDependencies(gameState);
+
+        Loop gameLoop = new Loop(gameState,logicManager.getGraphicManager().getFrame()
+                .getPanelsManagerCard().getGamePanel(), Constant.FPS);
+        gameLoop.start();
+        this.gameState = gameState;
+        return gameState;
+    }
+    private void setGameStateDependencies(Game game, GameState gameState) {
         Player player = new Mario();
         player.setWorldY(11 * 48);
         player.setCameraY(11 * 48);
@@ -90,10 +90,11 @@ public class GameStateController {
         gameState.setRemainingHeart(game.getHearts());
         gameState.setRemainingTime(gameState.getCurrentSection().getTime());
         gameState.setScore(0);
-        Loop gameLoop = new Loop(gameState,logicManager.getGraphicManager().getFrame()
-                .getPanelsManagerCard().getGamePanel(), Constant.FPS);
-        gameLoop.start();
-        this.gameState = gameState;
-        return gameState;
+    }
+    private void setGameStateControllerDependencies(GameState gameState) {
+
+        enemyMovementHandler = new EnemyMovementHandler(gameState);
+        playerMovementHandler = new PlayerMovementHandler(gameState);
+        gravityEffectsHandler = new GravityEffectsHandler(gameState);
     }
 }
