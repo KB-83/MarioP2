@@ -60,6 +60,12 @@ public class EnemyCollisionHandler{
                     pipeRect.updatePosition(pipe.getCol() * 48, pipe.getRow() * 48);
 //                    //todo give thebiigger rect first
                     if (collisionChecker.didCollide(mainEnemyRect, pipeRect)) {
+                        if (enemy.getVX() > 0){
+                            enemy.setWorldX(pipe.getCol()*  48  - 50);
+                        }
+                        if (enemy.getVX() < 0){
+                            enemy.setWorldX(pipe.getCol()*48  + 98 );
+                        }
                         enemy.setVX(-enemy.getVX());
 //                        handelCollision(pipe.getCol() * Constant.BACKGROUND_TILE_SIZE, pipe.getRow() *
 //                                Constant.BACKGROUND_TILE_SIZE, 2 * Constant.BACKGROUND_TILE_SIZE, 3 * Constant.BACKGROUND_TILE_SIZE);

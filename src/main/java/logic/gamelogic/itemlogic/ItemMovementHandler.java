@@ -1,6 +1,7 @@
 package logic.gamelogic.itemlogic;
 
 import logic.gamelogic.collisionlogic.EnemyCollisionHandler;
+import logic.gamelogic.collisionlogic.ItemCollisionHandler;
 import logic.gamestrucure.GameState;
 import logic.gamestrucure.gameworldoption.Gravity;
 import logic.modelstructure.entity.enemy.Enemy;
@@ -15,8 +16,8 @@ public class ItemMovementHandler {
     }
     public void updateItemsPosition() {
         for (Item item: gameState.getCurrentSection().getItems()) {
-//            item.setEnemyCollisionHandler(new EnemyCollisionHandler(gameState.getCurrentSection(),item));
-//            item.getEnemyCollisionHandler().applyCollisionEffects();
+            item.setItemCollisionHandler(new ItemCollisionHandler(gameState.getCurrentSection(),item));
+            item.getItemCollisionHandler().applyCollisionEffects();
             item.setWorldX((int) (item.getWorldX()+(1.0/ Constant.FPS * item.getVX())));
             item.setWorldY((int) (item.getWorldY()+(1.0/Constant.FPS * item.getVY())));
             if (item.getOnTopOfBlock() == false) {
