@@ -6,12 +6,10 @@ import logic.gamelogic.gravitylogic.GravityEffectsHandler;
 import logic.gamelogic.playerlogic.PlayerMovementHandler;
 import logic.gamestrucure.Game;
 import logic.gamestrucure.GameState;
-import logic.gamestrucure.gameworldoption.Gravity;
-import logic.gamelogic.collisionlogic.EnemyCollisionHandler;
 import logic.gamelogic.collisionlogic.PlayerCollisionHandler;
-import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.entity.player.Mario;
 import logic.modelstructure.entity.player.Player;
+import logic.sound.Sound;
 import util.Constant;
 import util.Loop;
 
@@ -29,6 +27,8 @@ public class GameStateController {
     public void update(){
         //player updates
         if (gameState.isPaused()) {
+            System.out.println("33 game state controller");
+            gameState.getSound().stop();
             return;
         }
         // this is gravity
@@ -36,7 +36,7 @@ public class GameStateController {
         // todo : gamr logic can be handel here if you part it
         gravityEffectsHandler.applyEffects();
         //check collision
-        gameState.getPlayerCollisionChecker().applyCollisionEffects();
+        gameState.getPlayerCollisionHandler().applyCollisionEffects();
         //playerUpdates
         playerMovementHandler.updatePlayerPosition();
 
@@ -48,7 +48,7 @@ public class GameStateController {
     public void changeSection() {
         if(gameState.getSectionNumber() < game.getLevels()[gameState.getLevelNumber()-1].getSections()[gameState.getSectionNumber()-1].getLength()) {
             gameState.setCurrentSection(game.getLevels()[gameState.getLevelNumber() - 1].getSections()[gameState.getSectionNumber() - 1 + 1]);
-            gameState.setPlayerCollisionChecker(new PlayerCollisionHandler(game.getLevels()[gameState.getLevelNumber() - 1].
+            gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(game.getLevels()[gameState.getLevelNumber() - 1].
                     getSections()[gameState.getSectionNumber() - 1 + 1], gameState.getPlayer()));
             gameState.setSectionNumber(gameState.getSectionNumber() + 1);
             gameState.setRemainingTime(gameState.getCurrentSection().getTime());
@@ -79,10 +79,15 @@ public class GameStateController {
         player.setWorldY(11 * 48);
         player.setCameraY(11 * 48);
         player.setImageAddress("Right1");
+        //todo : sound test
+        gameState.setSound(new Sound());
+        gameState.getSound().setFile(0);
+        gameState.getSound().play();
+        //
         gameState.setPlayer(player);
         gameState.setCurrentLevel(game.getLevels()[0]);
         gameState.setCurrentSection(game.getLevels()[0].getSections()[0]);
-        gameState.setPlayerCollisionChecker(new PlayerCollisionHandler(game.getLevels()[0].getSections()[0],player));
+        gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(game.getLevels()[0].getSections()[0],player));
         gameState.setCoins(0);
         gameState.setLevelNumber(1);
         gameState.setSectionNumber(1);

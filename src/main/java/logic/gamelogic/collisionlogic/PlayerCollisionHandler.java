@@ -18,7 +18,7 @@ public class PlayerCollisionHandler {
     private Block[] blocks;
     private BackGroundTile[][] backGroundTiles;
     private Rect blockRect = new Rect(0,48, 0,48);
-    private Rect playerRect = new Rect(8,40, 0,48);
+    private Rect playerRect = new Rect(0,48, 0,48);
     private Rect pipeRect = new Rect(0,96,0,48*3);
     private Rect enemyRect = new Rect(0,48,0,48);
     private Rect backgrounTileRect = new Rect(0,48,0,48);
@@ -36,9 +36,23 @@ public class PlayerCollisionHandler {
         blocks = section.getBlocks();
     }
     public void applyCollisionEffects(){
-        // blocks effects
         //todo : improve it
         player.setOnTopOfBlock(false);
+        //
+        // blocks effects
+        checkBlocksCollision();
+
+        //pipes
+        checkPipesCollision();
+
+//        enemies
+        checkEnemiesCollision();
+
+        //background tiles todo: give a bound to background tiles
+        checkBackgroundTilesCollision();
+
+    }
+    private void checkBlocksCollision(){
         if (blocks != null) {
             playerRect.updatePosition(player.getWorldX(), player.getWorldY());
             for (Block block : blocks) {
@@ -49,7 +63,8 @@ public class PlayerCollisionHandler {
                 }
             }
         }
-        //pipes
+    }
+    private void checkPipesCollision(){
         playerRect.updatePosition(player.getWorldX(),player.getWorldY());
         if (pipes != null) {
             for (Pipe pipe : pipes) {
@@ -60,8 +75,8 @@ public class PlayerCollisionHandler {
                             Constant.BACKGROUND_TILE_SIZE, 2 * Constant.BACKGROUND_TILE_SIZE, 3 * Constant.BACKGROUND_TILE_SIZE);
                 }
             }
-        }
-//        enemies
+        }}
+    private void checkEnemiesCollision(){
         if (enemies != null) {
             playerRect.updatePosition(player.getWorldX(), player.getWorldY());
             for (Enemy enemy : enemies) {
@@ -72,7 +87,8 @@ public class PlayerCollisionHandler {
                 }
             }
         }
-        //background tiles todo: give a bound to background tiles
+    }
+    private void checkBackgroundTilesCollision(){
         playerRect.updatePosition(player.getWorldX(),player.getWorldY());
         for (int i = 0; i < backGroundTiles.length; i++){
             for (int j = 0;j < backGroundTiles[i].length;j++) {
@@ -83,26 +99,25 @@ public class PlayerCollisionHandler {
                     }
                 }
             }
-        }
-    }
+        }}
     public void handelCollision(int itemLeftWorldX, int itemTopWorldY,int itemWidth,int itemHeight) {
-        if (player.getVX() > 0 && itemLeftWorldX <= player.getWorldX()+Constant.BACKGROUND_TILE_SIZE
-                && itemLeftWorldX+itemWidth  >= player.getWorldX()+Constant.BACKGROUND_TILE_SIZE) {
+        if (player.getVX() > 0 && itemLeftWorldX < player.getWorldX()+Constant.BACKGROUND_TILE_SIZE
+                && itemLeftWorldX+itemWidth  > player.getWorldX()+Constant.BACKGROUND_TILE_SIZE) {
             player.setVX(0);
         }
-        if (player.getVX() < 0 && itemLeftWorldX <= player.getWorldX()
-                && (itemLeftWorldX+itemWidth >= player.getWorldX())) {
+        if (player.getVX() < 0 && itemLeftWorldX < player.getWorldX()
+                && (itemLeftWorldX+itemWidth > player.getWorldX())) {
             player.setVX(0);
         }
-        if (player.getVY() > 0 && itemTopWorldY+itemHeight >= player.getWorldY() &&
-                itemTopWorldY <= player.getWorldY()) {
+        if (player.getVY() > 0 && itemTopWorldY+itemHeight > player.getWorldY() &&
+                itemTopWorldY < player.getWorldY()) {
             player.setVY(-player.getVY());
             if (player.isDuringJump()){
                 player.setDuringJump(false);
             }
         }
-        if (player.getVY() < 0 && itemTopWorldY <= player.getWorldY()+Constant.BACKGROUND_TILE_SIZE &&
-                itemTopWorldY+itemHeight >= player.getWorldY()+Constant.BACKGROUND_TILE_SIZE) {
+        if (player.getVY() < 0 && itemTopWorldY < player.getWorldY()+Constant.BACKGROUND_TILE_SIZE &&
+                itemTopWorldY+itemHeight > player.getWorldY()+Constant.BACKGROUND_TILE_SIZE) {
             player.setVY(0);
             player.setWorldY(itemTopWorldY - Constant.BACKGROUND_TILE_SIZE);
             player.setCameraY(itemTopWorldY-Constant.BACKGROUND_TILE_SIZE);

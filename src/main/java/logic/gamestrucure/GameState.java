@@ -5,6 +5,7 @@ import logic.levelstructure.Level;
 import logic.levelstructure.Section;
 import logic.gamelogic.GameStateController;
 import logic.modelstructure.entity.player.Player;
+import logic.sound.Sound;
 import logic.userstructure.User;
 import util.Loop;
 
@@ -16,6 +17,7 @@ public class GameState {
     private Player player;
     private Loop gameloop;
     private PlayerCollisionHandler playerCollisionHandler;
+    private Sound sound;
     private int levelNumber;
     private int sectionNumber;
     private int coins;
@@ -148,11 +150,19 @@ public class GameState {
         this.gameStateController = gameStateController;
     }
 
-    public PlayerCollisionHandler getPlayerCollisionChecker() {
+    public PlayerCollisionHandler getPlayerCollisionHandler() {
         return playerCollisionHandler;
     }
 
-    public void setPlayerCollisionChecker(PlayerCollisionHandler playerCollisionHandler) {
+    public void setPlayerCollisionHandler(PlayerCollisionHandler playerCollisionHandler) {
         this.playerCollisionHandler = playerCollisionHandler;
+    }
+
+    public Sound getSound() {
+        return sound;
+    }
+
+    public void setSound(Sound sound) {
+        this.sound = sound;
     }
 }

@@ -4,7 +4,6 @@ import graphic.guigamestructure.Camera;
 import graphic.guigamestructure.GuiGameState;
 import graphic.requestlistener.PlayerListener;
 import logic.gamestrucure.GameState;
-import logic.modelstructure.entity.player.Player;
 import logic.requsethandler.PlayerRequestHandler;
 import util.Loop;
 
@@ -16,12 +15,14 @@ public class GamePanel extends MarioPanel {
     private Graphics2D g2;
     private GuiGameState guiGameState;
     private Camera camera;
+    private GameHUI gameHUI;
     private Loop gameloop;
 
     public GamePanel(PanelsManagerCard cardPanel) {
 
         this.cardPanel = cardPanel;
         this.camera = new Camera();
+        this.gameHUI = new GameHUI();
         setFocusable(true);
     }
 
@@ -42,6 +43,7 @@ public class GamePanel extends MarioPanel {
     public void setGuiGameState(GuiGameState guiGameState) {
         this.guiGameState = guiGameState;
         camera.setGuiGameState(guiGameState);
+        gameHUI.setGuiGameState(guiGameState);
     }
 
     public Camera getCamera() {
@@ -60,6 +62,7 @@ public class GamePanel extends MarioPanel {
         g2 = (Graphics2D) g;
         if (camera.getGuiGameState() != null) {
             camera.paintCamera(g2);
+            gameHUI.paintHui(g2);
         }
     }
 

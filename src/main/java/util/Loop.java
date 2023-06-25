@@ -49,7 +49,8 @@ public class Loop implements Runnable{
         long currentTime;
         while (running){
             // sorry but it is the best i can design fo pause mechanisem :(
-            while (gameState.isPaused()){}
+            //todo : improve pause mechanisem
+//            while (gameState.isPaused()){}
             currentTime = System.nanoTime();
             delta = (currentTime - lastTime) / drawInterval ;
             if(delta >= 1){
