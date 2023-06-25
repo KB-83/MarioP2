@@ -5,6 +5,7 @@ import graphic.guibackgroundobject.guiblock.GuiBlock;
 import graphic.guibackgroundobject.guipipe.GuiPipe;
 import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundMap;
 import graphic.guientity.guienemy.GuiEnemy;
+import graphic.guientity.guiitem.GuiItem;
 
 public class GuiSection {
     private int length;
@@ -13,6 +14,7 @@ public class GuiSection {
     private GuiBlock[] guiBlocks;
     private GuiEnemy[] guiEnemies;
     private GuiPipe[] guiPipes;
+    private GuiItem[] guiItems;
 
     public GuiSection() {
     }
@@ -63,5 +65,13 @@ public class GuiSection {
 
     public void setGuiPipes(GuiPipe[] guiPipes) {
         this.guiPipes = guiPipes;
+    }
+
+    public GuiItem[] getGuiItems() {
+        return guiItems;
+    }
+
+    public void setGuiItems(GuiItem[] guiItems) {
+        this.guiItems = guiItems;
     }
 }

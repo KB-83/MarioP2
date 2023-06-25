@@ -58,7 +58,7 @@ public class ShopPanel extends MarioPanel {
         buttonList.add(uniqueGirl);
         buttonList.add(poker);
 //        try {
-//            this.coinImage = ImageIO.read(getClass().getResourceAsStream("/Images/Object/image.png"));
+//            this.coinImage = ImageIO.read(getClass().getResourceAsStream("/Images/Object/coin.png"));
 //        } catch (IOException e) {
 //            throw new RuntimeException(e);
 //        }

@@ -1,15 +1,18 @@
 package logic.gamelogic.collisionlogic;
+import logic.gamelogic.itemlogic.ItemUnlocker;
 import logic.gamestrucure.gameworldoption.collision.CollisionChecker;
 import logic.gamestrucure.gameworldoption.collision.Rect;
 import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.Pipe;
 import logic.modelstructure.entity.enemy.Enemy;
+import logic.modelstructure.entity.item.Item;
 import logic.modelstructure.entity.player.Player;
 import logic.modelstructure.worldtiles.BackGroundTile;
 import util.Constant;
 
-public class PlayerCollisionHandler {
+public class PlayerCollisionHandler implements CollisionHandler{
+    //todo: improve collision checker boundery
     //todo : improve this
     private CollisionChecker collisionChecker;
     private Player player;
@@ -22,6 +25,8 @@ public class PlayerCollisionHandler {
     private Rect pipeRect = new Rect(0,96,0,48*3);
     private Rect enemyRect = new Rect(0,48,0,48);
     private Rect backgrounTileRect = new Rect(0,48,0,48);
+    //todo: improve this too
+    private ItemUnlocker itemUnlocker;
     public PlayerCollisionHandler(Section section, Player player) {
         collisionChecker = new CollisionDetector(player);
         enemies = section.getEnemies();
@@ -29,6 +34,7 @@ public class PlayerCollisionHandler {
         blocks = section.getBlocks();
         backGroundTiles = section.getBackgroundMap().getBackGroundTiles();
         this.player = player;
+        itemUnlocker = new ItemUnlocker();
     }
     public void updateSection(Section section) {
         enemies = section.getEnemies();
@@ -52,19 +58,34 @@ public class PlayerCollisionHandler {
         checkBackgroundTilesCollision();
 
     }
-    private void checkBlocksCollision(){
-        if (blocks != null) {
-            playerRect.updatePosition(player.getWorldX(), player.getWorldY());
-            for (Block block : blocks) {
-                blockRect.updatePosition(block.getCol() * 48, block.getRow() * 48);
-                if (collisionChecker.didCollide(playerRect, blockRect)) {
-                    handelCollision(block.getCol() * Constant.BACKGROUND_TILE_SIZE, block.getRow() *
-                            Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
+    public void checkBlocksCollision(){
+//        if (blocks != null) {
+//            playerRect.updatePosition(player.getWorldX(), player.getWorldY());
+//            for (Block block : blocks) {
+//                blockRect.updatePosition(block.getCol() * 48, block.getRow() * 48);
+//                if (collisionChecker.didCollide(playerRect, blockRect)) {
+//                    handelCollision(block.getCol() * Constant.BACKGROUND_TILE_SIZE, block.getRow() *
+//                            Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
+//                    if (block.getItem() != null) {
+//                        itemUnlocker.unlock(block);
+//                    }
+//                }
+//            }
+//        }
+        playerRect.updatePosition(player.getWorldX(), player.getWorldY());
+        for (int i = 0; i < blocks.length ; i++) {
+            Block block = blocks[i];
+            blockRect.updatePosition(block.getCol() * 48, block.getRow() * 48);
+            if (collisionChecker.didCollide(playerRect, blockRect)) {
+                handelCollision(block.getCol() * Constant.BACKGROUND_TILE_SIZE, block.getRow() *
+                        Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
+                if (block.getItem() != null) {
+                    itemUnlocker.unlock(block,blocks,i);
                 }
             }
         }
     }
-    private void checkPipesCollision(){
+    public void checkPipesCollision(){
         playerRect.updatePosition(player.getWorldX(),player.getWorldY());
         if (pipes != null) {
             for (Pipe pipe : pipes) {
@@ -76,7 +97,7 @@ public class PlayerCollisionHandler {
                 }
             }
         }}
-    private void checkEnemiesCollision(){
+    public void checkEnemiesCollision(){
         if (enemies != null) {
             playerRect.updatePosition(player.getWorldX(), player.getWorldY());
             for (Enemy enemy : enemies) {
@@ -88,7 +109,7 @@ public class PlayerCollisionHandler {
             }
         }
     }
-    private void checkBackgroundTilesCollision(){
+    public void checkBackgroundTilesCollision(){
         playerRect.updatePosition(player.getWorldX(),player.getWorldY());
         for (int i = 0; i < backGroundTiles.length; i++){
             for (int j = 0;j < backGroundTiles[i].length;j++) {
@@ -100,6 +121,12 @@ public class PlayerCollisionHandler {
                 }
             }
         }}
+
+    @Override
+    public void checkPlayerCollision() {
+
+    }
+
     public void handelCollision(int itemLeftWorldX, int itemTopWorldY,int itemWidth,int itemHeight) {
         if (player.getVX() > 0 && itemLeftWorldX < player.getWorldX()+Constant.BACKGROUND_TILE_SIZE
                 && itemLeftWorldX+itemWidth  > player.getWorldX()+Constant.BACKGROUND_TILE_SIZE) {

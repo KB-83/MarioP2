@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.Pipe;
 import logic.modelstructure.entity.enemy.Enemy;
+import logic.modelstructure.entity.item.Item;
 import logic.modelstructure.worldtiles.BackgroundMap;
 
 public class Section {
@@ -15,6 +16,7 @@ public class Section {
     private Pipe spawnPipe;
     @JsonIgnore
     private BackgroundMap backgroundMap;
+    private Item[] items;
     public Section(){
         backgroundMap = new BackgroundMap(1,1,26*4, 15);    }
 
@@ -77,5 +79,13 @@ public class Section {
 
     public void setSpawnPipe(Pipe spawnPipe) {
         this.spawnPipe = spawnPipe;
+    }
+
+    public Item[] getItems() {
+        return items;
+    }
+
+    public void setItems(Item[] items) {
+        this.items = items;
     }
 }

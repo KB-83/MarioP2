@@ -14,6 +14,7 @@ import logic.modelstructure.entity.item.*;
 import util.Constant;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class CustomLevelLoader extends JsonDeserializer<Level> {
         @Override
@@ -207,10 +208,56 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
                 spawnPipe = createPipe(spawnPipeNode);
             }
             section.setSpawnPipe(spawnPipe);//todo : it is not correct
+            createItemArray(section,sectionNode);
 
             return section;
         }
-
+        private void createItemArray(Section section,JsonNode sectionNode) {
+            //items
+            Item[] items = null;
+            JsonNode itemsNode = sectionNode.get("items");
+            if (itemsNode != null && itemsNode.isArray()) {
+                items = new Item[itemsNode.size()];
+                int itemIndex = 0;
+                for (JsonNode itemNode : itemsNode) {
+                    Item item = createItem(itemNode.textValue());
+                    item.setWorldX(itemNode.get("x").asInt() * Constant.BACKGROUND_TILE_SIZE);
+                    item.setWorldY(((Constant.PANEL_ROWS-Constant.GROUND_BLOCKS-1)-itemsNode.get("y").asInt())*Constant.BACKGROUND_TILE_SIZE);
+                    items[itemIndex++] = item;
+                }
+            }
+            //blocks item
+            ArrayList<Item> items1 = new ArrayList<>();
+            for (Block block : section.getBlocks()) {
+                if(block.getItem() != null) {
+                    block.getItem().setWorldX(block.getCol()*Constant.BACKGROUND_TILE_SIZE);
+                    block.getItem().setWorldY(block.getRow()* Constant.BACKGROUND_TILE_SIZE);
+                    items1.add(block.getItem());
+                }
+            }
+            int finalItemSize = 0;
+            if (items1 != null){
+                finalItemSize += items1.size();
+            }
+            if (items != null){
+                finalItemSize += items.length;
+            }
+            Item[] finalItems = new Item[finalItemSize];
+            int index = 0;
+            if (items != null) {
+                for (Item item : items) {
+                    finalItems[index] = item;
+                    index++;
+                }
+            }
+            if (items1 != null) {
+                for (Item item : items1) {
+                    finalItems[index] = item;
+                    index++;
+                }
+            }
+            section.setItems(finalItems);
+        }
         private Item createItem(String itemType) {
             Item item;
             switch (itemType) {

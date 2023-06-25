@@ -5,6 +5,7 @@ import graphic.guibackgroundobject.guipipe.*;
 import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundMap;
 import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundTile;
 import graphic.guientity.guienemy.*;
+import graphic.guientity.guiitem.*;
 import graphic.guientity.guiplayer.GuiMario;
 import graphic.guientity.guiplayer.GuiPlayer;
 import graphic.guilevelstructure.GuiLevel;
@@ -15,6 +16,10 @@ import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.Pipe;
 import logic.modelstructure.entity.enemy.Enemy;
+import logic.modelstructure.entity.item.Coin;
+import logic.modelstructure.entity.item.Item;
+import logic.modelstructure.entity.item.Mushroom;
+import logic.modelstructure.entity.item.Star;
 import logic.modelstructure.entity.player.Player;
 import logic.modelstructure.worldtiles.BackgroundMap;
 
@@ -77,6 +82,7 @@ public class GuiGameCreator {
         guiSection.setGuiEnemies(createGuiEnemies(section.getEnemies()));
         guiSection.setGuiBlocks(createGuiBlocks(section.getBlocks()));
         guiSection.setGuiPipes(createGuiPipes(section.getPipes()));
+        guiSection.setGuiItems(createGuiItems(section.getItems()));
         guiSection.setGuiBackgroundMap(createGuiBackgroundMap(section.getBackgroundMap()));// todo : maybe it has to be diffrent in gui part
         return guiSection;
     }
@@ -160,6 +166,53 @@ public class GuiGameCreator {
             index++;
         }
         return guiEnemies;
+    }
+        private static GuiItem[] createGuiItems(Item[] items){
+        if (items == null){
+            return null;
+        }
+        int guiItemsSize = 0;
+        for (Item item : items) {
+            if (item.isLock()){
+                continue;
+            }
+            guiItemsSize++;
+        }
+        if (guiItemsSize == 0) {
+            return null;
+        }
+        GuiItem[] guiItems = new GuiItem[guiItemsSize];
+        int index = 0;
+        for (Item item: items){
+            if (item.isLock()){
+                continue;
+            }
+            String s = item.getClass().getSimpleName().toUpperCase();
+            GuiItem guiItem = null;
+            switch (s) {
+                case "STAR":
+                    guiItem = new GuiStar();
+                    break;
+
+                case "COIN":
+                    guiItem = new GuiCoin();
+                    break;
+
+                case "MUSHROOM":
+                    guiItem = new GuiMushroom();
+                    break;
+                case "FLOWER":
+                    guiItem = new GuiFlower();
+                    break;
+            }
+            guiItem.setCurrentImage(guiItem.getImageByItsAddress("1"));
+            guiItem.setWorldX(item.getWorldX());
+            guiItem.setWorldY(item.getWorldY());
+            guiItems[index] = guiItem;
+            index++;
+
+        }
+        return guiItems;
     }
     private static GuiPipe[] createGuiPipes(Pipe[] pipes){
         if (pipes == null){

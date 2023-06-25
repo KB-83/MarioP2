@@ -3,6 +3,7 @@ package logic.gamelogic;
 import logic.LogicManager;
 import logic.gamelogic.enemieslogic.EnemyMovementHandler;
 import logic.gamelogic.gravitylogic.GravityEffectsHandler;
+import logic.gamelogic.itemlogic.ItemMovementHandler;
 import logic.gamelogic.playerlogic.PlayerMovementHandler;
 import logic.gamestrucure.Game;
 import logic.gamestrucure.GameState;
@@ -19,6 +20,7 @@ public class GameStateController {
     private EnemyMovementHandler enemyMovementHandler;
     private PlayerMovementHandler playerMovementHandler;
     private GravityEffectsHandler gravityEffectsHandler;
+    private ItemMovementHandler itemMovementHandler;
 
     public GameStateController() {
 
@@ -42,6 +44,8 @@ public class GameStateController {
 
         // enemies update
         enemyMovementHandler.updateEnemiesPosition();
+        // item
+        itemMovementHandler.updateItemsPosition();
 
 
     }
@@ -80,9 +84,9 @@ public class GameStateController {
         player.setCameraY(11 * 48);
         player.setImageAddress("Right1");
         //todo : sound test
-        gameState.setSound(new Sound());
-        gameState.getSound().setFile(0);
-        gameState.getSound().play();
+//        gameState.setSound(new Sound());
+//        gameState.getSound().setFile(0);
+//        gameState.getSound().play();
         //
         gameState.setPlayer(player);
         gameState.setCurrentLevel(game.getLevels()[0]);
@@ -101,5 +105,6 @@ public class GameStateController {
         enemyMovementHandler = new EnemyMovementHandler(gameState);
         playerMovementHandler = new PlayerMovementHandler(gameState);
         gravityEffectsHandler = new GravityEffectsHandler(gameState);
+        itemMovementHandler = new ItemMovementHandler(gameState);
     }
 }

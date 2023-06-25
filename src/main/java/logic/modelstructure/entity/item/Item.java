@@ -10,6 +10,7 @@ public abstract class Item extends Entity {
     private boolean isLock;
     public Item() {
         isLock = true;
+        setOnTopOfBlock(true);
     }
 
     public boolean isLock() {

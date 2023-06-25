@@ -4,8 +4,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.util.HashMap;
 
-public class GuiCoin extends GuiItem{
-    public GuiCoin() {
+public class GuiMushroom extends GuiItem{
+    public GuiMushroom() {
         super();
         loadImages();
     }
@@ -15,7 +15,7 @@ public class GuiCoin extends GuiItem{
         HashMap<String, Image> imageHashMap = new HashMap<>();
         Image image;
         try{
-            image = ImageIO.read(getClass().getResourceAsStream("/image/item/coin.png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/image/item/mushroom.png"));
             imageHashMap.put("1",image);
         }catch (Exception e){
             e.printStackTrace();

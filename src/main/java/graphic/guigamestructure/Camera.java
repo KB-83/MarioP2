@@ -5,6 +5,7 @@ import graphic.guibackgroundobject.guipipe.GuiPipe;
 import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundMap;
 import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundTile;
 import graphic.guientity.guienemy.GuiEnemy;
+import graphic.guientity.guiitem.GuiItem;
 import graphic.panel.GamePanel;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.worldtiles.BackGroundTile;
@@ -71,6 +72,13 @@ public class Camera {
                 g2.drawImage(guiPipe.getCurrentImage(), (guiPipe.getWorldX() * Constant.BACKGROUND_TILE_SIZE) - minasXLength,
                         guiPipe.getWorldY() * Constant.BACKGROUND_TILE_SIZE,
                         Constant.BACKGROUND_TILE_SIZE * 2, Constant.BACKGROUND_TILE_SIZE * 3, null);
+            }
+        }
+        //item
+        if (guiGameState.getCurrentGuiSection().getGuiItems() != null) {
+            for (GuiItem guiItem : guiGameState.getCurrentGuiSection().getGuiItems()) {
+                g2.drawImage(guiItem.getCurrentImage(),guiItem.getWorldX() - minasXLength ,guiItem.getWorldY(),
+                        Constant.BACKGROUND_TILE_SIZE,Constant.BACKGROUND_TILE_SIZE,null);
             }
         }
 

@@ -1,4 +1,7 @@
 package graphic.guientity.guiitem;
 
-public class GuiItem {
+import graphic.guientity.GuiEntity;
+
+public abstract class GuiItem extends GuiEntity {
+
 }
