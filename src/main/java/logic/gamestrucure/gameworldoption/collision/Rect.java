@@ -33,6 +33,14 @@ public class Rect extends Polygon{
         this.topY = topY;
         this.bottomY = topY+height;
     }
+    public void updatePositionAndSize(int width, int height, int leftX, int topY) {
+        this.width = width;
+        this.height = height;
+        this.leftX = leftX;
+        this.rightX = leftX + this.width;
+        this.topY = topY;
+        this.bottomY = topY + this.height;
+    }
 
     public void setWidth(int width) {
         this.width = width;

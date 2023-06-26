@@ -242,7 +242,7 @@
       ]
     } ],
     "hearts" : 0,
-    "marioState" : 0
+    "marioState" : 1
   } ],
   "players" : null,
   "coins" : 0,

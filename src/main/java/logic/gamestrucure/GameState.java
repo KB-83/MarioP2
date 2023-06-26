@@ -15,6 +15,8 @@ public class GameState {
     private Level currentLevel;
     private Section currentSection;
     private Player player;
+    // 0 : mini //  1 : mega // 2 : fire
+    private int marioState;
     private Loop gameloop;
     private PlayerCollisionHandler playerCollisionHandler;
     private Sound sound;
@@ -164,5 +166,13 @@ public class GameState {
 
     public void setSound(Sound sound) {
         this.sound = sound;
+    }
+
+    public int getMarioState() {
+        return marioState;
+    }
+
+    public void setMarioState(int marioState) {
+        this.marioState = marioState;
     }
 }

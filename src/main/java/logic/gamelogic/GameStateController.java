@@ -80,14 +80,28 @@ public class GameStateController {
     }
     private void setGameStateDependencies(Game game, GameState gameState) {
         Player player = new Mario();
-        player.setWorldY(11 * 48);
-        player.setCameraY(11 * 48);
-        player.setImageAddress("Right1");
+        player.setWorldY(7 * 48);
+        player.setCameraY(7 * 48);
+        player.setImageAddress(game.getMarioState()+"Right1");
+        player.setWidth(Constant.BACKGROUND_TILE_SIZE);
+        player.setHeight(Constant.BACKGROUND_TILE_SIZE);
+        if (game.getMarioState() > 0) {
+            player.setHeight(2 * player.getHeight());
+            player.setWorldY(player.getWorldY() - 48);
+            player.setCameraY(player.getCameraY() - 48);
+            if (game.getMarioState() == 1) {
+                player.setMega(true);
+            }
+            else {
+                player.setFire(true);
+            }
+        }
         //todo : sound test
 //        gameState.setSound(new Sound());
 //        gameState.getSound().setFile(0);
 //        gameState.getSound().play();
         //
+        gameState.setMarioState(gameState.getMarioState());
         gameState.setPlayer(player);
         gameState.setCurrentLevel(game.getLevels()[0]);
         gameState.setCurrentSection(game.getLevels()[0].getSections()[0]);

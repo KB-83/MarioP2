@@ -43,6 +43,9 @@ public class PlayerCollisionHandler implements CollisionHandler{
     }
     public void applyCollisionEffects(){
         //todo : improve it
+        if (player.getOnTopOfBlock() && player.getVY() < 0){
+            player.setDuringJump(false);
+        }
         player.setOnTopOfBlock(false);
         //
         // blocks effects
@@ -53,13 +56,13 @@ public class PlayerCollisionHandler implements CollisionHandler{
 
 //        enemies
         checkEnemiesCollision();
-
-        //background tiles todo: give a bound to background tiles
+//
+//        //background tiles todo: give a bound to background tiles
         checkBackgroundTilesCollision();
 
     }
     public void checkBlocksCollision(){
-        playerRect.updatePosition(player.getWorldX(), player.getWorldY());
+        playerRect.updatePositionAndSize(player.getWidth(), player.getHeight(),player.getWorldX(), player.getWorldY());
         for (int i = 0; i < blocks.length ; i++) {
             Block block = blocks[i];
             blockRect.updatePosition(block.getCol() * 48, block.getRow() * 48);
@@ -73,7 +76,7 @@ public class PlayerCollisionHandler implements CollisionHandler{
         }
     }
     public void checkPipesCollision(){
-        playerRect.updatePosition(player.getWorldX(),player.getWorldY());
+        playerRect.updatePositionAndSize(player.getWidth(), player.getHeight(),player.getWorldX(), player.getWorldY());
         if (pipes != null) {
             for (Pipe pipe : pipes) {
                 pipeRect.updatePosition(pipe.getCol() * 48, pipe.getRow() * 48);
@@ -86,7 +89,7 @@ public class PlayerCollisionHandler implements CollisionHandler{
         }}
     public void checkEnemiesCollision(){
         if (enemies != null) {
-            playerRect.updatePosition(player.getWorldX(), player.getWorldY());
+            playerRect.updatePositionAndSize(player.getWidth(), player.getHeight(),player.getWorldX(), player.getWorldY());
             for (Enemy enemy : enemies) {
                 enemyRect.updatePosition(enemy.getWorldX(), enemy.getWorldY());
                 if (collisionChecker.didCollide(playerRect, enemyRect)) {
@@ -97,7 +100,7 @@ public class PlayerCollisionHandler implements CollisionHandler{
         }
     }
     public void checkBackgroundTilesCollision(){
-        playerRect.updatePosition(player.getWorldX(),player.getWorldY());
+        playerRect.updatePositionAndSize(player.getWidth(), player.getHeight(),player.getWorldX(), player.getWorldY());
         for (int i = 0; i < backGroundTiles.length; i++){
             for (int j = 0;j < backGroundTiles[i].length;j++) {
                 if (backGroundTiles[i][j].isSolid()){
@@ -115,8 +118,8 @@ public class PlayerCollisionHandler implements CollisionHandler{
     }
 
     public void handelCollision(int itemLeftWorldX, int itemTopWorldY,int itemWidth,int itemHeight) {
-        if (player.getVX() > 0 && itemLeftWorldX < player.getWorldX()+Constant.BACKGROUND_TILE_SIZE
-                && itemLeftWorldX+itemWidth  > player.getWorldX()+Constant.BACKGROUND_TILE_SIZE) {
+        if (player.getVX() > 0 && itemLeftWorldX < player.getWorldX()+ player.getWidth()
+                && itemLeftWorldX+itemWidth  > player.getWorldX()+ player.getHeight()) {
             player.setVX(0);
         }
         if (player.getVX() < 0 && itemLeftWorldX < player.getWorldX()
@@ -130,11 +133,11 @@ public class PlayerCollisionHandler implements CollisionHandler{
                 player.setDuringJump(false);
             }
         }
-        if (player.getVY() < 0 && itemTopWorldY < player.getWorldY()+Constant.BACKGROUND_TILE_SIZE &&
-                itemTopWorldY+itemHeight > player.getWorldY()+Constant.BACKGROUND_TILE_SIZE) {
+        if (player.getVY() < 0 && itemTopWorldY < player.getWorldY()+ player.getHeight() &&
+                itemTopWorldY+itemHeight > player.getWorldY()+ player.getHeight()) {
             player.setVY(0);
-            player.setWorldY(itemTopWorldY - Constant.BACKGROUND_TILE_SIZE);
-            player.setCameraY(itemTopWorldY-Constant.BACKGROUND_TILE_SIZE);
+            player.setWorldY(itemTopWorldY - player.getHeight());
+            player.setCameraY(itemTopWorldY- player.getHeight());
             if (player.isDuringJump()){
                 player.setDuringJump(false);
             }

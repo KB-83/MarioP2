@@ -37,11 +37,9 @@ public class PlayerRequestHandler extends Request{
         }
         player.setDuringJump(true);
         jumpTimer = new Timer(1000/Constant.FPS,jumpActionListener);
-        player.setImageAddress("JumpRight");
+        setPlayerImageByState("JumpRight");
         setJumpDependencies();
         jumpTimer.start();
-
-        System.out.println("jump request player request handler line 40");
     }
     private void setJumpDependencies(){
         jumpStartTime = System.currentTimeMillis();
@@ -59,11 +57,11 @@ public class PlayerRequestHandler extends Request{
         // todo : check next line
         player.setCameraY(player.getWorldY());
         if(counter < 2){
-            player.setImageAddress("Right1");
+            setPlayerImageByState("Right1");
             counter++;
         }
         else if(counter < 4) {
-            player.setImageAddress("Right2");
+            setPlayerImageByState("Right2");
             counter++;
         }
         else {
@@ -80,11 +78,11 @@ public class PlayerRequestHandler extends Request{
             return;
         }
         if(counter < 2){
-            player.setImageAddress("Left1");
+            setPlayerImageByState("Left1");
             counter++;
         }
         else if(counter < 4) {
-            player.setImageAddress("Left2");
+            setPlayerImageByState("Left2");
             counter++;
         }
         else {
@@ -128,23 +126,34 @@ public class PlayerRequestHandler extends Request{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (player.isDuringJump()){
+                    System.out.println("jump loop");
                     t = ( System.currentTimeMillis() - jumpStartTime) / 1000;
                     player.setVY ((-(Gravity.MARIO_GAME) * (t)) + JumpV0.MARIO.returnV0());
                     deltaY = -(((Gravity.MARIO_GAME/2)) * Math.pow(t, 2)) + (JumpV0.MARIO.returnV0() * t);
                 }
                 else {
-//                    player.setVY(0);
+                    player.setVY(0);
                     deltaY = 0;
                     t = 0;
                     // here means jump completed
-                    player.setImageAddress("Right1");
+                    setPlayerImageByState("Right1");
                     jumpTimer.stop();
                     player.setDuringJump(false);
-                    System.out.println("in timer loop");
                 }
 
             }};
 
+    }
+    private void setPlayerImageByState(String s) {
+        if (player.isFire()){
+            player.setImageAddress("2"+s);
+        }
+        else if (player.isMega()){
+            player.setImageAddress("1"+s);
+        }
+        else {
+            player.setImageAddress("0"+s);
+        }
     }
 
 

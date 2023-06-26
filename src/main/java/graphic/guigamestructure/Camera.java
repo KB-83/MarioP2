@@ -83,9 +83,10 @@ public class Camera {
         }
 
         // drying player
-        g2.drawImage(guiGameState.getGuiPlayer().getCurrentImage(),getGuiGameState().getGuiPlayer().getCameraX()
-                ,getGuiGameState().getGuiPlayer().getCameraY()
-                ,Constant.BACKGROUND_TILE_SIZE,Constant.BACKGROUND_TILE_SIZE,null );
+        g2.drawImage(guiGameState.getGuiPlayer().getCurrentImage(),getGuiGameState().getGuiPlayer().getCameraX(),
+                getGuiGameState().getGuiPlayer().getCameraY()
+                ,getGuiGameState().getGuiPlayer().getWidth(), getGuiGameState().getGuiPlayer().getHeight(),
+                null );
     }
     private boolean checkBound (int x , int y) {
         if(x < endPaintingX && x > startPaintingX) {

@@ -30,20 +30,34 @@ public class GuiMario extends GuiPlayer{
         Image image;
         try{
         image = ImageIO.read(getClass().getResourceAsStream("/image/player/MarioRight1.png"));
-        imageHashMap.put("Right1",image);
+        imageHashMap.put("0Right1",image);
         image = ImageIO.read(getClass().getResourceAsStream("/image/player/MarioRight2.png"));
-        imageHashMap.put("Right2",image);
+        imageHashMap.put("0Right2",image);
         image = ImageIO.read(getClass().getResourceAsStream("/image/player/MarioLeft1.png"));
-        imageHashMap.put("Left1",image);
+        imageHashMap.put("0Left1",image);
         image = ImageIO.read(getClass().getResourceAsStream("/image/player/MarioLeft2.png"));
-        imageHashMap.put("Left2",image);
+        imageHashMap.put("0Left2",image);
         image = ImageIO.read(getClass().getResourceAsStream("/image/player/MarioJumpRight.png"));
-        imageHashMap.put("JumpRight",image);
+        imageHashMap.put("0JumpRight",image);
         image = ImageIO.read(getClass().getResourceAsStream("/image/player/MarioJumpLeft.png"));
-        imageHashMap.put("JumpLeft",image);
+        imageHashMap.put("0JumpLeft",image);
         image = ImageIO.read(getClass().getResourceAsStream("/image/player/MarioLose.png"));
-        imageHashMap.put("Lose",image);
-        }catch (Exception e){
+        imageHashMap.put("0Lose",image);
+
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioRight1.png"));
+        imageHashMap.put("1Right1",image);
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioRight1.png"));
+        imageHashMap.put("1Right2",image);
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioRight1.png"));
+        imageHashMap.put("1Left1",image);
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioRight1.png"));
+        imageHashMap.put("1Left2",image);
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioRight1.png"));
+        imageHashMap.put("1JumpRight",image);
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioRight1.png"));
+        imageHashMap.put("1JumpLeft",image);
+        }
+        catch (Exception e){
         e.printStackTrace();
         }
         setImages(imageHashMap);

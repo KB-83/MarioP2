@@ -5,9 +5,11 @@ import logic.requsethandler.PlayerRequestHandler;
 
 public abstract class Player extends Entity {
     private int cameraX, cameraY;
+    private int Width, Height;
     private String imageAddress;
     // todo : test if you load a game which player is during jump what happens
     private boolean isDuringJump;
+    private boolean isFire, isMega;
     //todo: is it nessesart?
     private PlayerRequestHandler playerRequestHandler;
 
@@ -53,5 +55,37 @@ public abstract class Player extends Entity {
 
     public void setPlayerRequestHandler(PlayerRequestHandler playerRequestHandler) {
         this.playerRequestHandler = playerRequestHandler;
+    }
+
+    public boolean isFire() {
+        return isFire;
+    }
+
+    public void setFire(boolean fire) {
+        isFire = fire;
+    }
+
+    public boolean isMega() {
+        return isMega;
+    }
+
+    public void setMega(boolean mega) {
+        isMega = mega;
+    }
+
+    public int getWidth() {
+        return Width;
+    }
+
+    public void setWidth(int width) {
+        Width = width;
+    }
+
+    public int getHeight() {
+        return Height;
+    }
+
+    public void setHeight(int height) {
+        Height = height;
     }
 }

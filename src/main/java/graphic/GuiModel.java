@@ -8,6 +8,7 @@ public abstract class GuiModel {
     private Image currentImage;
     private int worldX,worldY;
     private int cameraX,cameraY;
+    private int Width,Height;
     public Image getImageByItsAddress(String imageAddress) {
         return images.get(imageAddress);
     }
@@ -58,5 +59,20 @@ public abstract class GuiModel {
 
     public void setCameraY(int cameraY) {
         this.cameraY = cameraY;
+    }
+    public int getWidth() {
+        return Width;
+    }
+
+    public void setWidth(int width) {
+        Width = width;
+    }
+
+    public int getHeight() {
+        return Height;
+    }
+
+    public void setHeight(int height) {
+        Height = height;
     }
 }

@@ -55,6 +55,8 @@ public class GuiGameCreator {
         guiPlayer.setCameraY(player.getCameraY());
         guiPlayer.setWorldX(player.getWorldX());
         guiPlayer.setWorldY(player.getWorldY());
+        guiPlayer.setWidth(player.getWidth());
+        guiPlayer.setHeight(player.getHeight());
         return guiPlayer;
     }
     private static GuiLevel createGuiLevel(Level level,GuiLevel guiLevel,GuiSection guiSection[]){
