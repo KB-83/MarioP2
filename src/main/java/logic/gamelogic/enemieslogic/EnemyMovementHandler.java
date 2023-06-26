@@ -14,7 +14,9 @@ public class EnemyMovementHandler {
     }
     public void updateEnemiesPosition() {
         for (Enemy enemy: gameState.getCurrentSection().getEnemies()) {
-            enemy.setEnemyCollisionHandler(new EnemyCollisionHandler(gameState.getCurrentSection(),enemy));
+//            enemy.setEnemyCollisionHandler(new EnemyCollisionHandler(gameState.getCurrentSection(),enemy));
+            //todo : change enemy collision handler if section changed?
+            enemy.getEnemyCollisionHandler().setSection(gameState.getCurrentSection());
             enemy.getEnemyCollisionHandler().applyCollisionEffects();
             enemy.setWorldX((int) (enemy.getWorldX()+(1.0/ Constant.FPS * enemy.getVX())));
             enemy.setWorldY((int) (enemy.getWorldY()+(1.0/Constant.FPS * enemy.getVY())));

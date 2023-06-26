@@ -16,7 +16,7 @@ public class ItemMovementHandler {
     }
     public void updateItemsPosition() {
         for (Item item: gameState.getCurrentSection().getItems()) {
-            item.setItemCollisionHandler(new ItemCollisionHandler(gameState.getCurrentSection(),item));
+            item.getItemCollisionHandler().setSection(gameState.getCurrentSection());
             item.getItemCollisionHandler().applyCollisionEffects();
             item.setWorldX((int) (item.getWorldX()+(1.0/ Constant.FPS * item.getVX())));
             item.setWorldY((int) (item.getWorldY()+(1.0/Constant.FPS * item.getVY())));

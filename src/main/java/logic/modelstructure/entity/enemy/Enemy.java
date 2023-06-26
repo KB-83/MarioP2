@@ -10,6 +10,7 @@ public abstract class Enemy extends Entity {
     EnemyCollisionHandler enemyCollisionHandler;
     public Enemy() {
         setOnTopOfBlock(true);
+        enemyCollisionHandler = new EnemyCollisionHandler(this);
     }
 
     public EnemyCollisionHandler getEnemyCollisionHandler() {

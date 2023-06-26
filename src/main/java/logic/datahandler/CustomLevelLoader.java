@@ -273,7 +273,7 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
                     item = new Mushroom();
                     break;
                 case "FLOWER":
-                    item = new Mushroom();
+                    item = new Flower();
                     break;
                 default:
                     item = new Coin();

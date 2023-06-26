@@ -13,7 +13,7 @@
               "x": 10,
               "y": 4,
               "type": "QUESTION",
-              "item": "COIN"
+              "item": "FLOWER"
             },
             {
               "x": 12,
@@ -142,7 +142,7 @@
               "x": 6,
               "y": 4,
               "type": "QUESTION",
-              "item": "COIN"
+              "item": "FLOWER"
             },
             {
               "x": 7,

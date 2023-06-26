@@ -14,6 +14,7 @@ public abstract class Item extends Entity {
     public Item() {
         isLock = true;
         setOnTopOfBlock(true);
+        itemCollisionHandler = new ItemCollisionHandler(this);
     }
 
     public boolean isLock() {

@@ -24,13 +24,15 @@ public class EnemyCollisionHandler{
         private Rect enemyRect = new Rect(0,48, 0,48);
         private Rect pipeRect = new Rect(0,96,0,48*3);
         private Rect backgrounTileRect = new Rect(0,48,0,48);
-        public EnemyCollisionHandler(Section section, Enemy enemy) {
+        public EnemyCollisionHandler( Enemy enemy) {
             collisionChecker = new CollisionDetector(enemy);
+            this.enemy = enemy;
+        }
+        public void setSection(Section section) {
             enemies = section.getEnemies();
             pipes = section.getPipes();
             blocks = section.getBlocks();
             backGroundTiles = section.getBackgroundMap().getBackGroundTiles();
-            this.enemy = enemy;
         }
         public void updateSection(Section section) {
             enemies = section.getEnemies();
@@ -124,5 +126,6 @@ public class EnemyCollisionHandler{
 //                }
             }
         }
+
 
 }
