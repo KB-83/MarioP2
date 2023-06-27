@@ -5,9 +5,7 @@ import logic.gamestrucure.gameworldoption.collision.CollisionChecker;
 import logic.gamestrucure.gameworldoption.collision.Rect;
 import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.block.Block;
-import logic.modelstructure.backgroundobject.pipe.Pipe;
-import logic.modelstructure.backgroundobject.pipe.SimpleTelePipe;
-import logic.modelstructure.backgroundobject.pipe.TelePlantPipe;
+import logic.modelstructure.backgroundobject.pipe.*;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.entity.item.Item;
 import logic.modelstructure.entity.player.Player;
@@ -183,8 +181,8 @@ public class PlayerCollisionHandler implements CollisionHandler{
                 && player.getWorldX()+ player.getWidth() <= (pipe.getCol()*Constant.BACKGROUND_TILE_SIZE) +
                 pipeRect.getWidth() && player.getWorldY()+ player.getHeight() >= pipe.getRow() * Constant.BACKGROUND_TILE_SIZE) {
                     String s = pipe.getClass().getSimpleName();
-
-                    if (s.equals("TelePlantPipe") || s.equals("SimpleTelePipe")) {
+                    if (s.equals("TelePlantPipe") || s.equals("SimpleTelePipe") ||
+                            s.equals("SimpleSpawnPipe") || s.equals("SpawnPlantPipe")) {
                         return pipe;
                     }
                 }

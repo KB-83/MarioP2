@@ -3,10 +3,7 @@ package logic.requsethandler;
 import logic.gamestrucure.GameState;
 import logic.gamestrucure.gameworldoption.Gravity;
 import logic.levelstructure.Section;
-import logic.modelstructure.backgroundobject.pipe.Pipe;
-import logic.modelstructure.backgroundobject.pipe.SimplePlantPipe;
-import logic.modelstructure.backgroundobject.pipe.SimpleTelePipe;
-import logic.modelstructure.backgroundobject.pipe.TelePlantPipe;
+import logic.modelstructure.backgroundobject.pipe.*;
 import logic.modelstructure.entity.player.JumpV0;
 import logic.modelstructure.entity.player.Player;
 import util.Constant;
@@ -111,6 +108,12 @@ public class PlayerRequestHandler extends Request{
             }
             else if(s.equals("SimpleTelePipe")) {
                 gameState.getGameStateController().changeSection(((SimpleTelePipe) pipe).getTeleSection());
+            }
+            else if(s.equals("SimpleSpawnPipe")) {
+                gameState.getGameStateController().changeSection(((SimpleSpawnPipe) pipe).getSection());
+            }
+            else if(s.equals("SpawnPlantPipe")) {
+                gameState.getGameStateController().changeSection(((SpawnPlantPipe) pipe).getSection());
             }
         }
         player.setWorldY(player.getWorldY()+10);

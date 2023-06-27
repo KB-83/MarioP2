@@ -48,7 +48,7 @@
             {
               "x": 6,
               "y": 0,
-              "type": "PIRANHA_TRAP"
+              "type": "SIMPLE"
             },
             {
               "x": 20,
@@ -96,19 +96,19 @@
                 "pipes": [
                   {
                     "x": 20,
-                    "y": 0,
+                    "y": 5,
                     "type": "SIMPLE"
                   },
                   {
                     "x": 14,
-                    "y": 0,
+                    "y": 5,
                     "type": "PIRANHA_TRAP"
                   }
                 ],
                 "spawnPipe": {
                   "x": 6,
                   "y": 0,
-                  "type": "SIMPLE"
+                  "type": "PIRANHA_TRAP"
                 }
               }
             }
@@ -179,7 +179,7 @@
           ],
           "pipes": [
             {
-              "x": 20,
+              "x": 23,
               "y": 0,
               "type": "PIRANHA_TRAP"
             }

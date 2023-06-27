@@ -14,9 +14,7 @@ import logic.gamestrucure.GameState;
 import logic.levelstructure.Level;
 import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.block.Block;
-import logic.modelstructure.backgroundobject.pipe.Pipe;
-import logic.modelstructure.backgroundobject.pipe.SimplePlantPipe;
-import logic.modelstructure.backgroundobject.pipe.TelePlantPipe;
+import logic.modelstructure.backgroundobject.pipe.*;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.entity.item.Coin;
 import logic.modelstructure.entity.item.Item;
@@ -254,6 +252,17 @@ public class GuiGameCreator {
                     break;
                 case "DECEITPIPE":
                     guiPipe = new GuiDeceitPipe();
+                    break;
+                case "SIMPLESPAWNPIPE":
+                    guiPipe = new GuiSpawnPipe();
+                    break;
+                case "SPAWNPLANTPIPE" :
+                    guiPipe = new GuiSpawnPlantPipe();
+                    guiPlant = new GuiPlant();
+                    guiPlant.setWorldX(((SpawnPlantPipe)pipe).getPlant().getWorldX());
+                    guiPlant.setWorldY(((SpawnPlantPipe)pipe).getPlant().getWorldY());
+                    guiPlant.setCurrentImage(guiPlant.getImageByItsAddress("Plant"));
+                    ((GuiSpawnPlantPipe)guiPipe).setGuiPlant(guiPlant);
                     break;
 
             }

@@ -143,6 +143,35 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
 
             return enemy;
         }
+        private Pipe createSpawnPipeAndAddToPipes(JsonNode pipeNode,TeleSection teleSection){
+            String type = pipeNode.get("type").asText();
+            Pipe pipe = null;
+            Plant plant = null;
+            if (type.equals("SIMPLE") || type.equals("TELE_SIMPLE")) {
+                pipe = new SimpleSpawnPipe();
+                ((SimpleSpawnPipe) pipe).setSection(teleSection.getSection());
+            }
+
+            else if (type.equals("PIRANHA_TRAP") || type.equals("TELE_PIRANHA")) {
+                pipe = new SpawnPlantPipe();
+                plant = new Plant();
+                ((SpawnPlantPipe)pipe).setPlant(plant);
+                ((SpawnPlantPipe) pipe).setSection(teleSection.getSection());
+            }
+            Pipe[] pipes = new Pipe[teleSection.getPipes().length+1];
+            for (int i = 0; i <teleSection.getPipes().length; i++){
+                pipes[i] = teleSection.getPipes()[i];
+            }
+            pipe.setCol(pipeNode.get("x").asInt());
+            pipe.setRow((Constant.PANEL_ROWS-Constant.GROUND_BLOCKS-3)-pipeNode.get("y").asInt());
+            if (plant != null) {
+                plant.setWorldX((pipe.getCol()*Constant.BACKGROUND_TILE_SIZE)+Constant.BACKGROUND_TILE_SIZE/2);
+                plant.setWorldY((pipe.getRow() * Constant.BACKGROUND_TILE_SIZE) - plant.getWidth());
+            }
+            pipes[teleSection.getPipes().length] = pipe;
+            teleSection.setPipes(pipes);
+            return pipe;
+        }
 
         private Pipe createPipe(JsonNode pipeNode,Section upperSection) {
             String type = pipeNode.get("type").asText();
@@ -216,6 +245,12 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
             teleSection.setBackgroundMap(section.getBackgroundMap());
             teleSection.setTime(section.getTime());
             teleSection.setSpawnPipe(section.getSpawnPipe());
+            Pipe spawnPipe = null;
+            JsonNode spawnPipeNode = sectionNode.get("spawnPipe");
+            if (spawnPipeNode != null) {
+                spawnPipe = createSpawnPipeAndAddToPipes(spawnPipeNode,teleSection);
+            }
+            teleSection.setSpawnPipe(spawnPipe);//todo : it is not correct
             return teleSection;
         }
 
@@ -264,12 +299,7 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
             section.setPipes(pipes);
 
             // Deserialize spawnPipe
-            Pipe spawnPipe = null;
-            JsonNode spawnPipeNode = sectionNode.get("spawnPipe");
-            if (spawnPipeNode != null) {
-                spawnPipe = createPipe(spawnPipeNode,section);
-            }
-            section.setSpawnPipe(spawnPipe);//todo : it is not correct
+
             createItemArray(section,sectionNode);
 
             return section;
