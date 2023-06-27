@@ -48,7 +48,7 @@
             {
               "x": 6,
               "y": 0,
-              "type": "SIMPLE"
+              "type": "PIRANHA_TRAP"
             },
             {
               "x": 20,
@@ -96,12 +96,12 @@
                 "pipes": [
                   {
                     "x": 20,
-                    "y": 5,
+                    "y": 0,
                     "type": "SIMPLE"
                   },
                   {
                     "x": 14,
-                    "y": 5,
+                    "y": 0,
                     "type": "PIRANHA_TRAP"
                   }
                 ],
@@ -230,7 +230,7 @@
           ]
         }
       ]
-    } ],
+    }],
     "hearts" : 0,
     "marioState" : 0
   } ],

@@ -1,14 +1,14 @@
 package logic.requsethandler;
 
-import graphic.guigamestructure.Camera;
-import graphic.panel.GamePanel;
 import logic.gamestrucure.GameState;
 import logic.gamestrucure.gameworldoption.Gravity;
+import logic.levelstructure.Section;
+import logic.modelstructure.backgroundobject.pipe.SimplePlantPipe;
+import logic.modelstructure.backgroundobject.pipe.TelePlantPipe;
 import logic.modelstructure.entity.player.JumpV0;
 import logic.modelstructure.entity.player.Player;
 import util.Constant;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -51,7 +51,7 @@ public class PlayerRequestHandler extends Request{
         }
         // todo : make section v=changing mechanisem alright
         if(player.getWorldX() >= Constant.PANEL_WIDTH){
-            gameState.getGameStateController().changeSection();
+            gameState.getGameStateController().nextSection();
             return;
         }
         // todo : check next line
@@ -95,10 +95,11 @@ public class PlayerRequestHandler extends Request{
         player.setVX(0);
     }
 
-    public void DownRequest(){
+    public void SeatRequest(){
         if(gameState.isPaused() || player.isDuringJump()){
             return;
         }
+        //todo ; just a test
         player.setWorldY(player.getWorldY()+10);
         player.setCameraY(player.getCameraY()+10);
     }

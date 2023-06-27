@@ -21,7 +21,7 @@ public class PlayerListener implements KeyListener {
             playerRequestHandler.JumpRequest();
         }
         else if(e.getKeyCode() == KeyEvent.VK_DOWN){
-            playerRequestHandler.DownRequest();
+            playerRequestHandler.SeatRequest();
         }
         else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
             playerRequestHandler.RightRequest();

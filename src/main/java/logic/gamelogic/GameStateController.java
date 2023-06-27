@@ -8,9 +8,9 @@ import logic.gamelogic.playerlogic.PlayerMovementHandler;
 import logic.gamestrucure.Game;
 import logic.gamestrucure.GameState;
 import logic.gamelogic.collisionlogic.PlayerCollisionHandler;
+import logic.levelstructure.Section;
 import logic.modelstructure.entity.player.Mario;
 import logic.modelstructure.entity.player.Player;
-import logic.sound.Sound;
 import util.Constant;
 import util.Loop;
 
@@ -49,7 +49,7 @@ public class GameStateController {
 
 
     }
-    public void changeSection() {
+    public void nextSection() {
         if(gameState.getSectionNumber() < game.getLevels()[gameState.getLevelNumber()-1].getSections()[gameState.getSectionNumber()-1].getLength()) {
             gameState.setCurrentSection(game.getLevels()[gameState.getLevelNumber() - 1].getSections()[gameState.getSectionNumber() - 1 + 1]);
             gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(gameState));
@@ -62,6 +62,14 @@ public class GameStateController {
         else {
             //todo : add level changing method here
         }
+    }
+    public void changeSection(Section section) {
+        gameState.setCurrentSection(section);
+        gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(gameState));
+//        gameState.setSectionNumber(gameState.getSectionNumber() + 1);
+        gameState.setRemainingTime(gameState.getCurrentSection().getTime());
+        gameState.getPlayer().setCameraX(0);
+        gameState.getPlayer().setWorldX(0);
     }
     private void changeLevel() {}
     public GameState createGameState(Game game, LogicManager logicManager) {

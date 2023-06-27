@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import logic.levelstructure.Level;
 import logic.levelstructure.Section;
+import logic.levelstructure.TeleSection;
 import logic.modelstructure.backgroundobject.block.*;
 import logic.modelstructure.backgroundobject.pipe.*;
 import logic.modelstructure.entity.enemy.*;
@@ -143,7 +144,7 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
             return enemy;
         }
 
-        private Pipe createPipe(JsonNode pipeNode) {
+        private Pipe createPipe(JsonNode pipeNode,Section upperSection) {
             String type = pipeNode.get("type").asText();
 
             Pipe pipe;
@@ -159,13 +160,18 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
                     ((TelePlantPipe)pipe).setPlant(plant);
                     JsonNode sectionNode = pipeNode.get("section");
                     if (sectionNode != null) {
-                        Section section = createSection(sectionNode);
-                        ((TelePlantPipe) pipe).setSection(section);
+                        TeleSection teleSection = creatTeleSection(sectionNode,upperSection);
+                        ((TelePlantPipe) pipe).setTeleSection(teleSection);
                     }
                     break;
                 // todo : initialize this pipes
                 case "TELE_SIMPLE":
                     pipe = new SimpleTelePipe();
+                    sectionNode = pipeNode.get("section");
+                    if (sectionNode != null) {
+                        TeleSection teleSection = creatTeleSection(sectionNode,upperSection);
+                        ((TelePlantPipe) pipe).setTeleSection(teleSection);
+                    }
                     break;
 
                     case "PIRANHA_TRAP":
@@ -196,6 +202,21 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
             }
 
             return pipe;
+        }
+        private TeleSection creatTeleSection(JsonNode sectionNode,Section upperSection) {
+            Section section = createSection(sectionNode);
+            setSectionPlantEnemies(section);
+            TeleSection teleSection = new TeleSection();
+            teleSection.setSection(upperSection);
+            teleSection.setPipes(section.getPipes());
+            teleSection.setBlocks(section.getBlocks());
+            teleSection.setEnemies(section.getEnemies());
+            teleSection.setItems(section.getItems());
+            teleSection.setLength(section.getLength());
+            teleSection.setBackgroundMap(section.getBackgroundMap());
+            teleSection.setTime(section.getTime());
+            teleSection.setSpawnPipe(section.getSpawnPipe());
+            return teleSection;
         }
 
         private Section createSection(JsonNode sectionNode) {
@@ -236,7 +257,7 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
                 pipes = new Pipe[pipesNode.size()];
                 int pipeIndex = 0;
                 for (JsonNode pipeNode : pipesNode) {
-                    Pipe pipe = createPipe(pipeNode);
+                    Pipe pipe = createPipe(pipeNode,section);
                     pipes[pipeIndex++] = pipe;
                 }
             }
@@ -246,7 +267,7 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
             Pipe spawnPipe = null;
             JsonNode spawnPipeNode = sectionNode.get("spawnPipe");
             if (spawnPipeNode != null) {
-                spawnPipe = createPipe(spawnPipeNode);
+                spawnPipe = createPipe(spawnPipeNode,section);
             }
             section.setSpawnPipe(spawnPipe);//todo : it is not correct
             createItemArray(section,sectionNode);
