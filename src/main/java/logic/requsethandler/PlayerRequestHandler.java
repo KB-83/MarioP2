@@ -3,7 +3,9 @@ package logic.requsethandler;
 import logic.gamestrucure.GameState;
 import logic.gamestrucure.gameworldoption.Gravity;
 import logic.levelstructure.Section;
+import logic.modelstructure.backgroundobject.pipe.Pipe;
 import logic.modelstructure.backgroundobject.pipe.SimplePlantPipe;
+import logic.modelstructure.backgroundobject.pipe.SimpleTelePipe;
 import logic.modelstructure.backgroundobject.pipe.TelePlantPipe;
 import logic.modelstructure.entity.player.JumpV0;
 import logic.modelstructure.entity.player.Player;
@@ -100,6 +102,17 @@ public class PlayerRequestHandler extends Request{
             return;
         }
         //todo ; just a test
+        if (player.getPlayerCollisionHandler().isOnTopOfTelePipe() != null) {
+            System.out.println("106 player request handler");
+            Pipe pipe = player.getPlayerCollisionHandler().isOnTopOfTelePipe();
+            String s = pipe.getClass().getSimpleName();
+            if (s.equals("TelePlantPipe")) {
+                gameState.getGameStateController().changeSection(((TelePlantPipe) pipe).getTeleSection());
+            }
+            else if(s.equals("SimpleTelePipe")) {
+                gameState.getGameStateController().changeSection(((SimpleTelePipe) pipe).getTeleSection());
+            }
+        }
         player.setWorldY(player.getWorldY()+10);
         player.setCameraY(player.getCameraY()+10);
     }

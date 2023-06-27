@@ -1,6 +1,7 @@
 package logic.levelstructure;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import logic.gamelogic.backgroundmaplogic.BackGroundMapGenerator;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.Pipe;
 import logic.modelstructure.entity.enemy.Enemy;
@@ -18,11 +19,16 @@ public class Section {
     private BackgroundMap backgroundMap;
     private Item[] items;
     public Section(){
-        backgroundMap = new BackgroundMap(1,1,26*4, 15);    }
+//        backgroundMap = new BackgroundMap();
+//        backgroundMap.loadMap(1,1,26*4, 15);
+        backgroundMap = BackGroundMapGenerator.retrunBackgroundMap(26 * 4,15);
+    }
 
     public Section(int levelNum,int sectionNum) {
         // todo: this is just a test
-        backgroundMap = new BackgroundMap(levelNum,sectionNum,26*4, 15);
+//        backgroundMap = new BackgroundMap();
+//        backgroundMap.loadMap(1,1,26*4, 15);
+        backgroundMap = BackGroundMapGenerator.retrunBackgroundMap(26 * 4,15);
     }
 
     public int getLength() {

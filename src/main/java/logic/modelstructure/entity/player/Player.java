@@ -1,5 +1,6 @@
 package logic.modelstructure.entity.player;
 
+import logic.gamelogic.collisionlogic.PlayerCollisionHandler;
 import logic.modelstructure.entity.Entity;
 import logic.requsethandler.PlayerRequestHandler;
 import util.Constant;
@@ -12,6 +13,7 @@ public abstract class Player extends Entity {
     private boolean isFire, isMega;
     //todo: is it nessesart?
     private PlayerRequestHandler playerRequestHandler;
+    private PlayerCollisionHandler playerCollisionHandler;
 
     public Player() {
         setOnTopOfBlock(true);
@@ -79,4 +81,11 @@ public abstract class Player extends Entity {
         }
     }
 
+    public PlayerCollisionHandler getPlayerCollisionHandler() {
+        return playerCollisionHandler;
+    }
+
+    public void setPlayerCollisionHandler(PlayerCollisionHandler playerCollisionHandler) {
+        this.playerCollisionHandler = playerCollisionHandler;
+    }
 }

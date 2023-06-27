@@ -6,6 +6,8 @@ import logic.gamestrucure.gameworldoption.collision.Rect;
 import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.Pipe;
+import logic.modelstructure.backgroundobject.pipe.SimpleTelePipe;
+import logic.modelstructure.backgroundobject.pipe.TelePlantPipe;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.entity.item.Item;
 import logic.modelstructure.entity.player.Player;
@@ -38,7 +40,9 @@ public class PlayerCollisionHandler implements CollisionHandler{
         blocks = gameState.getCurrentSection().getBlocks();
         backGroundTiles = gameState.getCurrentSection().getBackgroundMap().getBackGroundTiles();
         this.player = gameState.getPlayer();
+        player.setPlayerCollisionHandler(this);
         itemUnlocker = new ItemUnlocker();
+
     }
     public void updateSection(Section section) {
         enemies = section.getEnemies();
@@ -172,6 +176,22 @@ public class PlayerCollisionHandler implements CollisionHandler{
                 }
             }
         }}
+    public Pipe isOnTopOfTelePipe(){
+        if (pipes != null) {
+            for (Pipe pipe : pipes) {
+                if (player.getWorldX() >= (pipe.getCol()*Constant.BACKGROUND_TILE_SIZE)-(Constant.BACKGROUND_TILE_SIZE/2)
+                && player.getWorldX()+ player.getWidth() <= (pipe.getCol()*Constant.BACKGROUND_TILE_SIZE) +
+                pipeRect.getWidth() && player.getWorldY()+ player.getHeight() >= pipe.getRow() * Constant.BACKGROUND_TILE_SIZE) {
+                    String s = pipe.getClass().getSimpleName();
+
+                    if (s.equals("TelePlantPipe") || s.equals("SimpleTelePipe")) {
+                        return pipe;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
     @Override
     public void checkPlayerCollision() {

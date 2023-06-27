@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class BackgroundMap {
     private BackGroundTile[][] backGroundTiles;
-    public BackgroundMap(int levelNum ,int sectionNum,int sectionCols,int sectionRows){
-        loadMap(levelNum,sectionNum,sectionCols,sectionRows);
+    public BackgroundMap(){
+
     }
     public void loadMap(int levelNum ,int sectionNum,int sectionCols,int sectionRows){
         backGroundTiles = new BackGroundTile[sectionRows][sectionCols];
@@ -51,5 +51,9 @@ public class BackgroundMap {
 
     public BackGroundTile[][] getBackGroundTiles() {
         return backGroundTiles;
+    }
+
+    public void setBackGroundTiles(BackGroundTile[][] backGroundTiles) {
+        this.backGroundTiles = backGroundTiles;
     }
 }
