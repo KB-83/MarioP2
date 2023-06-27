@@ -1,5 +1,6 @@
 package logic.gamelogic.collisionlogic;
 import logic.gamelogic.itemlogic.ItemUnlocker;
+import logic.gamestrucure.GameState;
 import logic.gamestrucure.gameworldoption.collision.CollisionChecker;
 import logic.gamestrucure.gameworldoption.collision.Rect;
 import logic.levelstructure.Section;
@@ -14,6 +15,7 @@ import util.Constant;
 public class PlayerCollisionHandler implements CollisionHandler{
     //todo: improve collision checker boundery
     //todo : improve this
+    private GameState gameState;
     private CollisionChecker collisionChecker;
     private Player player;
     private Enemy[] enemies;
@@ -21,19 +23,21 @@ public class PlayerCollisionHandler implements CollisionHandler{
     private Block[] blocks;
     private BackGroundTile[][] backGroundTiles;
     private Rect blockRect = new Rect(0,48, 0,48);
+    private Rect itemRect = new Rect(0,0,48,48);
     private Rect playerRect = new Rect(0,48, 0,48);
     private Rect pipeRect = new Rect(0,96,0,48*3);
     private Rect enemyRect = new Rect(0,48,0,48);
     private Rect backgrounTileRect = new Rect(0,48,0,48);
     //todo: improve this too
     private ItemUnlocker itemUnlocker;
-    public PlayerCollisionHandler(Section section, Player player) {
-        collisionChecker = new CollisionDetector(player);
-        enemies = section.getEnemies();
-        pipes = section.getPipes();
-        blocks = section.getBlocks();
-        backGroundTiles = section.getBackgroundMap().getBackGroundTiles();
-        this.player = player;
+    public PlayerCollisionHandler(GameState gameState) {
+        this.gameState = gameState;
+        collisionChecker = new CollisionDetector(gameState.getPlayer());
+        enemies = gameState.getCurrentSection().getEnemies();
+        pipes = gameState.getCurrentSection().getPipes();
+        blocks = gameState.getCurrentSection().getBlocks();
+        backGroundTiles = gameState.getCurrentSection().getBackgroundMap().getBackGroundTiles();
+        this.player = gameState.getPlayer();
         itemUnlocker = new ItemUnlocker();
     }
     public void updateSection(Section section) {
@@ -59,7 +63,23 @@ public class PlayerCollisionHandler implements CollisionHandler{
 //
 //        //background tiles todo: give a bound to background tiles
         checkBackgroundTilesCollision();
+        checkItemEating();
 
+
+    }
+    public void checkItemEating(){
+        if (gameState == null) {
+            return;
+        }
+        if (gameState.getCurrentSection().getItems() != null) {
+            playerRect.updatePositionAndSize(player.getWidth(), player.getHeight(), player.getWorldX(), player.getWorldY());
+            for (int i = 0; i < gameState.getCurrentSection().getItems().length; i++) {
+                itemRect.updatePosition(gameState.getCurrentSection().getItems()[i].getWorldX(), gameState.getCurrentSection().getItems()[i].getWorldY());
+                if (gameState.getCurrentSection().getItems()[i].isLock() == false && collisionChecker.didCollide(playerRect, itemRect)) {
+                    gameState.getPlayerItemEater().eatItem(gameState.getCurrentSection().getItems(), gameState.getCurrentSection().getItems()[i], i);
+                }
+            }
+        }
     }
     public void checkBlocksCollision(){
         playerRect.updatePositionAndSize(player.getWidth(), player.getHeight(),player.getWorldX(), player.getWorldY());
@@ -71,6 +91,16 @@ public class PlayerCollisionHandler implements CollisionHandler{
                         Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
                 if (block.getItem() != null) {
                     itemUnlocker.unlock(block,blocks,i);
+                }
+            }
+            if (collisionChecker.returnSamePoints(playerRect,blockRect).equals("DOWN")) {
+                player.setOnTopOfBlock(true);
+//                    // todo: improve it too
+                player.setWorldY(blockRect.getTopY()-player.getHeight());
+                player.setCameraY(blockRect.getTopY()-player.getHeight());
+                if (player.getVY() < 0) {
+                    player.setVY(0);
+                    player.setDuringJump(false);
                 }
             }
         }
@@ -85,6 +115,16 @@ public class PlayerCollisionHandler implements CollisionHandler{
                     handelCollision(pipe.getCol() * Constant.BACKGROUND_TILE_SIZE, pipe.getRow() *
                             Constant.BACKGROUND_TILE_SIZE, 2 * Constant.BACKGROUND_TILE_SIZE, 3 * Constant.BACKGROUND_TILE_SIZE);
                 }
+                if (collisionChecker.returnSamePoints(playerRect,pipeRect).equals("DOWN")) {
+                    player.setOnTopOfBlock(true);
+//                    // todo: improve it too
+                    player.setWorldY(pipeRect.getTopY()-player.getHeight());
+                    player.setCameraY(pipeRect.getTopY()-player.getHeight());
+                    if (player.getVY() < 0) {
+                        player.setVY(0);
+                        player.setDuringJump(false);
+                    }
+                }
             }
         }}
     public void checkEnemiesCollision(){
@@ -95,6 +135,16 @@ public class PlayerCollisionHandler implements CollisionHandler{
                 if (collisionChecker.didCollide(playerRect, enemyRect)) {
                     handelCollision(enemy.getWorldX(), enemy.getWorldY(), Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
                     return;
+                }
+                if (collisionChecker.returnSamePoints(playerRect,enemyRect).equals("DOWN")) {
+                    player.setOnTopOfBlock(true);
+//                    // todo: improve it too
+                    player.setWorldY(enemyRect.getTopY()-player.getHeight());
+                    player.setCameraY(enemyRect.getTopY()-player.getHeight());
+                    if (player.getVY() < 0) {
+                        player.setVY(0);
+                        player.setDuringJump(false);
+                    }
                 }
             }
         }
@@ -107,6 +157,17 @@ public class PlayerCollisionHandler implements CollisionHandler{
                     backgrounTileRect.updatePosition(j*48,i*48);
                     if(collisionChecker.didCollide(playerRect,backgrounTileRect)){
                         handelCollision(j*48,i*48,48,48);
+                    }
+                }
+//                System.out.println("111 player collision handler  "+collisionChecker.returnSamePoints(playerRect,backgrounTileRect));
+                if (collisionChecker.returnSamePoints(playerRect,backgrounTileRect).equals("DOWN")) {
+                    player.setOnTopOfBlock(true);
+//                    // todo: improve it too
+                    player.setWorldY(backgrounTileRect.getTopY()-player.getHeight());
+                    player.setCameraY(backgrounTileRect.getTopY()-player.getHeight());
+                    if (player.getVY() < 0) {
+                        player.setVY(0);
+                        player.setDuringJump(false);
                     }
                 }
             }

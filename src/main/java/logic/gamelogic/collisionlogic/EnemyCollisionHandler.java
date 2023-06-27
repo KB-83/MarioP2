@@ -50,6 +50,14 @@ public class EnemyCollisionHandler{
                     if (collisionChecker.didCollide(mainEnemyRect, blockRect)) {
                         enemy.setVX(-enemy.getVX());
                     }
+                    if (collisionChecker.returnSamePoints(mainEnemyRect,blockRect).equals("DOWN")) {
+                        enemy.setOnTopOfBlock(true);
+//                    // todo: improve it too
+                        enemy.setWorldY(blockRect.getTopY()-mainEnemyRect.getHeight());
+                        if (enemy.getVY() < 0) {
+                            enemy.setVY(0);
+                        }
+                    }
 //                        handelCollision(block.getCol() * Constant.BACKGROUND_TILE_SIZE, block.getRow() *
 //                                Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
                     }
@@ -72,6 +80,14 @@ public class EnemyCollisionHandler{
 //                        handelCollision(pipe.getCol() * Constant.BACKGROUND_TILE_SIZE, pipe.getRow() *
 //                                Constant.BACKGROUND_TILE_SIZE, 2 * Constant.BACKGROUND_TILE_SIZE, 3 * Constant.BACKGROUND_TILE_SIZE);
                     }
+                    if (collisionChecker.returnSamePoints(mainEnemyRect,pipeRect).equals("DOWN")) {
+                        enemy.setOnTopOfBlock(true);
+//                    // todo: improve it too
+                        enemy.setWorldY(pipeRect.getTopY()-mainEnemyRect.getHeight());
+                        if (enemy.getVY() < 0) {
+                            enemy.setVY(0);
+                        }
+                    }
                 }
             }
 //        enemies
@@ -84,6 +100,14 @@ public class EnemyCollisionHandler{
 //                        handelCollision(enemy.getWorldX(), enemy.getWorldY(), Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
 //                        return;
                     }
+                    if (collisionChecker.returnSamePoints(mainEnemyRect,enemyRect).equals("DOWN")) {
+                        enemy.setOnTopOfBlock(true);
+//                    // todo: improve it too
+                        enemy.setWorldY(enemyRect.getTopY()-mainEnemyRect.getHeight());
+                        if (enemy.getVY() < 0) {
+                            enemy.setVY(0);
+                        }
+                    }
                 }
             }
             //background tiles todo: give a bound to background tiles
@@ -95,6 +119,14 @@ public class EnemyCollisionHandler{
                         if(collisionChecker.didCollide(mainEnemyRect, backgrounTileRect)){
                             enemy.setVX(-enemy.getVX());
 //                            handelCollision(j*48,i*48,48,48);
+                        }
+                        if (collisionChecker.returnSamePoints(mainEnemyRect,backgrounTileRect).equals("DOWN")) {
+                            enemy.setOnTopOfBlock(true);
+//                    // todo: improve it too
+                            enemy.setWorldY(backgrounTileRect.getTopY()-mainEnemyRect.getHeight());
+                            if (enemy.getVY() < 0) {
+                                enemy.setVY(0);
+                            }
                         }
                     }
                 }

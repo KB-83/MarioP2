@@ -8,6 +8,11 @@ public class Collision {
             public boolean didCollide(Rect rect1, Rect rect2) {
                 return false;
             }
+
+            @Override
+            public String returnSamePoints(Rect rect1, Rect relationToRect1) {
+                return "";
+            }
         };
     }
 

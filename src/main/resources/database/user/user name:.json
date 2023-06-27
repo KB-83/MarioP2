@@ -19,7 +19,7 @@
               "x": 12,
               "y": 4,
               "type": "QUESTION",
-              "item": "STAR"
+              "item": "MUSHROOM"
             },
             {
               "x": 14,
@@ -54,73 +54,6 @@
               "x": 6,
               "y": 0,
               "type": "SIMPLE"
-            },
-            {
-              "x": 20,
-              "y": 0,
-              "type": "TELE_PIRANHA",
-              "section": {
-                "length": 25,
-                "time": 50,
-                "blocks": [
-                  {
-                    "x": 10,
-                    "y": 4,
-                    "type": "SIMPLE"
-                  },
-                  {
-                    "x": 11,
-                    "y": 4,
-                    "type": "SIMPLE"
-                  },
-                  {
-                    "x": 12,
-                    "y": 4,
-                    "type": "QUESTION",
-                    "item": "COINS"
-                  },
-                  {
-                    "x": 15,
-                    "y": 4,
-                    "type": "QUESTION",
-                    "item": "MUSHROOM"
-                  },
-                  {
-                    "x": 17,
-                    "y": 4,
-                    "type": "SIMPLE"
-                  }
-                ],
-                "enemies": [
-                  {
-                    "x": 12,
-                    "y": 5,
-                    "type": "GOOMBA"
-                  },
-                  {
-                    "x": 18,
-                    "y": 0,
-                    "type": "SPINY"
-                  }
-                ],
-                "pipes": [
-                  {
-                    "x": 20,
-                    "y": 5,
-                    "type": "SIMPLE"
-                  },
-                  {
-                    "x": 14,
-                    "y": 5,
-                    "type": "PIRANHA_TRAP"
-                  }
-                ],
-                "spawnPipe": {
-                  "x": 6,
-                  "y": 0,
-                  "type": "SIMPLE"
-                }
-              }
             }
           ]
         },
@@ -242,7 +175,7 @@
       ]
     } ],
     "hearts" : 0,
-    "marioState" : 1
+    "marioState" : 0
   } ],
   "players" : null,
   "coins" : 0,

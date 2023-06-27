@@ -2,6 +2,7 @@ package logic.modelstructure.entity.player;
 
 import logic.modelstructure.entity.Entity;
 import logic.requsethandler.PlayerRequestHandler;
+import util.Constant;
 
 public abstract class Player extends Entity {
     private int cameraX, cameraY;
@@ -63,6 +64,9 @@ public abstract class Player extends Entity {
 
     public void setFire(boolean fire) {
         isFire = fire;
+        if (fire){
+            setHeight(Constant.BACKGROUND_TILE_SIZE*2);
+        }
     }
 
     public boolean isMega() {
@@ -71,6 +75,9 @@ public abstract class Player extends Entity {
 
     public void setMega(boolean mega) {
         isMega = mega;
+        if (mega){
+            setHeight(Constant.BACKGROUND_TILE_SIZE*2);
+        }
     }
 
     public int getWidth() {

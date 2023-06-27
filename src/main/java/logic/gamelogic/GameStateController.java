@@ -52,8 +52,7 @@ public class GameStateController {
     public void changeSection() {
         if(gameState.getSectionNumber() < game.getLevels()[gameState.getLevelNumber()-1].getSections()[gameState.getSectionNumber()-1].getLength()) {
             gameState.setCurrentSection(game.getLevels()[gameState.getLevelNumber() - 1].getSections()[gameState.getSectionNumber() - 1 + 1]);
-            gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(game.getLevels()[gameState.getLevelNumber() - 1].
-                    getSections()[gameState.getSectionNumber() - 1 + 1], gameState.getPlayer()));
+            gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(gameState));
             gameState.setSectionNumber(gameState.getSectionNumber() + 1);
             gameState.setRemainingTime(gameState.getCurrentSection().getTime());
             gameState.getPlayer().setCameraX(0);
@@ -105,7 +104,7 @@ public class GameStateController {
         gameState.setPlayer(player);
         gameState.setCurrentLevel(game.getLevels()[0]);
         gameState.setCurrentSection(game.getLevels()[0].getSections()[0]);
-        gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(game.getLevels()[0].getSections()[0],player));
+        gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(gameState));
         gameState.setCoins(0);
         gameState.setLevelNumber(1);
         gameState.setSectionNumber(1);

@@ -126,7 +126,6 @@ public class PlayerRequestHandler extends Request{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (player.isDuringJump()){
-                    System.out.println("jump loop");
                     t = ( System.currentTimeMillis() - jumpStartTime) / 1000;
                     player.setVY ((-(Gravity.MARIO_GAME) * (t)) + JumpV0.MARIO.returnV0());
                     deltaY = -(((Gravity.MARIO_GAME/2)) * Math.pow(t, 2)) + (JumpV0.MARIO.returnV0() * t);

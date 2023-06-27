@@ -46,16 +46,30 @@ public class GuiMario extends GuiPlayer{
 
         image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioRight1.png"));
         imageHashMap.put("1Right1",image);
-        image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioRight1.png"));
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioRight2.png"));
         imageHashMap.put("1Right2",image);
-        image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioRight1.png"));
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioLeft1.png"));
         imageHashMap.put("1Left1",image);
-        image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioRight1.png"));
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioLeft2.png"));
         imageHashMap.put("1Left2",image);
-        image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioRight1.png"));
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioJumpRight.png"));
         imageHashMap.put("1JumpRight",image);
         image = ImageIO.read(getClass().getResourceAsStream("/image/player/MegaMarioRight1.png"));
         imageHashMap.put("1JumpLeft",image);
+
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/FireMarioRight1.png"));
+        imageHashMap.put("2Right1",image);
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/FireMarioRight2.png"));
+        imageHashMap.put("2Right2",image);
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/FireMarioLeft1.png"));
+        imageHashMap.put("2Left1",image);
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/FireMarioLeft2.png"));
+        imageHashMap.put("2Left2",image);
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/FireMarioJumpRight.png"));
+        imageHashMap.put("2JumpRight",image);
+        image = ImageIO.read(getClass().getResourceAsStream("/image/player/FireMarioRight1.png"));
+        imageHashMap.put("2JumpLeft",image);
+
         }
         catch (Exception e){
         e.printStackTrace();

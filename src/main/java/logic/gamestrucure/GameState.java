@@ -1,6 +1,7 @@
 package logic.gamestrucure;
 
 import logic.gamelogic.collisionlogic.PlayerCollisionHandler;
+import logic.gamelogic.playerlogic.PlayerItemEater;
 import logic.levelstructure.Level;
 import logic.levelstructure.Section;
 import logic.gamelogic.GameStateController;
@@ -19,6 +20,7 @@ public class GameState {
     private int marioState;
     private Loop gameloop;
     private PlayerCollisionHandler playerCollisionHandler;
+    private PlayerItemEater playerItemEater;
     private Sound sound;
     private int levelNumber;
     private int sectionNumber;
@@ -29,10 +31,11 @@ public class GameState {
     private boolean isPaused;
     // todo : test
 
-    public GameState() {
-    }
+//    public GameState() {
+//    }
     public GameState(GameStateController gameStateController) {
         this.gameStateController = gameStateController;
+        playerItemEater = new PlayerItemEater(this);
     }
     public GameState(User user , Game game , Player player) {
         currentUser = user;
@@ -46,6 +49,7 @@ public class GameState {
         remainingHeart = game.getHearts();
         remainingTime = currentSection.getTime();
         isPaused = false;
+        playerItemEater = new PlayerItemEater(this);
     }
 
     public User getCurrentUser() {
@@ -174,5 +178,13 @@ public class GameState {
 
     public void setMarioState(int marioState) {
         this.marioState = marioState;
+    }
+
+    public PlayerItemEater getPlayerItemEater() {
+        return playerItemEater;
+    }
+
+    public void setPlayerItemEater(PlayerItemEater playerItemEater) {
+        this.playerItemEater = playerItemEater;
     }
 }
