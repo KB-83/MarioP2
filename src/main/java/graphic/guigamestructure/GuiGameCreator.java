@@ -15,6 +15,8 @@ import logic.levelstructure.Level;
 import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.Pipe;
+import logic.modelstructure.backgroundobject.pipe.SimplePlantPipe;
+import logic.modelstructure.backgroundobject.pipe.TelePlantPipe;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.entity.item.Coin;
 import logic.modelstructure.entity.item.Item;
@@ -45,6 +47,7 @@ public class GuiGameCreator {
         return guiGameState;
     }
     public void updateGuiGameState(GameState gameState) {
+        //todo : do that for render
     }
     private static GuiPlayer createGuiPlayer(Player player,GuiPlayer guiPlayer){
         if (guiPlayer == null) {
@@ -231,12 +234,23 @@ public class GuiGameCreator {
                     break;
                 case "SIMPLEPLANTPIPE":
                     guiPipe = new GuiSimplePlantPipe();
+                    GuiPlant guiPlant = new GuiPlant();
+                    guiPlant.setWorldX(((SimplePlantPipe)pipe).getPlant().getWorldX());
+                    guiPlant.setWorldY(((SimplePlantPipe)pipe).getPlant().getWorldY());
+                    guiPlant.setCurrentImage(guiPlant.getImageByItsAddress("Plant"));
+                    ((GuiSimplePlantPipe) guiPipe).setGuiPlant(guiPlant);
+
                     break;
                 case "SIMPLETELEPIPE":
                     guiPipe = new GuiSimpleTelePipe();
                     break;
                 case "TELEPLANTPIPE":
                     guiPipe = new GuiTelePlantPipe();
+                    guiPlant = new GuiPlant();
+                    guiPlant.setWorldX(((TelePlantPipe)pipe).getPlant().getWorldX());
+                    guiPlant.setWorldY(((TelePlantPipe)pipe).getPlant().getWorldY());
+                    guiPlant.setCurrentImage(guiPlant.getImageByItsAddress("Plant"));
+                    ((GuiTelePlantPipe)guiPipe).setGuiPlant(guiPlant);
                     break;
                 case "DECEITPIPE":
                     guiPipe = new GuiDeceitPipe();

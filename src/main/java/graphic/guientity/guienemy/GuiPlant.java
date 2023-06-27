@@ -26,9 +26,9 @@ public class GuiPlant extends GuiEnemy {
         Image image;
         try{
             image = ImageIO.read(getClass().getResourceAsStream("/image/enemy/Plant.png"));
+            //name because of gui game creator create enemies function
+            // you can change it then
             imageHashMap.put("Right",image);
-            image = ImageIO.read(getClass().getResourceAsStream("/image/enemy/Plant.png"));
-            imageHashMap.put("Left",image);
         }catch (Exception e){
             e.printStackTrace();
         }

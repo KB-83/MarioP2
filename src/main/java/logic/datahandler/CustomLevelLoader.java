@@ -31,12 +31,43 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
                 int index = 0;
                 for (JsonNode sectionNode : sectionsNode) {
                     Section section = createSection(sectionNode);
+                    setSectionPlantEnemies(section);
                     sections[index++] = section;
                 }
             }
             level.setSections(sections);
 
             return level;
+        }
+        private void setSectionPlantEnemies(Section section){
+            int plantsNumber = 0;
+            if(section.getPipes() != null) {
+                for (Pipe pipe: section.getPipes()) {
+                    String s = pipe.getClass().getSimpleName();
+                    if(s.equals("SimplePlantPipe") || s.equals("TelePlantPipe")) {
+                        plantsNumber++;
+                    }
+                }
+            }
+            Enemy[] newEnemies = new Enemy[section.getEnemies().length + plantsNumber];
+            for (int i = 0; i < section.getEnemies().length; i++) {
+                newEnemies[i] = section.getEnemies()[i];
+            }
+            int i = section.getEnemies().length;
+            if(section.getPipes() != null) {
+                for (Pipe pipe: section.getPipes()) {
+                    String s = pipe.getClass().getSimpleName();
+                    if(s.equals("SimplePlantPipe")) {
+                        newEnemies[i] = ((SimplePlantPipe)pipe).getPlant();
+                        i++;
+                    }
+                    else if(s.equals("TelePlantPipe")) {
+                        newEnemies[i] = ((TelePlantPipe)pipe).getPlant();
+                        i++;
+                    }
+                }
+            }
+            section.setEnemies(newEnemies);
         }
 
         private Block createBlock(JsonNode blockNode) {
@@ -116,6 +147,7 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
             String type = pipeNode.get("type").asText();
 
             Pipe pipe;
+            Plant plant = null;
             switch (type) {
                 case "SIMPLE":
                     pipe = new SimplePipe();
@@ -123,6 +155,8 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
 
                     case "TELE_PIRANHA":
                     pipe = new TelePlantPipe();
+                    plant = new Plant();
+                    ((TelePlantPipe)pipe).setPlant(plant);
                     JsonNode sectionNode = pipeNode.get("section");
                     if (sectionNode != null) {
                         Section section = createSection(sectionNode);
@@ -136,6 +170,9 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
 
                     case "PIRANHA_TRAP":
                     pipe = new SimplePlantPipe();
+                    plant = new Plant();
+                    ((SimplePlantPipe) pipe).setPlant(plant);
+
                     break;
                     //todo add this
                     case "DECEIT":
@@ -153,6 +190,10 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
             //todo 3 is pipe length
             pipe.setCol(pipeNode.get("x").asInt());
             pipe.setRow((Constant.PANEL_ROWS-Constant.GROUND_BLOCKS-3)-pipeNode.get("y").asInt());
+            if (plant != null) {
+                plant.setWorldX((pipe.getCol()*Constant.BACKGROUND_TILE_SIZE)+Constant.BACKGROUND_TILE_SIZE/2);
+                plant.setWorldY((pipe.getRow() * Constant.BACKGROUND_TILE_SIZE) - plant.getWidth());
+            }
 
             return pipe;
         }

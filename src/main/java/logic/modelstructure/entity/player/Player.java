@@ -6,7 +6,6 @@ import util.Constant;
 
 public abstract class Player extends Entity {
     private int cameraX, cameraY;
-    private int Width, Height;
     private String imageAddress;
     // todo : test if you load a game which player is during jump what happens
     private boolean isDuringJump;
@@ -80,19 +79,4 @@ public abstract class Player extends Entity {
         }
     }
 
-    public int getWidth() {
-        return Width;
-    }
-
-    public void setWidth(int width) {
-        Width = width;
-    }
-
-    public int getHeight() {
-        return Height;
-    }
-
-    public void setHeight(int height) {
-        Height = height;
-    }
 }

@@ -7,7 +7,8 @@ import logic.modelstructure.entity.Entity;
 
 public abstract class Enemy extends Entity {
     @JsonIgnore
-    EnemyCollisionHandler enemyCollisionHandler;
+    private EnemyCollisionHandler enemyCollisionHandler;
+    private boolean isAlive;
     public Enemy() {
         setOnTopOfBlock(true);
         enemyCollisionHandler = new EnemyCollisionHandler(this);
@@ -19,5 +20,13 @@ public abstract class Enemy extends Entity {
 
     public void setEnemyCollisionHandler(EnemyCollisionHandler enemyCollisionHandler) {
         this.enemyCollisionHandler = enemyCollisionHandler;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
     }
 }

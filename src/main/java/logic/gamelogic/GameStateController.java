@@ -30,7 +30,7 @@ public class GameStateController {
         //player updates
         if (gameState.isPaused()) {
             System.out.println("33 game state controller");
-            gameState.getSound().stop();
+//            gameState.getSound().stop();
             return;
         }
         // this is gravity
@@ -70,12 +70,16 @@ public class GameStateController {
         //todo : let player use its own selected player :)
         setGameStateDependencies(game, gameState);
         setGameStateControllerDependencies(gameState);
-
+        //todo : check if its good()
+        startGameState(gameState,logicManager);
+        this.gameState = gameState;
+        return gameState;
+    }
+    public void startGameState(GameState gameState,LogicManager logicManager){
+        //todo : doing gamestATE Timers run
         Loop gameLoop = new Loop(gameState,logicManager.getGraphicManager().getFrame()
                 .getPanelsManagerCard().getGamePanel(), Constant.FPS);
         gameLoop.start();
-        this.gameState = gameState;
-        return gameState;
     }
     private void setGameStateDependencies(Game game, GameState gameState) {
         Player player = new Mario();

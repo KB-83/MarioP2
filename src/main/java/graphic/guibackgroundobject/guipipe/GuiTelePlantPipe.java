@@ -1,10 +1,13 @@
 package graphic.guibackgroundobject.guipipe;
 
+import graphic.guientity.guienemy.GuiPlant;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.util.HashMap;
 
 public class GuiTelePlantPipe extends GuiPipe{
+    private GuiPlant guiPlant;
     public GuiTelePlantPipe() {
         loadImages();
     }
@@ -20,5 +23,13 @@ public class GuiTelePlantPipe extends GuiPipe{
             e.printStackTrace();
         }
         setImages(imageHashMap);
+    }
+
+    public GuiPlant getGuiPlant() {
+        return guiPlant;
+    }
+
+    public void setGuiPlant(GuiPlant guiPlant) {
+        this.guiPlant = guiPlant;
     }
 }

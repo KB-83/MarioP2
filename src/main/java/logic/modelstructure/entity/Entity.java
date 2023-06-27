@@ -5,6 +5,7 @@ public abstract class Entity {
     private int worldX,worldY;
     private double vX;
     private double vY;
+    private int width,height;
     private Boolean isOnTopOfBlock;
 
     public Entity() {
@@ -60,5 +61,21 @@ public abstract class Entity {
 
     public void setOnTopOfBlock(Boolean onTopOfBlock) {
         isOnTopOfBlock = onTopOfBlock;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

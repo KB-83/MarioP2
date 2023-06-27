@@ -2,11 +2,14 @@ package graphic.guigamestructure;
 
 import graphic.guibackgroundobject.guiblock.GuiBlock;
 import graphic.guibackgroundobject.guipipe.GuiPipe;
+import graphic.guibackgroundobject.guipipe.GuiSimplePlantPipe;
+import graphic.guibackgroundobject.guipipe.GuiTelePlantPipe;
 import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundMap;
 import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundTile;
 import graphic.guientity.guienemy.GuiEnemy;
 import graphic.guientity.guiitem.GuiItem;
 import graphic.panel.GamePanel;
+import logic.modelstructure.backgroundobject.pipe.Pipe;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.worldtiles.BackGroundTile;
 import util.Constant;

@@ -3,7 +3,7 @@
   "password" : "pass:",
   "games" : [ {
     "name" : "default",
-    "levels" : [ {
+    "levels" : [{
       "sections": [
         {
           "length": 26,
@@ -13,13 +13,13 @@
               "x": 10,
               "y": 4,
               "type": "QUESTION",
-              "item": "FLOWER"
+              "item": "COIN"
             },
             {
               "x": 12,
               "y": 4,
               "type": "QUESTION",
-              "item": "MUSHROOM"
+              "item": "STAR"
             },
             {
               "x": 14,
@@ -42,11 +42,6 @@
               "x": 10,
               "y": 5,
               "type": "GOOMBA"
-            },
-            {
-              "x": 16,
-              "y": 0,
-              "type": "KOOPA"
             }
           ],
           "pipes": [
@@ -54,6 +49,68 @@
               "x": 6,
               "y": 0,
               "type": "SIMPLE"
+            },
+            {
+              "x": 20,
+              "y": 0,
+              "type": "TELE_PIRANHA",
+              "section": {
+                "length": 25,
+                "time": 50,
+                "blocks": [
+                  {
+                    "x": 10,
+                    "y": 4,
+                    "type": "SIMPLE"
+                  },
+                  {
+                    "x": 11,
+                    "y": 4,
+                    "type": "SIMPLE"
+                  },
+                  {
+                    "x": 12,
+                    "y": 4,
+                    "type": "QUESTION",
+                    "item": "COIN"
+                  },
+                  {
+                    "x": 15,
+                    "y": 4,
+                    "type": "QUESTION",
+                    "item": "MUSHROOM"
+                  },
+                  {
+                    "x": 17,
+                    "y": 4,
+                    "type": "SIMPLE"
+                  }
+                ],
+                "enemies": [
+                  {
+                    "x": 12,
+                    "y": 5,
+                    "type": "GOOMBA"
+                  }
+                ],
+                "pipes": [
+                  {
+                    "x": 20,
+                    "y": 5,
+                    "type": "SIMPLE"
+                  },
+                  {
+                    "x": 14,
+                    "y": 5,
+                    "type": "PIRANHA_TRAP"
+                  }
+                ],
+                "spawnPipe": {
+                  "x": 6,
+                  "y": 0,
+                  "type": "SIMPLE"
+                }
+              }
             }
           ]
         },
@@ -75,7 +132,7 @@
               "x": 6,
               "y": 4,
               "type": "QUESTION",
-              "item": "FLOWER"
+              "item": "COIN"
             },
             {
               "x": 7,
