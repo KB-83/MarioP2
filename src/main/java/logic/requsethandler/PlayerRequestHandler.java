@@ -49,10 +49,10 @@ public class PlayerRequestHandler extends Request{
             return;
         }
         // todo : make section v=changing mechanisem alright
-        if(player.getWorldX() >= Constant.PANEL_WIDTH){
-            gameState.getGameStateController().nextSection();
-            return;
-        }
+//        if(player.getWorldX() >= Constant.PANEL_WIDTH){
+//            gameState.getGameStateController().nextSection();
+//            return;
+//        }
         // todo : check next line
         player.setCameraY(player.getWorldY());
         if(counter < 2){
@@ -100,7 +100,6 @@ public class PlayerRequestHandler extends Request{
         }
         //todo ; just a test
         if (player.getPlayerCollisionHandler().isOnTopOfTelePipe() != null) {
-            System.out.println("106 player request handler");
             Pipe pipe = player.getPlayerCollisionHandler().isOnTopOfTelePipe();
             String s = pipe.getClass().getSimpleName();
             if (s.equals("TelePlantPipe")) {

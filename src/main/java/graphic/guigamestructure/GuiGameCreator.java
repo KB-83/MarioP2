@@ -1,5 +1,6 @@
 package graphic.guigamestructure;
 
+import graphic.guibackgroundobject.GuiCheckPoint;
 import graphic.guibackgroundobject.guiblock.*;
 import graphic.guibackgroundobject.guipipe.*;
 import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundMap;
@@ -13,6 +14,7 @@ import graphic.guilevelstructure.GuiSection;
 import logic.gamestrucure.GameState;
 import logic.levelstructure.Level;
 import logic.levelstructure.Section;
+import logic.modelstructure.backgroundobject.CheckPoint;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.*;
 import logic.modelstructure.entity.enemy.Enemy;
@@ -22,6 +24,7 @@ import logic.modelstructure.entity.item.Mushroom;
 import logic.modelstructure.entity.item.Star;
 import logic.modelstructure.entity.player.Player;
 import logic.modelstructure.worldtiles.BackgroundMap;
+import util.Constant;
 
 
 public class GuiGameCreator {
@@ -46,6 +49,18 @@ public class GuiGameCreator {
     }
     public void updateGuiGameState(GameState gameState) {
         //todo : do that for render
+    }
+    private static GuiCheckPoint createCheckPoint(CheckPoint checkPoint) {
+        if (checkPoint == null){
+            return  null;
+        }
+        GuiCheckPoint guiCheckPoint = new GuiCheckPoint();
+        guiCheckPoint.setWorldX(checkPoint.getCol() * Constant.BACKGROUND_TILE_SIZE);
+        guiCheckPoint.setWorldY(checkPoint.getRow() * Constant.BACKGROUND_TILE_SIZE);
+        guiCheckPoint.setWidth(Constant.BACKGROUND_TILE_SIZE);
+        guiCheckPoint.setHeight(Constant.BACKGROUND_TILE_SIZE);
+        guiCheckPoint.setCurrentImage(guiCheckPoint.getImageByItsAddress("checkPoint"));
+        return guiCheckPoint;
     }
     private static GuiPlayer createGuiPlayer(Player player,GuiPlayer guiPlayer){
         if (guiPlayer == null) {
@@ -80,8 +95,10 @@ public class GuiGameCreator {
             guiSection = new GuiSection();
         }
 //        guiSection.setTime(section.getTime());
-//        guiSection.setLength(section.getLength());
         //todo : isnt it better to change theme if nessesary?
+//        System.out.println("99 gui game creator" + section.getCheckPoint().getCol());
+        guiSection.setLength(section.getLength());
+        guiSection.setGuiCheckPoint(createCheckPoint(section.getCheckPoint()));
         guiSection.setGuiEnemies(createGuiEnemies(section.getEnemies()));
         guiSection.setGuiBlocks(createGuiBlocks(section.getBlocks()));
         guiSection.setGuiPipes(createGuiPipes(section.getPipes()));

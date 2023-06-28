@@ -90,6 +90,13 @@ public class Camera {
                 getGuiGameState().getGuiPlayer().getCameraY()
                 ,getGuiGameState().getGuiPlayer().getWidth(), getGuiGameState().getGuiPlayer().getHeight(),
                 null );
+        //draw chckPoint test
+        if(guiGameState.getCurrentGuiSection().getGuiCheckPoint() != null) {
+            g2.drawImage(guiGameState.getCurrentGuiSection().getGuiCheckPoint().getCurrentImage(), guiGameState.getCurrentGuiSection().getGuiCheckPoint().getWorldX() - minasXLength,
+                    guiGameState.getCurrentGuiSection().getGuiCheckPoint().getWorldY(), guiGameState.getCurrentGuiSection().getGuiCheckPoint().getWidth(),
+                    guiGameState.getCurrentGuiSection().getGuiCheckPoint().getHeight(),
+                    null);
+        }
     }
     private boolean checkBound (int x , int y) {
         if(x < endPaintingX && x > startPaintingX) {
@@ -105,6 +112,9 @@ public class Camera {
             }//- game panel size;
             // todo: player camera x doesnt need to be initialize in logic player im goinig to creat it in graphic
             endPaintingX = startPaintingX + 2 * Constant.PANEL_WIDTH;//+ 2 gamePanel Size
+            if (endPaintingX > guiGameState.getCurrentGuiSection().getGuibackgroundMap().getGuiBackGroundTiles()[0].length * Constant.BACKGROUND_TILE_SIZE){
+                endPaintingX = guiGameState.getCurrentGuiSection().getGuibackgroundMap().getGuiBackGroundTiles()[0].length * Constant.BACKGROUND_TILE_SIZE;
+            }
             minasXLength = guiGameState.getGuiPlayer().getWorldX() - guiGameState.getGuiPlayer().getCameraX();
         }
     }

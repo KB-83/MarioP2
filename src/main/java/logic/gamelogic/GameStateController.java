@@ -1,5 +1,6 @@
 package logic.gamelogic;
 
+import graphic.guigamestructure.GuiGameCreator;
 import logic.LogicManager;
 import logic.gamelogic.enemieslogic.EnemyMovementHandler;
 import logic.gamelogic.gravitylogic.GravityEffectsHandler;
@@ -65,7 +66,6 @@ public class GameStateController {
     }
     public void changeSection(Section section) {
         gameState.setCurrentSection(section);
-        System.out.println("68 "+gameState.getCurrentSection());
         gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(gameState));
 //        gameState.setSectionNumber(gameState.getSectionNumber() + 1);
         gameState.setRemainingTime(gameState.getCurrentSection().getTime());

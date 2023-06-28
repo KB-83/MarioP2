@@ -1,6 +1,7 @@
 package graphic.guilevelstructure;
 
 
+import graphic.guibackgroundobject.GuiCheckPoint;
 import graphic.guibackgroundobject.guiblock.GuiBlock;
 import graphic.guibackgroundobject.guipipe.GuiPipe;
 import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundMap;
@@ -15,6 +16,7 @@ public class GuiSection {
     private GuiEnemy[] guiEnemies;
     private GuiPipe[] guiPipes;
     private GuiItem[] guiItems;
+    private GuiCheckPoint guiCheckPoint;
 
     public GuiSection() {
     }
@@ -73,5 +75,13 @@ public class GuiSection {
 
     public void setGuiItems(GuiItem[] guiItems) {
         this.guiItems = guiItems;
+    }
+
+    public GuiCheckPoint getGuiCheckPoint() {
+        return guiCheckPoint;
+    }
+
+    public void setGuiCheckPoint(GuiCheckPoint guiCheckPoint) {
+        this.guiCheckPoint = guiCheckPoint;
     }
 }
