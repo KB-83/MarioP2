@@ -35,7 +35,7 @@ public class UserRequestHandler {
     }
     public boolean signInRequest(String username, String password){
         User user = new User(username,password);
-        boolean b = Saver.getSaver().saveUser(user);
+        boolean b = Saver.getSaver().saveUser(user,true);
         if (!b){
             return false;
         }

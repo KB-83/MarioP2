@@ -19,9 +19,9 @@ public class Saver {
             saver = new Saver();
         }return saver;
     }
-    public boolean saveUser(User user) {
+    public boolean saveUser(User user,boolean isSignInRequest) {
         File file = new File("src/main/resources/database/user/"+user.getUsername()+".json");
-        if (file.exists()) {
+        if (file.exists() && isSignInRequest) {
             System.out.println("user already exist.");
             return false;
         }

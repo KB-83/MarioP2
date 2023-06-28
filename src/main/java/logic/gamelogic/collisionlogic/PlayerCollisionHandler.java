@@ -8,7 +8,6 @@ import logic.modelstructure.backgroundobject.CheckPoint;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.*;
 import logic.modelstructure.entity.enemy.Enemy;
-import logic.modelstructure.entity.item.Item;
 import logic.modelstructure.entity.player.Player;
 import logic.modelstructure.worldtiles.BackGroundTile;
 import util.Constant;

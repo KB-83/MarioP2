@@ -2,6 +2,7 @@ package logic.gamelogic;
 
 import graphic.guigamestructure.GuiGameCreator;
 import logic.LogicManager;
+import logic.datahandler.Saver;
 import logic.gamelogic.enemieslogic.EnemyMovementHandler;
 import logic.gamelogic.gravitylogic.GravityEffectsHandler;
 import logic.gamelogic.itemlogic.ItemMovementHandler;
@@ -91,6 +92,7 @@ public class GameStateController {
     }
     private void setGameStateDependencies(Game game, GameState gameState,LogicManager logicManager) {
         gameState.setCurrentUser(logicManager.getUser());
+        gameState.setLevels(game.getLevels());
         Player player = new Mario();
         player.setWorldY(7 * 48);
         player.setCameraY(7 * 48);
@@ -140,6 +142,7 @@ public class GameStateController {
                 gameState.getWaitingCheckpoint().setSaved(true);
                 //bla bla
                 gameState.setPaused(false);
+                Saver.getSaver().saveUser(gameState.getCurrentUser(),false);
                 break;
             case "Get Coins":
                 System.out.println("gameState Controller 141");

@@ -1,5 +1,6 @@
 package logic.modelstructure.entity.enemy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import util.Constant;
 
 import javax.swing.*;
@@ -7,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Plant extends Enemy{
+    @JsonIgnore
     private Timer timer;
     private boolean timerStarted;
     public Plant() {
@@ -64,4 +66,5 @@ public class Plant extends Enemy{
     public void setTimerStarted(boolean timerStarted) {
         this.timerStarted = timerStarted;
     }
+
 }

@@ -94,8 +94,10 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
             section.setPipes(pipes);
 
             // Deserialize spawnPipe
-
-            createItemArray(section,sectionNode);
+            JsonNode itemsNode = sectionNode.get("items");
+            if (itemsNode != null) {
+                createItemArray(section, sectionNode);
+            }
 
             return section;
         }
@@ -131,7 +133,7 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
         private void createItemArray(Section section,JsonNode sectionNode) {
             //items
             Item[] items = null;
-            JsonNode itemsNode = sectionNode.get("items");
+            JsonNode itemsNode = sectionNode.get("item");
             if (itemsNode != null && itemsNode.isArray()) {
                 items = new Item[itemsNode.size()];
                 int itemIndex = 0;
@@ -326,7 +328,6 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
 
         private Enemy createEnemy(JsonNode enemyNode) {
         String type = enemyNode.get("type").asText();
-
         Enemy enemy;
         switch (type) {
             case "GOOMBA":

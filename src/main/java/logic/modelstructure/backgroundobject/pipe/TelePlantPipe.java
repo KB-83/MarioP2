@@ -1,10 +1,12 @@
 package logic.modelstructure.backgroundobject.pipe;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import logic.levelstructure.Section;
 import logic.levelstructure.TeleSection;
 import logic.modelstructure.entity.enemy.Plant;
 
 public class TelePlantPipe extends Pipe{
+    @JsonIgnore
     private TeleSection teleSection;
     private Plant plant;
 

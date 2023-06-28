@@ -2,8 +2,6 @@ package logic.gamelogic.itemlogic;
 
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.block.EmptyBlock;
-import logic.modelstructure.backgroundobject.block.SimpleBlock;
-import logic.modelstructure.entity.item.Item;
 import logic.modelstructure.entity.item.Mushroom;
 import logic.modelstructure.entity.item.Star;
 import util.Constant;

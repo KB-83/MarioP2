@@ -14,6 +14,7 @@ import util.Loop;
 public class GameState {
     private GameStateController gameStateController;
     private User currentUser;
+    private Level[] levels;
     private Level currentLevel;
     private Section currentSection;
     private Player player;
@@ -39,20 +40,21 @@ public class GameState {
         this.gameStateController = gameStateController;
         playerItemEater = new PlayerItemEater(this);
     }
-    public GameState(User user , Game game , Player player) {
-        currentUser = user;
-        currentLevel = game.getLevels()[0];
-        currentSection = currentLevel.getSections()[0];
-        this.player = player;
-        levelNumber = 1;
-        sectionNumber = 1;
-        coins = 0;
-        score = 0;
-        remainingHeart = game.getHearts();
-        remainingTime = currentSection.getTime();
-        isPaused = false;
-        playerItemEater = new PlayerItemEater(this);
-    }
+//    public GameState(User user , Game game , Player player,GameStateController gameStateController) {
+//        currentUser = user;
+//        currentLevel = game.getLevels()[0];
+//        currentSection = currentLevel.getSections()[0];
+//        levels = game.getLevels();
+//        this.player = player;
+//        levelNumber = 1;
+//        sectionNumber = 1;
+//        coins = 0;
+//        score = 0;
+//        remainingHeart = game.getHearts();
+//        remainingTime = currentSection.getTime();
+//        isPaused = false;
+//        playerItemEater = new PlayerItemEater(this);
+//    }
 
     public User getCurrentUser() {
         return currentUser;
@@ -196,5 +198,13 @@ public class GameState {
 
     public void setWaitingCheckpoint(CheckPoint waitingCheckpoint) {
         this.waitingCheckpoint = waitingCheckpoint;
+    }
+
+    public Level[] getLevels() {
+        return levels;
+    }
+
+    public void setLevels(Level[] levels) {
+        this.levels = levels;
     }
 }

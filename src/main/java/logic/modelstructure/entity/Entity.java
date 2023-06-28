@@ -1,9 +1,14 @@
 package logic.modelstructure.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public abstract class Entity {
+    @JsonIgnore
     private String imageAddress;
     private int worldX,worldY;
+    @JsonIgnore
     private double vX;
+    @JsonIgnore
     private double vY;
     private int width,height;
     private Boolean isOnTopOfBlock;
