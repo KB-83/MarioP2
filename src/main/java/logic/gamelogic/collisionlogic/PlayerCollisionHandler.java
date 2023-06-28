@@ -4,6 +4,7 @@ import logic.gamestrucure.GameState;
 import logic.gamestrucure.gameworldoption.collision.CollisionChecker;
 import logic.gamestrucure.gameworldoption.collision.Rect;
 import logic.levelstructure.Section;
+import logic.modelstructure.backgroundobject.CheckPoint;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.*;
 import logic.modelstructure.entity.enemy.Enemy;
@@ -27,6 +28,7 @@ public class PlayerCollisionHandler implements CollisionHandler{
     private Rect playerRect = new Rect(0,48, 0,48);
     private Rect pipeRect = new Rect(0,96,0,48*3);
     private Rect enemyRect = new Rect(0,48,0,48);
+    private Rect checkpointRect = new Rect(0,48,0,48);
     private Rect backgrounTileRect = new Rect(0,48,0,48);
     //todo: improve this too
     private ItemUnlocker itemUnlocker;
@@ -66,8 +68,21 @@ public class PlayerCollisionHandler implements CollisionHandler{
 //        //background tiles todo: give a bound to background tiles
         checkBackgroundTilesCollision();
         checkItemEating();
+        checkCheckPointTouch();
 
 
+    }
+    private void checkCheckPointTouch(){
+        CheckPoint checkPoint = gameState.getCurrentSection().getCheckPoint();
+        if (checkPoint != null){
+            checkpointRect.updatePosition(checkPoint.getCol() * 48,checkPoint.getRow() * 48);
+            if (!checkPoint.getSaved() && collisionChecker.didCollide(playerRect,checkpointRect)) {
+                //todo : do it as a requset
+                gameState.setWaitingCheckpoint(checkPoint);
+                gameState.setPaused(true);
+                gameState.getCurrentUser().getLogicManager().getGraphicManager().getFrame().getCheckPointFrame().setVisible(true);
+            }
+        }
     }
     public void checkItemEating(){
         if (gameState == null) {

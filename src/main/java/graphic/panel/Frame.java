@@ -9,6 +9,7 @@ import java.awt.*;
 public class Frame extends JFrame {
     private GraphicManager graphicManager;
     private PanelsManagerCard panelsManagerCard;
+    private CheckPointFrame checkPointFrame;
     public Frame(GraphicManager gM){
         setDependencies(gM);
         loadConfig(this.getClass().getSimpleName());
@@ -16,6 +17,7 @@ public class Frame extends JFrame {
     private void setDependencies(GraphicManager graphicManager){
         this.graphicManager = graphicManager;
         this.panelsManagerCard = new PanelsManagerCard(this);
+        checkPointFrame = new CheckPointFrame(this);
     }
     private void loadConfig(String name) {
         Config config = Config.getConfig(name);
@@ -49,5 +51,13 @@ public class Frame extends JFrame {
 
     public GraphicManager getGraphicManager() {
         return graphicManager;
+    }
+
+    public CheckPointFrame getCheckPointFrame() {
+        return checkPointFrame;
+    }
+
+    public void setCheckPointFrame(CheckPointFrame checkPointFrame) {
+        this.checkPointFrame = checkPointFrame;
     }
 }

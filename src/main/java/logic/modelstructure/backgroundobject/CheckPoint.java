@@ -3,7 +3,9 @@ package logic.modelstructure.backgroundobject;
 public class CheckPoint {
     private int col,row;
     private int sectionNum;
+    private boolean isSaved;
     public CheckPoint() {
+        isSaved = false;
     }
 
     public int getCol() {
@@ -28,5 +30,13 @@ public class CheckPoint {
 
     public void setSectionNum(int sectionNum) {
         this.sectionNum = sectionNum;
+    }
+
+    public boolean getSaved() {
+        return isSaved;
+    }
+
+    public void setSaved(boolean saved) {
+        isSaved = saved;
     }
 }

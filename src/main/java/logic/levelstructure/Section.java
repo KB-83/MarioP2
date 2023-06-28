@@ -8,6 +8,7 @@ import logic.modelstructure.backgroundobject.pipe.Pipe;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.entity.item.Item;
 import logic.modelstructure.worldtiles.BackgroundMap;
+import util.Constant;
 
 public class Section {
     private int length;
@@ -21,16 +22,12 @@ public class Section {
     private CheckPoint checkPoint;
     private Item[] items;
     public Section(){
-//        backgroundMap = new BackgroundMap();
-//        backgroundMap.loadMap(1,1,26*4, 15);
-//        backgroundMap = BackGroundMapGenerator.retrunBackgroundMap(26 * 4,15);
     }
 
-    public Section(int levelNum,int sectionNum) {
-        // todo: this is just a test
-//        backgroundMap = new BackgroundMap();
-//        backgroundMap.loadMap(1,1,26*4, 15);
-//        backgroundMap = BackGroundMapGenerator.retrunBackgroundMap(26 * 4,15);
+    public Section(int levelNum,int sectionNum,int cols) {
+        backgroundMap = new BackgroundMap();
+        backgroundMap.loadMap(levelNum,sectionNum,cols, Constant.PANEL_ROWS);
+
     }
 
     public int getLength() {

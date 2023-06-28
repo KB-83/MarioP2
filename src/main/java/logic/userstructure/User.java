@@ -19,6 +19,8 @@ public class User {
     private String username;
     private String password;
     private Game[] games;
+    //todo : think about it (next-line)
+    private GameState[] savedGames;
     private Player[] players;
     private int coins;
     private int highScore;

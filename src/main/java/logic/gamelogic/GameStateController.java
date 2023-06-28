@@ -30,7 +30,6 @@ public class GameStateController {
     public void update(){
         //player updates
         if (gameState.isPaused()) {
-            System.out.println("33 game state controller");
 //            gameState.getSound().stop();
             return;
         }
@@ -77,7 +76,7 @@ public class GameStateController {
         this.game = game;
         GameState gameState = new GameState(this);
         //todo : let player use its own selected player :)
-        setGameStateDependencies(game, gameState);
+        setGameStateDependencies(game, gameState,logicManager);
         setGameStateControllerDependencies(gameState);
         //todo : check if its good()
         startGameState(gameState,logicManager);
@@ -90,7 +89,8 @@ public class GameStateController {
                 .getPanelsManagerCard().getGamePanel(), Constant.FPS);
         gameLoop.start();
     }
-    private void setGameStateDependencies(Game game, GameState gameState) {
+    private void setGameStateDependencies(Game game, GameState gameState,LogicManager logicManager) {
+        gameState.setCurrentUser(logicManager.getUser());
         Player player = new Mario();
         player.setWorldY(7 * 48);
         player.setCameraY(7 * 48);
@@ -132,5 +132,22 @@ public class GameStateController {
         playerMovementHandler = new PlayerMovementHandler(gameState);
         gravityEffectsHandler = new GravityEffectsHandler(gameState);
         itemMovementHandler = new ItemMovementHandler(gameState);
+    }
+    public void checkPointRequest(String s) {
+        gameState.getPlayer().setVX(0);
+        switch (s){
+            case "Save CheckPoint":
+                gameState.getWaitingCheckpoint().setSaved(true);
+                //bla bla
+                gameState.setPaused(false);
+                break;
+            case "Get Coins":
+                System.out.println("gameState Controller 141");
+                gameState.setWaitingCheckpoint(null);
+                gameState.getCurrentSection().setCheckPoint(null);
+//                bla bla
+                gameState.setPaused(false);
+                break;
+        }
     }
 }

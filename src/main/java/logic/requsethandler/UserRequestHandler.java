@@ -23,6 +23,7 @@ public class UserRequestHandler {
         if (user != null){
             if (user.getPassword().equals(password)) {
                 user.setUserRequestHandler(this);
+                user.setLogicManager(logicManager);
                 this.user = user;
                 logicManager.setUser(user);
                 logicManager.getGraphicManager().setUser(user);
@@ -40,11 +41,13 @@ public class UserRequestHandler {
         }
         this.user = user;
         user.setUserRequestHandler(this);
+        user.setLogicManager(logicManager);
         // todo: load default gameAs a Config
         Game game = new Game();
         game.setName("default");
         Level level = new Level();
-        level.setSections(new Section[]{new Section(1,1)});
+//        todo : uncomment next line if nessesary
+//        level.setSections(new Section[]{new Section(1,1,)});
         game.setLevels(new Level[]{level});
 
         Game[] games = {game};
@@ -66,6 +69,7 @@ public class UserRequestHandler {
         // todo set game default
         if (game != null) {
             GameState gameState = new GameStateController().createGameState(game,logicManager);
+            user.setCurrentGameState(gameState);
             // todo: (lines start whit blue)next line is really dirty you can send it as a request to graphic
             logicManager.getGraphicManager().getFrame().getPanelsManagerCard().getGamePanel().setKeyListener(gameState);
             //todo ; this also
@@ -73,5 +77,15 @@ public class UserRequestHandler {
             return gameState;
         }
         return null;
+    }
+    public void checkPointRequest(String s) {
+        switch (s){
+            case "Save CheckPoint":
+                //bla bla
+                break;
+            case "Get Coins":
+//                bla bla
+                break;
+        }
     }
 }

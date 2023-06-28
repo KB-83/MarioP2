@@ -5,6 +5,7 @@ import logic.gamelogic.playerlogic.PlayerItemEater;
 import logic.levelstructure.Level;
 import logic.levelstructure.Section;
 import logic.gamelogic.GameStateController;
+import logic.modelstructure.backgroundobject.CheckPoint;
 import logic.modelstructure.entity.player.Player;
 import logic.sound.Sound;
 import logic.userstructure.User;
@@ -29,6 +30,7 @@ public class GameState {
     private int remainingHeart;
     private int remainingTime;
     private boolean isPaused;
+    private CheckPoint waitingCheckpoint;
     // todo : test
 
 //    public GameState() {
@@ -186,5 +188,13 @@ public class GameState {
 
     public void setPlayerItemEater(PlayerItemEater playerItemEater) {
         this.playerItemEater = playerItemEater;
+    }
+
+    public CheckPoint getWaitingCheckpoint() {
+        return waitingCheckpoint;
+    }
+
+    public void setWaitingCheckpoint(CheckPoint waitingCheckpoint) {
+        this.waitingCheckpoint = waitingCheckpoint;
     }
 }
