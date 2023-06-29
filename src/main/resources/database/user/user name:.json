@@ -10,7 +10,7 @@
         "checkPoint" : {
           "isSaved" : true,
           "col" : 5,
-          "row" : 7,
+          "row" : 10,
           "sectionNum" : 0
         },
         "blocks" : [ {
@@ -38,16 +38,16 @@
         } ],
         "enemies" : [ {
           "type" : "GOOMBA",
-          "x" : 16,
+          "x" : 10,
           "y" : 5
         } ],
         "pipes" : [ {
           "x" : 6,
-          "y" : 2,
+          "y" : 4,
           "type" : "SIMPLE"
         }, {
           "x" : 20,
-          "y" : 2,
+          "y" : 4,
           "type" : "TELE_PIRANHA",
           "section" : {
             "length" : 25,
@@ -82,11 +82,11 @@
             } ],
             "pipes" : [ {
               "x" : 20,
-              "y" : 7,
+              "y" : 9,
               "type" : "SIMPLE"
             }, {
               "x" : 14,
-              "y" : 7,
+              "y" : 9,
               "type" : "PIRANHA_TRAP"
             } ],
             "items" : [ {
@@ -100,7 +100,7 @@
             } ],
             "spawnPipe" : {
               "x" : 6,
-              "y" : 2,
+              "y" : 4,
               "type" : "SIMPLE"
             }
           }
@@ -108,11 +108,11 @@
         "items" : [ {
           "type" : "COIN",
           "x" : 10,
-          "y" : 0
+          "y" : 4
         }, {
           "type" : "STAR",
           "x" : 12,
-          "y" : 0
+          "y" : 4
         } ]
       }, {
         "length" : 23,
@@ -166,7 +166,7 @@
         } ],
         "pipes" : [ {
           "x" : 23,
-          "y" : 2,
+          "y" : 4,
           "type" : "PIRANHA_TRAP"
         } ],
         "items" : [ {

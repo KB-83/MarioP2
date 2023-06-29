@@ -94,10 +94,8 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
             section.setPipes(pipes);
 
             // Deserialize spawnPipe
-            JsonNode itemsNode = sectionNode.get("items");
-            if (itemsNode != null) {
-                createItemArray(section, sectionNode);
-            }
+            createItemArray(section, sectionNode);
+
 
             return section;
         }

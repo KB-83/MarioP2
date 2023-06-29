@@ -2,6 +2,7 @@ package logic.gamelogic;
 
 import graphic.guigamestructure.GuiGameCreator;
 import logic.LogicManager;
+import logic.datahandler.GameCloner;
 import logic.datahandler.Saver;
 import logic.gamelogic.enemieslogic.EnemyMovementHandler;
 import logic.gamelogic.gravitylogic.GravityEffectsHandler;
@@ -74,10 +75,10 @@ public class GameStateController {
     }
     private void changeLevel() {}
     public GameState createGameState(Game game, LogicManager logicManager) {
-        this.game = game;
+        this.game = GameCloner.cloneGame(game);
         GameState gameState = new GameState(this);
         //todo : let player use its own selected player :)
-        setGameStateDependencies(game, gameState,logicManager);
+        setGameStateDependencies(this.game, gameState,logicManager);
         setGameStateControllerDependencies(gameState);
         //todo : check if its good()
         startGameState(gameState,logicManager);
