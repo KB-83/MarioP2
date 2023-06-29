@@ -1,6 +1,8 @@
 package logic.modelstructure.entity.player;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import logic.gamelogic.collisionlogic.PlayerCollisionHandler;
+import logic.modelstructure.entity.Bullet;
 import logic.modelstructure.entity.Entity;
 import logic.requsethandler.PlayerRequestHandler;
 import util.Constant;
@@ -9,14 +11,21 @@ public abstract class Player extends Entity {
     private int cameraX, cameraY;
     private String imageAddress;
     // todo : test if you load a game which player is during jump what happens
+    @JsonIgnore
     private boolean isDuringJump;
+    @JsonIgnore
+    private final Bullet bullet;
     private boolean isFire, isMega;
     //todo: is it nessesart?
+    @JsonIgnore
     private PlayerRequestHandler playerRequestHandler;
+    @JsonIgnore
     private PlayerCollisionHandler playerCollisionHandler;
 
     public Player() {
+
         setOnTopOfBlock(true);
+        bullet = new Bullet();
     }
 
     public int getCameraX() {
@@ -87,5 +96,9 @@ public abstract class Player extends Entity {
 
     public void setPlayerCollisionHandler(PlayerCollisionHandler playerCollisionHandler) {
         this.playerCollisionHandler = playerCollisionHandler;
+    }
+
+    public Bullet getBullet() {
+        return bullet;
     }
 }

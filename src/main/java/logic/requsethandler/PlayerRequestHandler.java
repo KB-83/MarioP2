@@ -2,8 +2,8 @@ package logic.requsethandler;
 
 import logic.gamestrucure.GameState;
 import logic.gamestrucure.gameworldoption.Gravity;
-import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.pipe.*;
+import logic.modelstructure.entity.Bullet;
 import logic.modelstructure.entity.player.JumpV0;
 import logic.modelstructure.entity.player.Player;
 import util.Constant;
@@ -23,7 +23,7 @@ public class PlayerRequestHandler extends Request{
     //todo: behtareh inaro be logic game pass bede
 
     public PlayerRequestHandler(GameState gameState) {
-        this.player = gameState.getPlayer();
+        this.player = gameState.getMario();
         player.setPlayerRequestHandler(this);
         this.gameState = gameState;
         setActonListeners();
@@ -126,6 +126,15 @@ public class PlayerRequestHandler extends Request{
     public void BulletRequest(){
         if(gameState.isPaused()){
             return;
+        }
+//        3000 is cool down
+        if (player.isFire() && player.getOnTopOfBlock()  && System.currentTimeMillis() - player.getBullet().getLastTime() >= 3000){
+            Bullet bullet = player.getBullet();
+            bullet.setLock(false);
+            bullet.setWorldX(player.getWorldX());
+            bullet.setWorldY(player.getWorldY() + (player.getHeight()/2));
+            bullet.setStartX(bullet.getWorldX());
+            bullet.getTimer().start();
         }
     }
     //todo : maybe pause request is for a user not a player

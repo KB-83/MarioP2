@@ -1,28 +1,38 @@
 package logic.gamestrucure;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import logic.gamelogic.collisionlogic.PlayerCollisionHandler;
 import logic.gamelogic.playerlogic.PlayerItemEater;
 import logic.levelstructure.Level;
 import logic.levelstructure.Section;
 import logic.gamelogic.GameStateController;
 import logic.modelstructure.backgroundobject.CheckPoint;
+import logic.modelstructure.entity.player.Mario;
 import logic.modelstructure.entity.player.Player;
 import logic.sound.Sound;
 import logic.userstructure.User;
 import util.Loop;
 
 public class GameState {
+    @JsonIgnore
     private GameStateController gameStateController;
+    @JsonIgnore
     private User currentUser;
     private Level[] levels;
+    @JsonIgnore
     private Level currentLevel;
+    @JsonIgnore
     private Section currentSection;
-    private Player player;
+    private Mario mario;
     // 0 : mini //  1 : mega // 2 : fire
     private int marioState;
+    @JsonIgnore
     private Loop gameloop;
+    @JsonIgnore
     private PlayerCollisionHandler playerCollisionHandler;
+    @JsonIgnore
     private PlayerItemEater playerItemEater;
+    @JsonIgnore
     private Sound sound;
     private int levelNumber;
     private int sectionNumber;
@@ -30,12 +40,14 @@ public class GameState {
     private int score;
     private int remainingHeart;
     private int remainingTime;
+    @JsonIgnore
     private boolean isPaused;
+    @JsonIgnore
     private CheckPoint waitingCheckpoint;
     // todo : test
 
-//    public GameState() {
-//    }
+    public GameState() {
+    }
     public GameState(GameStateController gameStateController) {
         this.gameStateController = gameStateController;
         playerItemEater = new PlayerItemEater(this);
@@ -78,14 +90,6 @@ public class GameState {
 
     public void setCurrentSection(Section currentSection) {
         this.currentSection = currentSection;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 
     public int getLevelNumber() {
@@ -206,5 +210,13 @@ public class GameState {
 
     public void setLevels(Level[] levels) {
         this.levels = levels;
+    }
+
+    public Mario getMario() {
+        return mario;
+    }
+
+    public void setMario(Mario mario) {
+        this.mario = mario;
     }
 }

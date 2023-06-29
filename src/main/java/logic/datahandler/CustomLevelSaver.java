@@ -64,7 +64,7 @@ public class CustomLevelSaver extends JsonSerializer<Level> {
         jsonGenerator.writeObjectFieldStart("spawnPipe");
 
         jsonGenerator.writeNumberField("x", spawnPipe.getCol());
-        jsonGenerator.writeNumberField("y", (Constant.PANEL_ROWS - Constant.GROUND_BLOCKS - 1) - spawnPipe.getRow());
+        jsonGenerator.writeNumberField("y", (Constant.PANEL_ROWS - Constant.GROUND_BLOCKS - 3) - spawnPipe.getRow());
         if (!type.equals("")) {
             jsonGenerator.writeStringField("type", type);
         }
@@ -98,6 +98,9 @@ public class CustomLevelSaver extends JsonSerializer<Level> {
                         break;
                     case "FullCoinBlock":
                         type = "COINS";
+                        break;
+                    case "EmptyBlock":
+                        type = "EMPTY";
                         break;
 
                 }
@@ -199,7 +202,7 @@ public class CustomLevelSaver extends JsonSerializer<Level> {
                 jsonGenerator.writeStartObject();
 
                 jsonGenerator.writeNumberField("x", pipe.getCol());
-                jsonGenerator.writeNumberField("y", (Constant.PANEL_ROWS - Constant.GROUND_BLOCKS - 1) - pipe.getRow());
+                jsonGenerator.writeNumberField("y", (Constant.PANEL_ROWS - Constant.GROUND_BLOCKS - 3) - pipe.getRow());
                 if (!type.equals("")) {
                     jsonGenerator.writeStringField("type", type);
                 }

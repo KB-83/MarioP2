@@ -1,6 +1,5 @@
 package logic.gamelogic;
 
-import graphic.guigamestructure.GuiGameCreator;
 import logic.LogicManager;
 import logic.datahandler.GameCloner;
 import logic.datahandler.Saver;
@@ -57,8 +56,8 @@ public class GameStateController {
             gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(gameState));
             gameState.setSectionNumber(gameState.getSectionNumber() + 1);
             gameState.setRemainingTime(gameState.getCurrentSection().getTime());
-            gameState.getPlayer().setCameraX(0);
-            gameState.getPlayer().setWorldX(0);
+            gameState.getMario().setCameraX(0);
+            gameState.getMario().setWorldX(0);
 
         }
         else {
@@ -70,8 +69,8 @@ public class GameStateController {
         gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(gameState));
 //        gameState.setSectionNumber(gameState.getSectionNumber() + 1);
         gameState.setRemainingTime(gameState.getCurrentSection().getTime());
-        gameState.getPlayer().setCameraX(0);
-        gameState.getPlayer().setWorldX(0);
+        gameState.getMario().setCameraX(0);
+        gameState.getMario().setWorldX(0);
     }
     private void changeLevel() {}
     public GameState createGameState(Game game, LogicManager logicManager) {
@@ -94,21 +93,21 @@ public class GameStateController {
     private void setGameStateDependencies(Game game, GameState gameState,LogicManager logicManager) {
         gameState.setCurrentUser(logicManager.getUser());
         gameState.setLevels(game.getLevels());
-        Player player = new Mario();
-        player.setWorldY(7 * 48);
-        player.setCameraY(7 * 48);
-        player.setImageAddress(game.getMarioState()+"Right1");
-        player.setWidth(Constant.BACKGROUND_TILE_SIZE);
-        player.setHeight(Constant.BACKGROUND_TILE_SIZE);
+        Mario mario = new Mario();
+        mario.setWorldY(7 * 48);
+        mario.setCameraY(7 * 48);
+        mario.setImageAddress(game.getMarioState()+"Right1");
+        mario.setWidth(Constant.BACKGROUND_TILE_SIZE);
+        mario.setHeight(Constant.BACKGROUND_TILE_SIZE);
         if (game.getMarioState() > 0) {
-            player.setHeight(2 * player.getHeight());
-            player.setWorldY(player.getWorldY() - 48);
-            player.setCameraY(player.getCameraY() - 48);
+            mario.setHeight(2 * mario.getHeight());
+            mario.setWorldY(mario.getWorldY() - 48);
+            mario.setCameraY(mario.getCameraY() - 48);
             if (game.getMarioState() == 1) {
-                player.setMega(true);
+                mario.setMega(true);
             }
             else {
-                player.setFire(true);
+                mario.setFire(true);
             }
         }
         //todo : sound test
@@ -117,7 +116,7 @@ public class GameStateController {
 //        gameState.getSound().play();
         //
         gameState.setMarioState(gameState.getMarioState());
-        gameState.setPlayer(player);
+        gameState.setMario(mario);
         gameState.setCurrentLevel(game.getLevels()[0]);
         gameState.setCurrentSection(game.getLevels()[0].getSections()[0]);
         gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(gameState));
@@ -137,12 +136,14 @@ public class GameStateController {
         itemMovementHandler = new ItemMovementHandler(gameState);
     }
     public void checkPointRequest(String s) {
-        gameState.getPlayer().setVX(0);
+        gameState.getMario().setVX(0);
         switch (s){
             case "Save CheckPoint":
                 gameState.getWaitingCheckpoint().setSaved(true);
                 //bla bla
                 gameState.setPaused(false);
+                GameState[] gameStates = {gameState};
+                gameState.getCurrentUser().setSavedGames(gameStates);
                 Saver.getSaver().saveUser(gameState.getCurrentUser(),false);
                 break;
             case "Get Coins":

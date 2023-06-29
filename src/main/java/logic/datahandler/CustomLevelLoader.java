@@ -219,8 +219,11 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
             case "COINS":
                 block = new FullCoinBlock();
                 break;
-            default:
+            case "EMPTY":
                 block = new EmptyBlock();
+                break;
+            default:
+                block = new SimpleBlock();
                 break;
         }
         // todo : set it as col and row then

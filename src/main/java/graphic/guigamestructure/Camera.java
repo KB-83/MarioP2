@@ -7,9 +7,11 @@ import graphic.guibackgroundobject.guipipe.GuiTelePlantPipe;
 import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundMap;
 import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundTile;
 import graphic.guientity.guienemy.GuiEnemy;
+import graphic.guientity.guiitem.GuiBullet;
 import graphic.guientity.guiitem.GuiItem;
 import graphic.panel.GamePanel;
 import logic.modelstructure.backgroundobject.pipe.Pipe;
+import logic.modelstructure.entity.Bullet;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.worldtiles.BackGroundTile;
 import util.Constant;
@@ -96,6 +98,12 @@ public class Camera {
                     guiGameState.getCurrentGuiSection().getGuiCheckPoint().getWorldY(), guiGameState.getCurrentGuiSection().getGuiCheckPoint().getWidth(),
                     guiGameState.getCurrentGuiSection().getGuiCheckPoint().getHeight(),
                     null);
+        }
+        //dryingBullet
+        GuiBullet guiBullet = guiGameState.getGuiPlayer().getGuiBullet();
+        if (!guiBullet.isLock()){
+            g2.drawImage(guiBullet.getCurrentImage(),guiBullet.getWorldX() - minasXLength,guiBullet.getWorldY(),
+                    guiBullet.getWidth(),guiBullet.getHeight(),null);
         }
     }
     private boolean checkBound (int x , int y) {

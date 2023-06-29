@@ -33,12 +33,12 @@ public class PlayerCollisionHandler implements CollisionHandler{
     private ItemUnlocker itemUnlocker;
     public PlayerCollisionHandler(GameState gameState) {
         this.gameState = gameState;
-        collisionChecker = new CollisionDetector(gameState.getPlayer());
+        collisionChecker = new CollisionDetector(gameState.getMario());
         enemies = gameState.getCurrentSection().getEnemies();
         pipes = gameState.getCurrentSection().getPipes();
         blocks = gameState.getCurrentSection().getBlocks();
         backGroundTiles = gameState.getCurrentSection().getBackgroundMap().getBackGroundTiles();
-        this.player = gameState.getPlayer();
+        this.player = gameState.getMario();
         player.setPlayerCollisionHandler(this);
         itemUnlocker = new ItemUnlocker();
 

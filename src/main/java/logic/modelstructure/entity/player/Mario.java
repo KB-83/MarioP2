@@ -8,4 +8,5 @@ public class Mario extends Player {
         setCameraX(0);
         setCameraY(0);
     }
+
 }

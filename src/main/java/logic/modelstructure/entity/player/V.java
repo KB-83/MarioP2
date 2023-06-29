@@ -2,7 +2,7 @@ package logic.modelstructure.entity.player;
 
 public enum V {
 
-    Mario(5),
+    Mario(400),
     UniqueGirl(15),
     Luigi(3),
     Princess(7),

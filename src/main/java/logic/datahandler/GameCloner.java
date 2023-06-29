@@ -100,9 +100,7 @@ public class GameCloner {
             Item[] items = new Item[section.getItems().length];
             for (int i = 0; i < section.getItems().length; i++) {
                 for (int j = 0 ; j < section.getBlocks().length ; j++){
-                    System.out.println(section.getBlocks()[j].getItem() +"----" +section.getItems()[i]);
                     if (section.getBlocks()[j].getItem() != null && section.getBlocks()[j].getItem().equals(section.getItems()[i])){
-                        System.out.println("88");
                         items[i] = section1.getBlocks()[j].getItem();
                         break;
                     }
@@ -177,7 +175,6 @@ public class GameCloner {
             return null;
         }
         Pipe pipe1 = null;
-        String type = "";
         switch (pipe.getClass().getSimpleName()){
             case "SimplePipe":
                 pipe1 = new SimplePipe();
@@ -249,9 +246,6 @@ public class GameCloner {
             return null;
         }
         block1.setItem(cloneItem(block.getItem()));
-        if (block1.getItem() != null) {
-            System.out.println(block1.getItem().getClass().getSimpleName());
-        }
         block1.setCol(block.getCol());
         block1.setRow(block.getRow());
         return block1;

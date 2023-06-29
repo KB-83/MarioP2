@@ -17,6 +17,7 @@ import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.CheckPoint;
 import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.pipe.*;
+import logic.modelstructure.entity.Bullet;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.entity.item.Item;
 import logic.modelstructure.entity.player.Player;
@@ -40,7 +41,7 @@ public class GuiGameCreator {
 //        guiGameState.setCurrentGuiLevel(createGuiLevel(gameState.getCurrentLevel()));
         guiGameState.setCurrentGuiSection(createGuiSection(gameState.getCurrentSection(),
                 guiGameState.getCurrentGuiSection()));
-        guiGameState.setGuiPlayer(createGuiPlayer(gameState.getPlayer(),guiGameState.getGuiPlayer()));
+        guiGameState.setGuiPlayer(createGuiPlayer(gameState.getMario(),guiGameState.getGuiPlayer()));
 
         return guiGameState;
     }
@@ -70,6 +71,11 @@ public class GuiGameCreator {
         guiPlayer.setWorldY(player.getWorldY());
         guiPlayer.setWidth(player.getWidth());
         guiPlayer.setHeight(player.getHeight());
+        guiPlayer.getGuiBullet().setWorldX(player.getBullet().getWorldX());
+        guiPlayer.getGuiBullet().setWorldY(player.getBullet().getWorldY());
+        guiPlayer.getGuiBullet().setLock(player.getBullet().isLock());
+        guiPlayer.getGuiBullet().setHeight(player.getBullet().getHeight());
+        guiPlayer.getGuiBullet().setWidth(player.getBullet().getWidth());
         return guiPlayer;
     }
     private static GuiLevel createGuiLevel(Level level,GuiLevel guiLevel,GuiSection guiSection[]){

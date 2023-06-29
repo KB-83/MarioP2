@@ -20,6 +20,7 @@ public class Section {
     @JsonIgnore
     private BackgroundMap backgroundMap;
     private CheckPoint checkPoint;
+    @JsonIgnore
     private Item[] items;
     public Section(){
     }

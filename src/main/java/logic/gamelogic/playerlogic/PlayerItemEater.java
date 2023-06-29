@@ -2,7 +2,6 @@ package logic.gamelogic.playerlogic;
 
 import logic.gamestrucure.GameState;
 import logic.modelstructure.entity.item.Item;
-import logic.modelstructure.entity.player.Player;
 
 public class PlayerItemEater {
     private GameState gameState;
@@ -25,12 +24,12 @@ public class PlayerItemEater {
                 switch (i) {
                     case 0:
                         gameState.setMarioState(1);
-                        gameState.getPlayer().setMega(true);
+                        gameState.getMario().setMega(true);
                         break;
                     case 1:
                         gameState.setMarioState(2);
-                        gameState.getPlayer().setMega(false);
-                        gameState.getPlayer().setFire(true);
+                        gameState.getMario().setMega(false);
+                        gameState.getMario().setFire(true);
                 }
                 break;
             case "Flower":
@@ -39,12 +38,12 @@ public class PlayerItemEater {
                 switch (i) {
                     case 0:
                         gameState.setMarioState(1);
-                        gameState.getPlayer().setMega(true);
+                        gameState.getMario().setMega(true);
                         break;
                     case 1:
                         gameState.setMarioState(2);
-                        gameState.getPlayer().setMega(false);
-                        gameState.getPlayer().setFire(true);
+                        gameState.getMario().setMega(false);
+                        gameState.getMario().setFire(true);
                         break;
                 }
         }

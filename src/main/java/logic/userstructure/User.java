@@ -113,4 +113,12 @@ public class User {
     public void setCurrentGameState(GameState currentGameState) {
         this.currentGameState = currentGameState;
     }
+
+    public GameState[] getSavedGames() {
+        return savedGames;
+    }
+
+    public void setSavedGames(GameState[] savedGames) {
+        this.savedGames = savedGames;
+    }
 }
