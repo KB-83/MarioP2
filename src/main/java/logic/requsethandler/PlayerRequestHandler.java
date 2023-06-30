@@ -6,6 +6,7 @@ import logic.modelstructure.backgroundobject.pipe.*;
 import logic.modelstructure.entity.Bullet;
 import logic.modelstructure.entity.player.JumpV0;
 import logic.modelstructure.entity.player.Player;
+import logic.sound.Sound;
 import util.Constant;
 
 import java.awt.event.ActionEvent;
@@ -19,6 +20,7 @@ public class PlayerRequestHandler extends Request{
     private ActionListener jumpActionListener;
     private Timer jumpTimer;
     private double jumpStartTime;
+    private Sound sound;
     private int jumpStartY;
     //todo: behtareh inaro be logic game pass bede
 
@@ -26,6 +28,7 @@ public class PlayerRequestHandler extends Request{
         this.player = gameState.getMario();
         player.setPlayerRequestHandler(this);
         this.gameState = gameState;
+        sound = new Sound("BULLET");
         setActonListeners();
 
     }
@@ -102,6 +105,8 @@ public class PlayerRequestHandler extends Request{
         if (player.getPlayerCollisionHandler().isOnTopOfTelePipe() != null) {
             Pipe pipe = player.getPlayerCollisionHandler().isOnTopOfTelePipe();
             String s = pipe.getClass().getSimpleName();
+            sound.setSound("TELE_PIPE");
+            sound.play();
             if (s.equals("TelePlantPipe")) {
                 gameState.getGameStateController().changeSection(((TelePlantPipe) pipe).getTeleSection(),gameState.getSectionNumber());
             }
@@ -139,6 +144,8 @@ public class PlayerRequestHandler extends Request{
             bullet.setWorldY(player.getWorldY() + (Constant.BACKGROUND_TILE_SIZE/2));
             bullet.setStartX(bullet.getWorldX());
             bullet.getTimer().start();
+            sound.setSound("BULLET");
+            sound.play();
         }
     }
     //todo : maybe pause request is for a user not a player

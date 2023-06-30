@@ -2,12 +2,15 @@ package logic.gamelogic.playerlogic;
 
 import logic.gamestrucure.GameState;
 import logic.modelstructure.entity.item.Item;
+import logic.sound.Sound;
 
 public class PlayerItemEater {
     private GameState gameState;
+    private Sound sound;
 
     public PlayerItemEater(GameState gameState) {
         this.gameState = gameState;
+        sound = new Sound("POWER_UP");
     }
 
     public void eatItem(Item[] items, Item item, int index) {
@@ -15,10 +18,12 @@ public class PlayerItemEater {
         String s = item.getClass().getSimpleName();
         switch (s) {
             case "Star":
+                sound.setSound("POWER_UP");
                 gameState.setScore(gameState.getScore() + 40);
                 //
                 break;
             case "Mushroom":
+                sound.setSound("POWER_UP");
                 gameState.setScore(gameState.getScore() + 30);
                 int i = gameState.getMarioState();
                 switch (i) {
@@ -33,6 +38,7 @@ public class PlayerItemEater {
                 }
                 break;
             case "Flower":
+                sound.setSound("POWER_UP");
                 gameState.setScore(gameState.getScore() + 20);
                 i = gameState.getMarioState();
                 switch (i) {
@@ -46,7 +52,12 @@ public class PlayerItemEater {
                         gameState.getMario().setFire(true);
                         break;
                 }
+                break;
+            case "Coin":
+                sound.setSound("COIN");
+                break;
         }
+        sound.play();
         Item[] newItems = new Item[items.length-1];
         int i = 0;
         for (int j = 0 ; j < items.length ; j++){
@@ -57,5 +68,13 @@ public class PlayerItemEater {
         }
         gameState.getCurrentSection().setItems(newItems);
 
+    }
+
+    public Sound getSound() {
+        return sound;
+    }
+
+    public void setSound(Sound sound) {
+        this.sound = sound;
     }
 }

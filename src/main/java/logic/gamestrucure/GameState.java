@@ -55,6 +55,12 @@ public class GameState {
         this.gameStateController = gameStateController;
         playerItemEater = new PlayerItemEater(this);
         playerLifeChecker = new PlayerLifeChecker(this);
+        sound = new Sound("MAIN");
+    }
+    public void setDefaultDependencies(){
+        playerItemEater = new PlayerItemEater(this);
+        playerLifeChecker = new PlayerLifeChecker(this);
+        sound = new Sound("MAIN");
     }
 //    public GameState(User user , Game game , Player player,GameStateController gameStateController) {
 //        currentUser = user;

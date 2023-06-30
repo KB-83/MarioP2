@@ -237,13 +237,15 @@
           "x" : 10,
           "y" : 4
         }, {
-          "type" : "EMPTY",
+          "type" : "QUESTION",
           "x" : 12,
-          "y" : 4
+          "y" : 4,
+          "item" : "COIN"
         }, {
-          "type" : "EMPTY",
+          "type" : "QUESTION",
           "x" : 14,
-          "y" : 4
+          "y" : 4,
+          "item" : "FLOWER"
         }, {
           "type" : "SIMPLE",
           "x" : 16,
@@ -255,12 +257,12 @@
         } ],
         "enemies" : [ {
           "type" : "GOOMBA",
-          "x" : -145,
-          "y" : -11890
+          "x" : -15,
+          "y" : -120
         }, {
           "type" : "SPINY",
           "x" : 35,
-          "y" : -12694
+          "y" : -212
         } ],
         "pipes" : [ {
           "x" : 6,
@@ -287,9 +289,10 @@
               "y" : 4,
               "item" : "COIN"
             }, {
-              "type" : "EMPTY",
+              "type" : "QUESTION",
               "x" : 15,
-              "y" : 4
+              "y" : 4,
+              "item" : "MUSHROOM"
             }, {
               "type" : "SIMPLE",
               "x" : 17,
@@ -297,8 +300,8 @@
             } ],
             "enemies" : [ {
               "type" : "GOOMBA",
-              "x" : -47,
-              "y" : -1234
+              "x" : 12,
+              "y" : 5
             } ],
             "pipes" : [ {
               "x" : 20,
@@ -312,7 +315,11 @@
             "items" : [ {
               "type" : "COIN",
               "x" : 12,
-              "y" : 0
+              "y" : 4
+            }, {
+              "type" : "MUSHROOM",
+              "x" : 15,
+              "y" : 4
             } ],
             "spawnPipe" : {
               "x" : 6,
@@ -320,6 +327,19 @@
               "type" : "SIMPLE"
             }
           }
+        } ],
+        "items" : [ {
+          "type" : "FLOWER",
+          "x" : 10,
+          "y" : 5
+        }, {
+          "type" : "COIN",
+          "x" : 12,
+          "y" : 0
+        }, {
+          "type" : "FLOWER",
+          "x" : 14,
+          "y" : 0
         } ]
       }, {
         "length" : 23,
@@ -365,11 +385,11 @@
         } ],
         "enemies" : [ {
           "type" : "GOOMBA",
-          "x" : 5,
+          "x" : 16,
           "y" : 0
         }, {
           "type" : "KOOPA",
-          "x" : 1,
+          "x" : 19,
           "y" : 0
         }, {
           "type" : "SPINY",
@@ -380,6 +400,11 @@
           "x" : 23,
           "y" : 0,
           "type" : "PIRANHA_TRAP"
+        } ],
+        "items" : [ {
+          "type" : "COIN",
+          "x" : 6,
+          "y" : 5
         } ]
       }, {
         "length" : 25,
@@ -423,26 +448,26 @@
       } ]
     } ],
     "mario" : {
-      "imageAddress" : "2Right1",
-      "worldX" : 535,
-      "worldY" : 215,
+      "imageAddress" : "1Right1",
+      "worldX" : 540,
+      "worldY" : 295,
       "width" : 48,
       "height" : 96,
-      "cameraX" : 535,
-      "cameraY" : 215,
+      "cameraX" : 540,
+      "cameraY" : 295,
       "duringJump" : false,
-      "fire" : true,
-      "mega" : false,
+      "fire" : false,
+      "mega" : true,
       "onTopOfBlock" : false,
-      "vx" : 0.0,
-      "vy" : -432.0
+      "vy" : -12.0,
+      "vx" : 0.0
     },
-    "marioState" : 2,
+    "marioState" : 1,
     "levelNumber" : 1,
     "sectionNumber" : 2,
     "coins" : 0,
-    "score" : 70,
-    "remainingHeart" : 1,
+    "score" : 0,
+    "remainingHeart" : 3,
     "remainingTime" : 80,
     "paused" : false
   } ],

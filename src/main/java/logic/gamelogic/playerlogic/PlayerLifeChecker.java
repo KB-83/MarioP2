@@ -5,13 +5,16 @@ import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.CheckPoint;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.entity.player.Player;
+import logic.sound.Sound;
 import util.Constant;
 
 public class PlayerLifeChecker {
     private GameState gameState;
     private long lastKickTimeByEnemy;
+    private Sound sound;
     public PlayerLifeChecker(GameState gameState) {
         this.gameState = gameState;
+        sound = new Sound("HEART-LOOSE");
     }
     public void checkIfHurt() {
 
@@ -45,6 +48,7 @@ public class PlayerLifeChecker {
             decreaseHeart();
             return;
         }
+        sound.setSound("KICK");
         if (gameState.getMario().isFire()){
             gameState.getMario().setFire(false);
             gameState.getMario().setMega(true);
@@ -55,12 +59,15 @@ public class PlayerLifeChecker {
             gameState.getMario().setMega(false);
             gameState.setMarioState(0);
         }
+        sound.play();
     }
     private void decreaseHeart(){
-        if (gameState.getRemainingHeart() <=1) {
-            killPlayer();
-            return;
-        }
+//        if (gameState.getRemainingHeart() <=1) {
+//            killPlayer();
+//            return;
+//        }
+        sound.setSound("HEART-LOOSE");
+        sound.play();
         gameState.setRemainingHeart(gameState.getRemainingHeart() - 1);
         gameState.getMario().setMega(false);
         gameState.getMario().setFire(false);

@@ -86,9 +86,13 @@ public class GameStateController {
     }
     public void startGameState(GameState gameState,LogicManager logicManager){
         //todo : doing gamestATE Timers run
+        //test
+//        gameState.getSound().play();
+        gameState.getSound().loop();
         Loop gameLoop = new Loop(gameState,logicManager.getGraphicManager().getFrame()
                 .getPanelsManagerCard().getGamePanel(), Constant.FPS);
         gameLoop.start();
+
     }
     private void setGameStateDependencies(Game game, GameState gameState,LogicManager logicManager) {
         gameState.setCurrentUser(logicManager.getUser());

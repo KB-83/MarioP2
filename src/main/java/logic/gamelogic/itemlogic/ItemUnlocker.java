@@ -4,6 +4,7 @@ import logic.modelstructure.backgroundobject.block.Block;
 import logic.modelstructure.backgroundobject.block.EmptyBlock;
 import logic.modelstructure.entity.item.Mushroom;
 import logic.modelstructure.entity.item.Star;
+import logic.sound.Sound;
 import util.Constant;
 
 import javax.swing.Timer;
@@ -16,8 +17,10 @@ public class ItemUnlocker {
     private Timer mushroomTimer;
     private Mushroom mushroom;
     private Timer flowerTimer;
+    private Sound sound;
     public ItemUnlocker() {
         setTimers();
+        sound = new Sound("BREAK_BLOCK");
     }
     private void setTimers(){
         starTimer = new Timer(3000, new ActionListener() {
@@ -47,6 +50,8 @@ public class ItemUnlocker {
     public void unlock(Block block,Block[] blocks, int i){
         block.getItem().setLock(false);
         block.getItem().setWorldY((block.getRow() - 1) * Constant.BACKGROUND_TILE_SIZE);
+        sound.setSound("BREAK_BLOCK");
+        sound.play();
         String s = block.getItem().getClass().getSimpleName();
         switch (s){
             case "Star":
