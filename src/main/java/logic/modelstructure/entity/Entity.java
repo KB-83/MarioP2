@@ -48,7 +48,7 @@ public abstract class Entity {
         return worldX;
     }
 
-    public void setWorldX(int worldX) {
+    synchronized public void setWorldX(int worldX) {
         this.worldX = worldX;
     }
 

@@ -4,6 +4,7 @@ import logic.gamestrucure.GameState;
 import logic.gamestrucure.gameworldoption.Gravity;
 import logic.modelstructure.backgroundobject.pipe.*;
 import logic.modelstructure.entity.Bullet;
+import logic.modelstructure.entity.Sward;
 import logic.modelstructure.entity.player.JumpV0;
 import logic.modelstructure.entity.player.Player;
 import logic.sound.Sound;
@@ -126,6 +127,24 @@ public class PlayerRequestHandler extends Request{
     public void SwardRequest(){
         if(gameState.isPaused()){
             return;
+        }
+        if ( player.getOnTopOfBlock()  && System.currentTimeMillis() - player.getSward().getLastTime() >= 5000 && gameState.getCoins() >=3){
+            gameState.setCoins(gameState.getCoins()-3);
+            Sward sward = player.getSward();
+            sward.setImageAddress("Right");
+            sward.setWorldX(player.getWorldX());
+            sward.setGoingRight(true);
+            if (player.getImageAddress().contains("Left")){
+                sward.setGoingRight(false);
+                sward.setImageAddress("Left");
+                sward.setWorldX(player.getWorldX() - Constant.BACKGROUND_TILE_SIZE);
+            }
+            sward.setLock(false);
+            sward.setWorldY(player.getWorldY() + (Constant.BACKGROUND_TILE_SIZE/2));
+            sward.setStartX(sward.getWorldX());
+            sward.getTimer().start();
+            sound.setSound("BULLET");
+            sound.play();
         }
     }
     public void BulletRequest(){

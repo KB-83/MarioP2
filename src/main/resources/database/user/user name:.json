@@ -248,8 +248,8 @@
         } ],
         "enemies" : [ {
           "type" : "GOOMBA",
-          "x" : 118,
-          "y" : -5241
+          "x" : 39,
+          "y" : -159
         } ],
         "pipes" : [ {
           "x" : 6,
@@ -332,9 +332,10 @@
           "x" : 5,
           "y" : 4
         }, {
-          "type" : "EMPTY",
+          "type" : "QUESTION",
           "x" : 6,
-          "y" : 4
+          "y" : 4,
+          "item" : "COIN"
         }, {
           "type" : "SIMPLE",
           "x" : 7,
@@ -358,12 +359,12 @@
         } ],
         "enemies" : [ {
           "type" : "GOOMBA",
-          "x" : 17,
-          "y" : 0
+          "x" : 4,
+          "y" : 5
         }, {
           "type" : "KOOPA",
-          "x" : 13,
-          "y" : 0
+          "x" : 7,
+          "y" : 8
         }, {
           "type" : "SPINY",
           "x" : 14,
@@ -373,6 +374,11 @@
           "x" : 23,
           "y" : 0,
           "type" : "PIRANHA_TRAP"
+        } ],
+        "items" : [ {
+          "type" : "COIN",
+          "x" : 6,
+          "y" : 4
         } ]
       }, {
         "length" : 25,
@@ -416,18 +422,18 @@
       } ]
     } ],
     "mario" : {
-      "imageAddress" : "0Left1",
-      "worldX" : 277,
-      "worldY" : 330,
+      "imageAddress" : "0Right1",
+      "worldX" : 284,
+      "worldY" : 291,
       "width" : 48,
       "height" : 48,
-      "cameraX" : 277,
-      "cameraY" : 330,
-      "mega" : false,
+      "cameraX" : 284,
+      "cameraY" : 291,
       "fire" : false,
+      "mega" : false,
       "duringJump" : false,
       "vx" : 0.0,
-      "vy" : -264.0,
+      "vy" : -24.0,
       "onTopOfBlock" : false
     },
     "marioState" : 0,
@@ -435,7 +441,7 @@
     "sectionNumber" : 1,
     "coins" : 0,
     "score" : 0,
-    "remainingHeart" : -3,
+    "remainingHeart" : 0,
     "remainingTime" : 100,
     "paused" : false
   } ],

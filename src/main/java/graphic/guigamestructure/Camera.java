@@ -2,23 +2,14 @@ package graphic.guigamestructure;
 
 import graphic.guibackgroundobject.guiblock.GuiBlock;
 import graphic.guibackgroundobject.guipipe.GuiPipe;
-import graphic.guibackgroundobject.guipipe.GuiSimplePlantPipe;
-import graphic.guibackgroundobject.guipipe.GuiTelePlantPipe;
 import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundMap;
-import graphic.guibackgroundobject.guiworldtiles.GuiBackgroundTile;
+import graphic.guientity.GuiSward;
 import graphic.guientity.guienemy.GuiEnemy;
-import graphic.guientity.guiitem.GuiBullet;
+import graphic.guientity.GuiBullet;
 import graphic.guientity.guiitem.GuiItem;
-import graphic.panel.GamePanel;
-import logic.modelstructure.backgroundobject.pipe.Pipe;
-import logic.modelstructure.entity.Bullet;
-import logic.modelstructure.entity.enemy.Enemy;
-import logic.modelstructure.worldtiles.BackGroundTile;
 import util.Constant;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.IOException;
 
 public class Camera {
     // world button column which it have to start painting from
@@ -104,6 +95,12 @@ public class Camera {
         if (!guiBullet.isLock()){
             g2.drawImage(guiBullet.getCurrentImage(),guiBullet.getWorldX() - minasXLength,guiBullet.getWorldY(),
                     guiBullet.getWidth(),guiBullet.getHeight(),null);
+        }
+        //dryingSward
+        GuiSward guiSward = guiGameState.getGuiPlayer().getGuiSward();
+        if (!guiSward.isLock()){
+            g2.drawImage(guiSward.getCurrentImage(),guiSward.getWorldX() - minasXLength,guiSward.getWorldY(),
+                    guiSward.getWidth(),guiSward.getHeight(),null);
         }
     }
     private boolean checkBound (int x , int y) {

@@ -76,6 +76,14 @@ public class GuiGameCreator {
         guiPlayer.getGuiBullet().setLock(player.getBullet().isLock());
         guiPlayer.getGuiBullet().setHeight(player.getBullet().getHeight());
         guiPlayer.getGuiBullet().setWidth(player.getBullet().getWidth());
+
+
+        guiPlayer.getGuiSward().setWorldX(player.getSward().getWorldX());
+        guiPlayer.getGuiSward().setWorldY(player.getSward().getWorldY());
+        guiPlayer.getGuiSward().setLock(player.getSward().isLock());
+        guiPlayer.getGuiSward().setHeight(player.getSward().getHeight());
+        guiPlayer.getGuiSward().setWidth(player.getSward().getWidth());
+        guiPlayer.getGuiSward().setCurrentImage((guiPlayer.getGuiSward().getImageByItsAddress(player.getSward().getImageAddress())));
         return guiPlayer;
     }
     private static GuiLevel createGuiLevel(Level level,GuiLevel guiLevel,GuiSection guiSection[]){

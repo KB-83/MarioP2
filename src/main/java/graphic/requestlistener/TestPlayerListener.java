@@ -3,35 +3,53 @@ package graphic.requestlistener;
 import logic.requsethandler.PlayerRequestHandler;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class PlayerListener implements KeyListener {
+public class TestPlayerListener implements KeyListener {
     private PlayerRequestHandler playerRequestHandler;
     private boolean isUpPressed, isDownPressed;
     private boolean isDuringSwardChecking;
     private Timer swardRequestTimer;
     private Timer letPlayerPressBothKeys;
-    private boolean isDuringLetPlayerPressBothKeys;
     private long startPressingUpAndDown;
-    private long lastSwardRequest;
-    public PlayerListener(PlayerRequestHandler playerRequestHandler){
+    public TestPlayerListener(PlayerRequestHandler playerRequestHandler){
         this.playerRequestHandler = playerRequestHandler;
         isDuringSwardChecking = false;
+        startSwardRequestTimer();
+    }
+    private void startSwardRequestTimer(){
+            startPressingUpAndDown = System.currentTimeMillis();
+            swardRequestTimer = new Timer(100, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (isUpPressed && isDownPressed && System.currentTimeMillis() - startPressingUpAndDown >= 3000){
+                        playerRequestHandler.SwardRequest();
+                        swardRequestTimer.stop();
+                        swardRequestTimer = null;
+                        isDuringSwardChecking = false;
+                    }
+                    else if (!(isUpPressed && isDownPressed)){
+                        swardRequestTimer.stop();
+                        swardRequestTimer = null;
+                        isDuringSwardChecking = false;
+                    }
+                }
+            });
         letPlayerPressBothKeys = new Timer(100, new ActionListener() {
             int i = 0;
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (i<1){
-                    isDuringLetPlayerPressBothKeys = true;
+                if (i<5){
                     i++;
                 }
                 else {
                     i = 0;
-                    isDuringLetPlayerPressBothKeys = false;
                     letPlayerPressBothKeys.stop();
                     if(isDownPressed && isUpPressed){
-                        isDuringSwardChecking = true;
-                        startSwardRequestTimer();
+                        swardRequestTimer.start();
                     }
                     else if (isUpPressed){playerRequestHandler.jumpRequest();}
                     else if (isDownPressed){playerRequestHandler.SeatRequest();}
@@ -40,31 +58,14 @@ public class PlayerListener implements KeyListener {
             }
         });
     }
-    private void startSwardRequestTimer(){
-        startPressingUpAndDown = System.currentTimeMillis();
-        swardRequestTimer = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (isUpPressed && isDownPressed && System.currentTimeMillis() - startPressingUpAndDown >= 1000){
-                    playerRequestHandler.SwardRequest();
-                    swardRequestTimer.stop();
-                    swardRequestTimer = null;
-                    isDuringSwardChecking = false;
-                    lastSwardRequest = System.currentTimeMillis();
-                }
-                else if (!(isUpPressed && isDownPressed)){
-                    swardRequestTimer.stop();
-                    swardRequestTimer = null;
-                    isDuringSwardChecking = false;
-                }
-            }
-        });
-        swardRequestTimer.start();
-
-    }
     @Override
     public void keyTyped(KeyEvent e) {
-
+        if(e.getKeyCode() == KeyEvent.VK_UP){
+            playerRequestHandler.jumpRequest();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+            playerRequestHandler.SeatRequest();
+        }
     }
 
     @Override
@@ -72,16 +73,13 @@ public class PlayerListener implements KeyListener {
         if (isDuringSwardChecking){
             return;
         }
-        if(e.getKeyCode() == KeyEvent.VK_UP){
-            isUpPressed = true;
-            letPlayerPressBothKeys.start();
-        }
-        else if(e.getKeyCode() == KeyEvent.VK_DOWN){
-            isDownPressed = true;
-            if(!isDuringLetPlayerPressBothKeys) {
-                letPlayerPressBothKeys.start();
-            }
-        }
+//        if(e.getKeyCode() == KeyEvent.VK_UP){
+//            isUpPressed = true;
+//            letPlayerPressBothKeys.start();
+//        }
+//        else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+//            isDownPressed = true;
+//        }
         else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
             playerRequestHandler.RightRequest();
         }
@@ -100,7 +98,7 @@ public class PlayerListener implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_UP || System.currentTimeMillis() - lastSwardRequest < 500){
+        if(e.getKeyCode() == KeyEvent.VK_UP){
             isUpPressed = false;
         }
         if(e.getKeyCode() == KeyEvent.VK_DOWN){

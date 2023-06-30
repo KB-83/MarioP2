@@ -1,20 +1,19 @@
 package graphic.guientity.guiplayer;
 
 
-import graphic.GraphicManager;
 import graphic.guientity.GuiEntity;
-import graphic.guientity.guiitem.GuiBullet;
-
-import java.awt.*;
-import java.util.HashMap;
+import graphic.guientity.GuiBullet;
+import graphic.guientity.GuiSward;
 
 public abstract class GuiPlayer extends GuiEntity {
 
 //            GuiGameState guiGameState;
     private GuiBullet guiBullet;
+    private GuiSward guiSward;
     public GuiPlayer() {
         super();
         guiBullet = new GuiBullet();
+        guiSward  = new GuiSward();
     }
 
     //    GuiPlayer(GuiGameState guiGameState) {
@@ -34,5 +33,13 @@ public abstract class GuiPlayer extends GuiEntity {
 
     public void setGuiBullet(GuiBullet guiBullet) {
         this.guiBullet = guiBullet;
+    }
+
+    public GuiSward getGuiSward() {
+        return guiSward;
+    }
+
+    public void setGuiSward(GuiSward guiSward) {
+        this.guiSward = guiSward;
     }
 }

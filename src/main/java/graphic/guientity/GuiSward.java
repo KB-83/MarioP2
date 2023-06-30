@@ -1,17 +1,16 @@
-package graphic.guientity.guiitem;
+package graphic.guientity;
 
-import graphic.guientity.GuiEntity;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.util.HashMap;
 
-public class GuiBullet extends GuiEntity {
+public class GuiSward extends GuiEntity {
     private boolean isLock;
-    public GuiBullet() {
+    public GuiSward() {
         super();
         loadImages();
-        setCurrentImage(getImageByItsAddress("1"));
+        setCurrentImage(getImageByItsAddress("Right"));
     }
 
     @Override
@@ -19,8 +18,11 @@ public class GuiBullet extends GuiEntity {
         HashMap<String, Image> imageHashMap = new HashMap<>();
         Image image;
         try{
-            image = ImageIO.read(getClass().getResourceAsStream("/image/item/bullet.png"));
-            imageHashMap.put("1",image);
+            image = ImageIO.read(getClass().getResourceAsStream("/image/item/swardright.png"));
+            imageHashMap.put("Right",image);
+
+            image = ImageIO.read(getClass().getResourceAsStream("/image/item/swardleft.png"));
+            imageHashMap.put("Left",image);
         }catch (Exception e){
             e.printStackTrace();
         }

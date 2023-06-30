@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import logic.gamelogic.collisionlogic.PlayerCollisionHandler;
 import logic.modelstructure.entity.Bullet;
 import logic.modelstructure.entity.Entity;
+import logic.modelstructure.entity.Sward;
 import logic.requsethandler.PlayerRequestHandler;
 import util.Constant;
 
@@ -15,6 +16,8 @@ public abstract class Player extends Entity {
     private boolean isDuringJump;
     @JsonIgnore
     private final Bullet bullet;
+    @JsonIgnore
+    private final Sward sward;
     private boolean isFire, isMega;
     //todo: is it nessesart?
     @JsonIgnore
@@ -26,6 +29,7 @@ public abstract class Player extends Entity {
 
         setOnTopOfBlock(true);
         bullet = new Bullet();
+        sward = new Sward();
     }
 
     public int getCameraX() {
@@ -103,5 +107,9 @@ public abstract class Player extends Entity {
 
     public Bullet getBullet() {
         return bullet;
+    }
+
+    public Sward getSward() {
+        return sward;
     }
 }
