@@ -140,23 +140,41 @@ public class GameStateController {
         itemMovementHandler = new ItemMovementHandler(gameState);
     }
     public void checkPointRequest(String s) {
+        double PR = returnPR();
         gameState.getMario().setVX(0);
         switch (s){
             case "Save CheckPoint":
                 gameState.getWaitingCheckpoint().setSaved(true);
-                //bla bla
+                gameState.setCoins((int) (gameState.getCoins() - PR));
                 gameState.setPaused(false);
                 GameState[] gameStates = {gameState};
                 gameState.getCurrentUser().setSavedGames(gameStates);
                 Saver.getSaver().saveUser(gameState.getCurrentUser(),false);
                 break;
             case "Get Coins":
-                System.out.println("gameState Controller 141");
+                gameState.setCoins((int) (gameState.getCoins()+ (PR/4)));
                 gameState.setWaitingCheckpoint(null);
                 gameState.getCurrentSection().setCheckPoint(null);
 //                bla bla
                 gameState.setPaused(false);
                 break;
         }
+    }
+    public double returnPR() {
+        int totalLength = 0;
+        double progressLength = 0;
+        boolean reachSection = false;
+        for (Section section : gameState.getCurrentLevel().getSections()){
+            totalLength += Constant.BACKGROUND_TILE_SIZE * section.getLength();
+            if (section.equals(gameState.getCurrentSection())){
+                progressLength += gameState.getMario().getWorldX();
+                reachSection = true;
+            }
+            if (!reachSection){
+                progressLength += Constant.BACKGROUND_TILE_SIZE * section.getLength();
+            }
+        }
+        double PR = (progressLength / totalLength) * gameState.getCoins();
+        return PR;
     }
 }

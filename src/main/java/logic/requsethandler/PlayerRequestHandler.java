@@ -33,7 +33,7 @@ public class PlayerRequestHandler extends Request{
 
     }
 
-    public void JumpRequest(){
+    public void jumpRequest(){
         if(gameState.isPaused() || player.isDuringJump()){
             return;
         }

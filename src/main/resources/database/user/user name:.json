@@ -5,23 +5,27 @@
     "name" : "default",
     "levels" : [ {
       "sections" : [ {
-        "length" : 30,
+        "length" : 26,
         "time" : 100,
+        "checkPoint" : {
+          "isSaved" : true,
+          "col" : 5,
+          "row" : 7,
+          "sectionNum" : 0
+        },
         "blocks" : [ {
-          "type" : "QUESTION",
+          "type" : "COIN",
           "x" : 10,
-          "y" : 4,
-          "item" : "FLOWER"
-        }, {
-          "type" : "QUESTION",
-          "x" : 12,
           "y" : 4,
           "item" : "COIN"
         }, {
-          "type" : "QUESTION",
+          "type" : "COINS",
+          "x" : 12,
+          "y" : 4
+        }, {
+          "type" : "SIMPLE",
           "x" : 14,
-          "y" : 4,
-          "item" : "FLOWER"
+          "y" : 4
         }, {
           "type" : "SIMPLE",
           "x" : 16,
@@ -33,12 +37,8 @@
         } ],
         "enemies" : [ {
           "type" : "GOOMBA",
-          "x" : 5,
-          "y" : 1
-        }, {
-          "type" : "SPINY",
-          "x" : 35,
-          "y" : 1
+          "x" : 10,
+          "y" : 5
         } ],
         "pipes" : [ {
           "x" : 6,
@@ -105,27 +105,13 @@
           }
         } ],
         "items" : [ {
-          "type" : "FLOWER",
-          "x" : 10,
-          "y" : 4
-        }, {
           "type" : "COIN",
-          "x" : 12,
-          "y" : 4
-        }, {
-          "type" : "FLOWER",
-          "x" : 14,
+          "x" : 10,
           "y" : 4
         } ]
       }, {
         "length" : 23,
         "time" : 80,
-        "checkPoint" : {
-          "isSaved" : true,
-          "col" : 12,
-          "row" : 6,
-          "sectionNum" : 0
-        },
         "blocks" : [ {
           "type" : "SIMPLE",
           "x" : 4,
@@ -224,28 +210,33 @@
         } ]
       } ]
     } ],
-    "hearts" : 3,
-    "marioState" : 2
+    "hearts" : 0,
+    "marioState" : 0
   } ],
   "savedGames" : [ {
     "levels" : [ {
       "sections" : [ {
-        "length" : 30,
+        "length" : 26,
         "time" : 100,
+        "checkPoint" : {
+          "isSaved" : true,
+          "col" : 5,
+          "row" : 7,
+          "sectionNum" : 0
+        },
         "blocks" : [ {
-          "type" : "EMPTY",
+          "type" : "COIN",
           "x" : 10,
-          "y" : 4
-        }, {
-          "type" : "QUESTION",
-          "x" : 12,
           "y" : 4,
           "item" : "COIN"
         }, {
-          "type" : "QUESTION",
+          "type" : "COINS",
+          "x" : 12,
+          "y" : 4
+        }, {
+          "type" : "SIMPLE",
           "x" : 14,
-          "y" : 4,
-          "item" : "FLOWER"
+          "y" : 4
         }, {
           "type" : "SIMPLE",
           "x" : 16,
@@ -257,12 +248,8 @@
         } ],
         "enemies" : [ {
           "type" : "GOOMBA",
-          "x" : -15,
-          "y" : -120
-        }, {
-          "type" : "SPINY",
-          "x" : 35,
-          "y" : -212
+          "x" : 118,
+          "y" : -5241
         } ],
         "pipes" : [ {
           "x" : 6,
@@ -329,27 +316,13 @@
           }
         } ],
         "items" : [ {
-          "type" : "FLOWER",
-          "x" : 10,
-          "y" : 5
-        }, {
           "type" : "COIN",
-          "x" : 12,
-          "y" : 0
-        }, {
-          "type" : "FLOWER",
-          "x" : 14,
+          "x" : 10,
           "y" : 0
         } ]
       }, {
         "length" : 23,
         "time" : 80,
-        "checkPoint" : {
-          "isSaved" : true,
-          "col" : 12,
-          "row" : 6,
-          "sectionNum" : 0
-        },
         "blocks" : [ {
           "type" : "SIMPLE",
           "x" : 4,
@@ -385,11 +358,11 @@
         } ],
         "enemies" : [ {
           "type" : "GOOMBA",
-          "x" : 16,
+          "x" : 17,
           "y" : 0
         }, {
           "type" : "KOOPA",
-          "x" : 19,
+          "x" : 13,
           "y" : 0
         }, {
           "type" : "SPINY",
@@ -400,11 +373,6 @@
           "x" : 23,
           "y" : 0,
           "type" : "PIRANHA_TRAP"
-        } ],
-        "items" : [ {
-          "type" : "COIN",
-          "x" : 6,
-          "y" : 5
         } ]
       }, {
         "length" : 25,
@@ -448,27 +416,27 @@
       } ]
     } ],
     "mario" : {
-      "imageAddress" : "1Right1",
-      "worldX" : 540,
-      "worldY" : 295,
+      "imageAddress" : "0Left1",
+      "worldX" : 277,
+      "worldY" : 330,
       "width" : 48,
-      "height" : 96,
-      "cameraX" : 540,
-      "cameraY" : 295,
-      "duringJump" : false,
+      "height" : 48,
+      "cameraX" : 277,
+      "cameraY" : 330,
+      "mega" : false,
       "fire" : false,
-      "mega" : true,
-      "onTopOfBlock" : false,
-      "vy" : -12.0,
-      "vx" : 0.0
+      "duringJump" : false,
+      "vx" : 0.0,
+      "vy" : -264.0,
+      "onTopOfBlock" : false
     },
-    "marioState" : 1,
+    "marioState" : 0,
     "levelNumber" : 1,
-    "sectionNumber" : 2,
+    "sectionNumber" : 1,
     "coins" : 0,
     "score" : 0,
-    "remainingHeart" : 3,
-    "remainingTime" : 80,
+    "remainingHeart" : -3,
+    "remainingTime" : 100,
     "paused" : false
   } ],
   "players" : null,

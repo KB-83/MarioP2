@@ -28,6 +28,10 @@ public class PlayerLifeChecker {
     }
     private void handleFalling(){
         decreaseHeart();
+        gameState.setScore(gameState.getScore() - 30);
+        if (gameState.getScore() < 0) {
+            gameState.setScore(0);
+        }
     }
     private void handleOutOfTime(){}
     public void handleEnemyCollide(Enemy enemy,String position){
@@ -66,24 +70,40 @@ public class PlayerLifeChecker {
 //            killPlayer();
 //            return;
 //        }
+        gameState.getSound().stop();
         sound.setSound("HEART-LOOSE");
         sound.play();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        gameState.getSound().play();
         gameState.setRemainingHeart(gameState.getRemainingHeart() - 1);
+        gameState.setScore(gameState.getScore() - 20);
+        if (gameState.getScore() < 0) {
+            gameState.setScore(0);
+        }
         gameState.getMario().setMega(false);
         gameState.getMario().setFire(false);
         gameState.setMarioState(0);
+        gameState.getMario().getPlayerRequestHandler().jumpRequest();
         CheckPoint checkPoint = null;
         Section checkPointSection = null;
         int sectionNum = 0;
         int i = 0;
+        int savedCheckpoints = 0;
         for (Section section : gameState.getCurrentLevel().getSections()) {
             i++;
             if (section.getCheckPoint() != null && section.getCheckPoint().getSaved()) {
                 checkPoint = section.getCheckPoint();
                 checkPointSection = section;
                 sectionNum = i;
+                savedCheckpoints++;
             }
         }
+        int Dn = (int) (((savedCheckpoints+1 * gameState.getCoins()) + gameState.getGameStateController().returnPR())/(savedCheckpoints+4));
+        gameState.setCoins(gameState.getCoins()-Dn);
         Player player = gameState.getMario();
         if (checkPoint != null) {
             gameState.getGameStateController().changeSection(checkPointSection,sectionNum);

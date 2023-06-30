@@ -1,11 +1,13 @@
 package logic.gamelogic.collisionlogic;
-import logic.gamelogic.itemlogic.ItemUnlocker;
+import logic.gamelogic.itemlogic.BlockUnlocker;
 import logic.gamestrucure.GameState;
 import logic.gamestrucure.gameworldoption.collision.CollisionChecker;
 import logic.gamestrucure.gameworldoption.collision.Rect;
 import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.CheckPoint;
 import logic.modelstructure.backgroundobject.block.Block;
+import logic.modelstructure.backgroundobject.block.CoinBlock;
+import logic.modelstructure.backgroundobject.block.FullCoinBlock;
 import logic.modelstructure.backgroundobject.pipe.*;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.entity.player.Player;
@@ -30,7 +32,7 @@ public class PlayerCollisionHandler implements CollisionHandler{
     private Rect checkpointRect = new Rect(0,48,0,48);
     private Rect backgrounTileRect = new Rect(0,48,0,48);
     //todo: improve this too
-    private ItemUnlocker itemUnlocker;
+    private BlockUnlocker blockUnlocker;
     public PlayerCollisionHandler(GameState gameState) {
         this.gameState = gameState;
         collisionChecker = new CollisionDetector(gameState.getMario());
@@ -40,7 +42,7 @@ public class PlayerCollisionHandler implements CollisionHandler{
         backGroundTiles = gameState.getCurrentSection().getBackgroundMap().getBackGroundTiles();
         this.player = gameState.getMario();
         player.setPlayerCollisionHandler(this);
-        itemUnlocker = new ItemUnlocker();
+        blockUnlocker = new BlockUnlocker();
 
     }
     public void updateSection(Section section) {
@@ -105,8 +107,9 @@ public class PlayerCollisionHandler implements CollisionHandler{
             if (collisionChecker.didCollide(playerRect, blockRect)) {
                 handelCollision(block.getCol() * Constant.BACKGROUND_TILE_SIZE, block.getRow() *
                         Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
-                if (block.getItem() != null) {
-                    itemUnlocker.unlock(block,blocks,i);
+                if (block.getItem() != null || block.getClass() == CoinBlock.class
+                || block.getClass() == FullCoinBlock.class) {
+                    blockUnlocker.unlock(gameState,block,blocks,i);
                 }
             }
             if (collisionChecker.returnSamePoints(playerRect,blockRect).equals("DOWN")) {

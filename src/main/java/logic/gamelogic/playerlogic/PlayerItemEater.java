@@ -2,6 +2,7 @@ package logic.gamelogic.playerlogic;
 
 import logic.gamestrucure.GameState;
 import logic.modelstructure.entity.item.Item;
+import logic.modelstructure.entity.item.Star;
 import logic.sound.Sound;
 
 public class PlayerItemEater {
@@ -20,12 +21,22 @@ public class PlayerItemEater {
             case "Star":
                 sound.setSound("POWER_UP");
                 gameState.setScore(gameState.getScore() + 40);
-                //
+                int i = gameState.getMarioState();
+                switch (i) {
+                    case 0:
+                        gameState.setMarioState(1);
+                        gameState.getMario().setMega(true);
+                        break;
+                    case 1:
+                        gameState.setMarioState(2);
+                        gameState.getMario().setMega(false);
+                        gameState.getMario().setFire(true);
+                }
                 break;
             case "Mushroom":
                 sound.setSound("POWER_UP");
                 gameState.setScore(gameState.getScore() + 30);
-                int i = gameState.getMarioState();
+                i = gameState.getMarioState();
                 switch (i) {
                     case 0:
                         gameState.setMarioState(1);
@@ -55,6 +66,8 @@ public class PlayerItemEater {
                 break;
             case "Coin":
                 sound.setSound("COIN");
+                gameState.setScore(gameState.getScore() + 10);
+                gameState.setCoins(gameState.getCoins()+1);
                 break;
         }
         sound.play();

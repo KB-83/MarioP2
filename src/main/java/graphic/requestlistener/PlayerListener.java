@@ -18,7 +18,7 @@ public class PlayerListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_UP){
-            playerRequestHandler.JumpRequest();
+            playerRequestHandler.jumpRequest();
         }
         else if(e.getKeyCode() == KeyEvent.VK_DOWN){
             playerRequestHandler.SeatRequest();

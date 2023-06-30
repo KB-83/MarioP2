@@ -1,7 +1,11 @@
 package logic.gamelogic.itemlogic;
 
+import logic.gamestrucure.GameState;
 import logic.modelstructure.backgroundobject.block.Block;
+import logic.modelstructure.backgroundobject.block.CoinBlock;
 import logic.modelstructure.backgroundobject.block.EmptyBlock;
+import logic.modelstructure.backgroundobject.block.FullCoinBlock;
+import logic.modelstructure.entity.item.Coin;
 import logic.modelstructure.entity.item.Mushroom;
 import logic.modelstructure.entity.item.Star;
 import logic.sound.Sound;
@@ -11,14 +15,15 @@ import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ItemUnlocker {
+public class BlockUnlocker {
     private Timer starTimer;
     private Star star;
     private Timer mushroomTimer;
     private Mushroom mushroom;
     private Timer flowerTimer;
+    private long lastBreakTime;
     private Sound sound;
-    public ItemUnlocker() {
+    public BlockUnlocker() {
         setTimers();
         sound = new Sound("BREAK_BLOCK");
     }
@@ -31,6 +36,7 @@ public class ItemUnlocker {
                 if (i >= 1) {
                     starTimer.stop();
                     star.setVX(200);
+                    star.startJumping();
                 }
             }
         });
@@ -47,11 +53,34 @@ public class ItemUnlocker {
             }
         });
     }
-    public void unlock(Block block,Block[] blocks, int i){
-        block.getItem().setLock(false);
-        block.getItem().setWorldY((block.getRow() - 1) * Constant.BACKGROUND_TILE_SIZE);
+    public void unlock(GameState gameState,Block block, Block[] blocks, int i){
+        if (block.getClass() == FullCoinBlock.class){
+            unlockFullCoin(gameState,blocks,block,i);
+            return;
+//            if (System.currentTimeMillis() - lastBreakTime < 500) {
+//                return;
+//            }
+//            lastBreakTime = System.currentTimeMillis();
+//            sound.setSound("BREAK_BLOCK");
+//            sound.play();
+//            gameState.setCoins(gameState.getCoins()+1);
+//            ((FullCoinBlock) block).setNumOfCoins(((FullCoinBlock) block).getNumOfCoins() - 1);
+//            if (((FullCoinBlock) block).getNumOfCoins() >= 1) {
+//                unlockFullCoin(block);
+//                return;
+//            }
+//            else {
+//                Block newBlock = new EmptyBlock();
+//                newBlock.setRow(block.getRow());
+//                newBlock.setCol(block.getCol());
+//                blocks[i] = newBlock;
+//                return;
+//            }
+        }
         sound.setSound("BREAK_BLOCK");
         sound.play();
+        block.getItem().setLock(false);
+        block.getItem().setWorldY((block.getRow() - 1) * Constant.BACKGROUND_TILE_SIZE);
         String s = block.getItem().getClass().getSimpleName();
         switch (s){
             case "Star":
@@ -65,9 +94,6 @@ public class ItemUnlocker {
                 break;
             case "Coin":
                 unlockCoin(block);
-                break;
-            case "FullCoin":
-                unlockFullCoin(block);
                 break;
         }
 //        block.getItem().setVX(200);
@@ -92,5 +118,22 @@ public class ItemUnlocker {
     }
     private void unlockFlower(Block block) {}
     private void unlockCoin(Block block) {}
-    private void unlockFullCoin(Block block) {}
+    private void unlockFullCoin(GameState gameState,Block[] blocks,Block block,int i) {
+        if (System.currentTimeMillis() - lastBreakTime < 500) {
+            return;
+        }
+        lastBreakTime = System.currentTimeMillis();
+        sound.setSound("COIN");
+        sound.play();
+        gameState.setCoins(gameState.getCoins()+1);
+        ((FullCoinBlock) block).setNumOfCoins(((FullCoinBlock) block).getNumOfCoins() - 1);
+        if (!(((FullCoinBlock) block).getNumOfCoins() >= 1)) {
+            Block newBlock = new EmptyBlock();
+            newBlock.setRow(block.getRow());
+            newBlock.setCol(block.getCol());
+            blocks[i] = newBlock;
+            sound.setSound("BREAK_BLOCK");
+            sound.play();
+        }
+    }
 }

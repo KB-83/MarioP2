@@ -214,6 +214,7 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
 //               SLIME/FIREBAR
             case "COIN":
                 block = new CoinBlock();
+                block.setItem(createItem("COIN"));
                 break;
 
             case "COINS":
