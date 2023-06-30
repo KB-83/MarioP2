@@ -12,19 +12,26 @@ public class Bullet extends Entity {
     private long lastTime;
     private int startX;
     private Timer timer;
+    private boolean isGoingRight;
     public Bullet() {
         addActionListeners();
         lastTime = System.currentTimeMillis();
         setLock(true);
         setWidth(35);
         setHeight(35);
+        setGoingRight(true);
     }
     public void addActionListeners() {
         timer = new Timer(1000/Constant.FPS, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (getWorldX() - startX <= 8 * Constant.BACKGROUND_TILE_SIZE){
-                    setWorldX(getWorldX()+(V.Mario.returnV()/Constant.FPS));
+                if (Math.abs(getWorldX() - startX) <= 8 * Constant.BACKGROUND_TILE_SIZE){
+                    if (isGoingRight){
+                        setWorldX(getWorldX() + (V.Mario.returnV()/Constant.FPS));
+                    }
+                    else {
+                        setWorldX(getWorldX() - (V.Mario.returnV()/Constant.FPS));
+                    }
                     setLastTime(System.currentTimeMillis());
                 }
                 else {
@@ -68,5 +75,13 @@ public class Bullet extends Entity {
 
     public void setTimer(Timer timer) {
         this.timer = timer;
+    }
+
+    public boolean isGoingRight() {
+        return isGoingRight;
+    }
+
+    public void setGoingRight(boolean goingRight) {
+        isGoingRight = goingRight;
     }
 }

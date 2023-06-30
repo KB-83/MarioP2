@@ -23,7 +23,7 @@ public class BackGroundMapGenerator {
 
         while (col < cols && row < rows){
 //            || (col <= 26 && col>22)
-            if (row < rows - 3 ) {
+            if (row < rows - 3 || (col <= 26 && col>22)) {
                 BackGroundTile backGroundTile = new BackGroundTile(col,row,TileNum.Sky,false);
                 backGroundTiles[row][col] = backGroundTile;
             }

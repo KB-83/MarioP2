@@ -103,16 +103,16 @@ public class PlayerRequestHandler extends Request{
             Pipe pipe = player.getPlayerCollisionHandler().isOnTopOfTelePipe();
             String s = pipe.getClass().getSimpleName();
             if (s.equals("TelePlantPipe")) {
-                gameState.getGameStateController().changeSection(((TelePlantPipe) pipe).getTeleSection());
+                gameState.getGameStateController().changeSection(((TelePlantPipe) pipe).getTeleSection(),gameState.getSectionNumber());
             }
             else if(s.equals("SimpleTelePipe")) {
-                gameState.getGameStateController().changeSection(((SimpleTelePipe) pipe).getTeleSection());
+                gameState.getGameStateController().changeSection(((SimpleTelePipe) pipe).getTeleSection(),gameState.getSectionNumber());
             }
             else if(s.equals("SimpleSpawnPipe")) {
-                gameState.getGameStateController().changeSection(((SimpleSpawnPipe) pipe).getSection());
+                gameState.getGameStateController().changeSection(((SimpleSpawnPipe) pipe).getSection(),gameState.getSectionNumber());
             }
             else if(s.equals("SpawnPlantPipe")) {
-                gameState.getGameStateController().changeSection(((SpawnPlantPipe) pipe).getSection());
+                gameState.getGameStateController().changeSection(((SpawnPlantPipe) pipe).getSection(),gameState.getSectionNumber());
             }
         }
         player.setWorldY(player.getWorldY()+10);
@@ -130,9 +130,13 @@ public class PlayerRequestHandler extends Request{
 //        3000 is cool down
         if (player.isFire() && player.getOnTopOfBlock()  && System.currentTimeMillis() - player.getBullet().getLastTime() >= 3000){
             Bullet bullet = player.getBullet();
+            bullet.setGoingRight(true);
+            if (player.getImageAddress().contains("Left")){
+                bullet.setGoingRight(false);
+            }
             bullet.setLock(false);
             bullet.setWorldX(player.getWorldX());
-            bullet.setWorldY(player.getWorldY() + (player.getHeight()/2));
+            bullet.setWorldY(player.getWorldY() + (Constant.BACKGROUND_TILE_SIZE/2));
             bullet.setStartX(bullet.getWorldX());
             bullet.getTimer().start();
         }

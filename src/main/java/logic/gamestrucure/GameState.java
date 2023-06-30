@@ -3,6 +3,7 @@ package logic.gamestrucure;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import logic.gamelogic.collisionlogic.PlayerCollisionHandler;
 import logic.gamelogic.playerlogic.PlayerItemEater;
+import logic.gamelogic.playerlogic.PlayerLifeChecker;
 import logic.levelstructure.Level;
 import logic.levelstructure.Section;
 import logic.gamelogic.GameStateController;
@@ -31,6 +32,8 @@ public class GameState {
     @JsonIgnore
     private PlayerCollisionHandler playerCollisionHandler;
     @JsonIgnore
+    private PlayerLifeChecker playerLifeChecker;
+    @JsonIgnore
     private PlayerItemEater playerItemEater;
     @JsonIgnore
     private Sound sound;
@@ -51,6 +54,7 @@ public class GameState {
     public GameState(GameStateController gameStateController) {
         this.gameStateController = gameStateController;
         playerItemEater = new PlayerItemEater(this);
+        playerLifeChecker = new PlayerLifeChecker(this);
     }
 //    public GameState(User user , Game game , Player player,GameStateController gameStateController) {
 //        currentUser = user;
@@ -218,5 +222,13 @@ public class GameState {
 
     public void setMario(Mario mario) {
         this.mario = mario;
+    }
+
+    public PlayerLifeChecker getPlayerLifeChecker() {
+        return playerLifeChecker;
+    }
+
+    public void setPlayerLifeChecker(PlayerLifeChecker playerLifeChecker) {
+        this.playerLifeChecker = playerLifeChecker;
     }
 }

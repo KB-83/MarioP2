@@ -12,7 +12,6 @@ import logic.gamestrucure.GameState;
 import logic.gamelogic.collisionlogic.PlayerCollisionHandler;
 import logic.levelstructure.Section;
 import logic.modelstructure.entity.player.Mario;
-import logic.modelstructure.entity.player.Player;
 import util.Constant;
 import util.Loop;
 
@@ -47,6 +46,7 @@ public class GameStateController {
         enemyMovementHandler.updateEnemiesPosition();
         // item
         itemMovementHandler.updateItemsPosition();
+        gameState.getPlayerLifeChecker().checkIfHurt();
 
 
     }
@@ -64,10 +64,10 @@ public class GameStateController {
             //todo : add level changing method here
         }
     }
-    public void changeSection(Section section) {
+    public void changeSection(Section section,int sectionNumber) {
         gameState.setCurrentSection(section);
         gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(gameState));
-//        gameState.setSectionNumber(gameState.getSectionNumber() + 1);
+        gameState.setSectionNumber(sectionNumber);
         gameState.setRemainingTime(gameState.getCurrentSection().getTime());
         gameState.getMario().setCameraX(0);
         gameState.getMario().setWorldX(0);

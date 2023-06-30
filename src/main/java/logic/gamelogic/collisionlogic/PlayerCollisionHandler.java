@@ -148,20 +148,24 @@ public class PlayerCollisionHandler implements CollisionHandler{
             playerRect.updatePositionAndSize(player.getWidth(), player.getHeight(),player.getWorldX(), player.getWorldY());
             for (Enemy enemy : enemies) {
                 enemyRect.updatePosition(enemy.getWorldX(), enemy.getWorldY());
-                if (collisionChecker.didCollide(playerRect, enemyRect)) {
-                    handelCollision(enemy.getWorldX(), enemy.getWorldY(), Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
+                if (enemy.getOnTopOfBlock() && collisionChecker.didCollide(playerRect, enemyRect)) {
+//                    handelCollision(enemy.getWorldX(), enemy.getWorldY(), Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
+                    String position = collisionChecker.returnSamePoints(playerRect,enemyRect);
+                    gameState.getPlayerLifeChecker().handleEnemyCollide(enemy,position);
+                    player.setDuringJump(false);
                     return;
                 }
-                if (collisionChecker.returnSamePoints(playerRect,enemyRect).equals("DOWN")) {
-                    player.setOnTopOfBlock(true);
-//                    // todo: improve it too
-                    player.setWorldY(enemyRect.getTopY()-player.getHeight());
-                    player.setCameraY(enemyRect.getTopY()-player.getHeight());
-                    if (player.getVY() < 0) {
-                        player.setVY(0);
-                        player.setDuringJump(false);
-                    }
-                }
+//                if (collisionChecker.returnSamePoints(playerRect,enemyRect).equals("DOWN")) {
+//                    player.setOnTopOfBlock(true);
+////                    // todo: improve it too
+////                    gameState.getPlayerLifeChecker().handleEnemyCollide("");
+//                    player.setWorldY(enemyRect.getTopY()-player.getHeight());
+//                    player.setCameraY(enemyRect.getTopY()-player.getHeight());
+//                    if (player.getVY() < 0) {
+//                        player.setVY(0);
+//                        player.setDuringJump(false);
+//                    }
+//                }
             }
         }
     }
