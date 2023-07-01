@@ -125,6 +125,7 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
             CheckPoint checkPoint = new CheckPoint();
             checkPoint.setCol(checkPointNode.get("col").asInt());
             checkPoint.setRow(checkPointNode.get("row").asInt());
+            checkPoint.setSaved(checkPointNode.get("isSaved").asBoolean());
             return checkPoint;
 
     }

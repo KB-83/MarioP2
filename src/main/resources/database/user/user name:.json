@@ -8,9 +8,9 @@
         "length" : 26,
         "time" : 100,
         "checkPoint" : {
-          "isSaved" : true,
-          "col" : 5,
-          "row" : 7,
+          "isSaved" : false,
+          "col" : 12,
+          "row" : 6,
           "sectionNum" : 0
         },
         "blocks" : [ {
@@ -220,15 +220,14 @@
         "time" : 100,
         "checkPoint" : {
           "isSaved" : true,
-          "col" : 5,
-          "row" : 7,
+          "col" : 12,
+          "row" : 6,
           "sectionNum" : 0
         },
         "blocks" : [ {
-          "type" : "COIN",
+          "type" : "EMPTY",
           "x" : 10,
-          "y" : 4,
-          "item" : "COIN"
+          "y" : 4
         }, {
           "type" : "COINS",
           "x" : 12,
@@ -248,8 +247,8 @@
         } ],
         "enemies" : [ {
           "type" : "GOOMBA",
-          "x" : 39,
-          "y" : -159
+          "x" : 57,
+          "y" : -724
         } ],
         "pipes" : [ {
           "x" : 6,
@@ -314,11 +313,6 @@
               "type" : "SIMPLE"
             }
           }
-        } ],
-        "items" : [ {
-          "type" : "COIN",
-          "x" : 10,
-          "y" : 0
         } ]
       }, {
         "length" : 23,
@@ -423,12 +417,12 @@
     } ],
     "mario" : {
       "imageAddress" : "0Right1",
-      "worldX" : 284,
-      "worldY" : 291,
+      "worldX" : 554,
+      "worldY" : 277,
       "width" : 48,
       "height" : 48,
-      "cameraX" : 284,
-      "cameraY" : 291,
+      "cameraX" : 554,
+      "cameraY" : 277,
       "fire" : false,
       "mega" : false,
       "duringJump" : false,
@@ -439,8 +433,8 @@
     "marioState" : 0,
     "levelNumber" : 1,
     "sectionNumber" : 1,
-    "coins" : 0,
-    "score" : 0,
+    "coins" : 4,
+    "score" : 10,
     "remainingHeart" : 0,
     "remainingTime" : 100,
     "paused" : false

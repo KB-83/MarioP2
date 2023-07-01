@@ -15,6 +15,7 @@ public class CheckPointFrame extends JFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setSize(200, 100);
         setLayout(new FlowLayout());
+        setResizable(false);
 
         saveCheckPoint.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

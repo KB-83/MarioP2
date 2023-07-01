@@ -78,14 +78,24 @@ public class UserRequestHandler {
         }
         return null;
     }
-    public void checkPointRequest(String s) {
-        switch (s){
-            case "Save CheckPoint":
-                //bla bla
-                break;
-            case "Get Coins":
-//                bla bla
-                break;
+
+    public void lastGameRequest (String gameName) {
+        GameState gameState = null;
+//        for (GameState gameState1 :logicManager.getUser().getSavedGames()){
+//            if (gameName.equals(gameState1.getName())){
+//                gameState = gameState1;
+//                break;
+//            }
+//        }
+        gameState = user.getSavedGames()[0];
+        // todo set game default
+        if (gameState != null) {
+            user.setCurrentGameState(gameState);
+            new GameStateController().createGameState(gameState,logicManager);
+            // todo: (lines start whit blue)next line is really dirty you can send it as a request to graphic
+            logicManager.getGraphicManager().getFrame().getPanelsManagerCard().getGamePanel().setKeyListener(gameState);
+            //todo ; this also
+            logicManager.getGraphicManager().getFrame().getPanelsManagerCard().getGamePanel().setGuiGameState(GuiGameCreator.createGameState(gameState,null));
         }
     }
 }

@@ -169,9 +169,16 @@ public class PlayerRequestHandler extends Request{
     }
     //todo : maybe pause request is for a user not a player
     public void PauseRequest(){
-        System.out.println("pause request 70 player Request Handler");
-        System.out.println(gameState.isPaused());
         gameState.setPaused(!gameState.isPaused());
+        if (gameState.isPaused()){
+            gameState.getCurrentUser().getLogicManager().getGraphicManager().getFrame().getPauseFrame().setVisible(true);
+            gameState.getCurrentUser().getLogicManager().getGraphicManager().getFrame().getPanelsManagerCard().getGamePanel().requestFocus();
+        }
+        else {
+
+            gameState.getCurrentUser().getLogicManager().getGraphicManager().getFrame().getPauseFrame().setVisible(false);
+            gameState.getCurrentUser().getLogicManager().getGraphicManager().getFrame().getPanelsManagerCard().getGamePanel().requestFocus();
+        }
     }
     public void setActonListeners() {
         //jumpActionListener

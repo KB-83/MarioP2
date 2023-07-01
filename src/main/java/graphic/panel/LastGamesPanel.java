@@ -1,4 +1,6 @@
 package graphic.panel;
+import logic.requsethandler.UserRequestHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -46,12 +48,14 @@ public class LastGamesPanel extends MarioPanel {
         });
         back.setBounds(0,0,50,50);
         add(back);
+        //test
+        setLastGamesButtons();
     }
     public void setLastGamesButtons(){
-        ok.setBounds(this.getWidth()/2 - 25,550,50,50);
-//        ok.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
+        ok.setBounds(200,550,50,50);
+        ok.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 //                for (JRadioButton button:lastGamesList){
 //                    if(button != null && button.isSelected() ) {
 //                        if (!button.getText().equals("newGame   ")) {
@@ -70,8 +74,12 @@ public class LastGamesPanel extends MarioPanel {
 //                        break;
 //                    }
 //                }
-//            }
-//        });
+                UserRequestHandler userRequestHandler = cardPanel.getFrame().getGraphicManager().getLogicManager().getUser().getUserRequestHandler();
+                cardPanel.getCardLayout().show(cardPanel,"gamePanel");
+                cardPanel.getGamePanel().requestFocus();
+                cardPanel.getFrame().getGraphicManager().getUser().getUserRequestHandler().lastGameRequest("");
+            }
+        });
         add(ok);
         setLastGamesOptions();
 

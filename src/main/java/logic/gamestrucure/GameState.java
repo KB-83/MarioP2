@@ -16,6 +16,8 @@ import util.Loop;
 
 public class GameState {
     @JsonIgnore
+    private String name;
+    @JsonIgnore
     private GameStateController gameStateController;
     @JsonIgnore
     private User currentUser;
@@ -237,4 +239,13 @@ public class GameState {
     public void setPlayerLifeChecker(PlayerLifeChecker playerLifeChecker) {
         this.playerLifeChecker = playerLifeChecker;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

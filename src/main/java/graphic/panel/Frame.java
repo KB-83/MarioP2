@@ -10,6 +10,7 @@ public class Frame extends JFrame {
     private GraphicManager graphicManager;
     private PanelsManagerCard panelsManagerCard;
     private CheckPointFrame checkPointFrame;
+    private PauseFrame pauseFrame;
     public Frame(GraphicManager gM){
         setDependencies(gM);
         loadConfig(this.getClass().getSimpleName());
@@ -18,6 +19,7 @@ public class Frame extends JFrame {
         this.graphicManager = graphicManager;
         this.panelsManagerCard = new PanelsManagerCard(this);
         checkPointFrame = new CheckPointFrame(this);
+        pauseFrame = new PauseFrame(this);
     }
     private void loadConfig(String name) {
         Config config = Config.getConfig(name);
@@ -59,5 +61,13 @@ public class Frame extends JFrame {
 
     public void setCheckPointFrame(CheckPointFrame checkPointFrame) {
         this.checkPointFrame = checkPointFrame;
+    }
+
+    public PauseFrame getPauseFrame() {
+        return pauseFrame;
+    }
+
+    public void setPauseFrame(PauseFrame pauseFrame) {
+        this.pauseFrame = pauseFrame;
     }
 }

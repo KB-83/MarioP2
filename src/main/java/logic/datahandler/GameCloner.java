@@ -70,7 +70,7 @@ public class GameCloner {
         }
         section1.setTime(section.getTime());
         section1.setLength(section.getLength());
-        section1.setCheckPoint(section.getCheckPoint());
+        section1.setCheckPoint(cloneCheckPoint(section.getCheckPoint()));
 //        section1.setBackgroundMap(new BackgroundMap().loadMap(););
         section1.setBackgroundMap(BackGroundMapGenerator.retrunBackgroundMap(section.getLength(),15));
 //        System.out.println(section.getItems());
@@ -221,7 +221,7 @@ public class GameCloner {
         checkPoint1.setRow(checkPoint.getRow());
         checkPoint1.setSaved(checkPoint.getSaved());
         checkPoint1.setSectionNum(checkPoint.getSectionNum());
-        return null;
+        return checkPoint1;
     }
     private static Block cloneBlock(Block block) {
         if (block == null){

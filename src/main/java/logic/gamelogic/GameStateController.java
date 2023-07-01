@@ -17,7 +17,6 @@ import util.Loop;
 
 public class GameStateController {
     private GameState gameState;
-    private Game game;
     private EnemyMovementHandler enemyMovementHandler;
     private PlayerMovementHandler playerMovementHandler;
     private GravityEffectsHandler gravityEffectsHandler;
@@ -51,8 +50,11 @@ public class GameStateController {
 
     }
     public void nextSection() {
-        if(gameState.getSectionNumber() < game.getLevels()[gameState.getLevelNumber()-1].getSections()[gameState.getSectionNumber()-1].getLength()) {
-            gameState.setCurrentSection(game.getLevels()[gameState.getLevelNumber() - 1].getSections()[gameState.getSectionNumber() - 1 + 1]);
+//        System.out.println(gameState.getLevelNumber()-1);
+//        System.out.println(game.getLevels()[gameState.getLevelNumber()-1].getSections()[gameState.getSectionNumber()-1].getLength());
+//        System.out.println(gameState.getSectionNumber() );
+        if(gameState.getSectionNumber() < gameState.getLevels()[gameState.getLevelNumber()-1].getSections()[gameState.getSectionNumber()-1].getLength()) {
+            gameState.setCurrentSection(gameState.getLevels()[gameState.getLevelNumber() - 1].getSections()[gameState.getSectionNumber() - 1 + 1]);
             gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(gameState));
             gameState.setSectionNumber(gameState.getSectionNumber() + 1);
             gameState.setRemainingTime(gameState.getCurrentSection().getTime());
@@ -74,16 +76,29 @@ public class GameStateController {
     }
     private void changeLevel() {}
     public GameState createGameState(Game game, LogicManager logicManager) {
-        this.game = GameCloner.cloneGame(game);
+        Game game1 = GameCloner.cloneGame(game);
         GameState gameState = new GameState(this);
         //todo : let player use its own selected player :)
-        setGameStateDependencies(this.game, gameState,logicManager);
+        setGameStateDependencies(game1, gameState,logicManager);
         setGameStateControllerDependencies(gameState);
         //todo : check if its good()
         startGameState(gameState,logicManager);
         this.gameState = gameState;
         return gameState;
     }
+    public GameState createGameState(GameState gameState, LogicManager logicManager) {
+//        this.game = GameCloner.cloneGame(game);
+        gameState.setGameStateController(this);
+        gameState.setDefaultDependencies();
+        //todo : let player use its own selected player :)
+        setGameStateDependencies(gameState,logicManager);
+        setGameStateControllerDependencies(gameState);
+        //todo : check if its good()
+        startGameState(gameState,logicManager);
+        this.gameState = gameState;
+        return gameState;
+    }
+
     public void startGameState(GameState gameState,LogicManager logicManager){
         //todo : doing gamestATE Timers run
         //test
@@ -97,6 +112,7 @@ public class GameStateController {
     private void setGameStateDependencies(Game game, GameState gameState,LogicManager logicManager) {
         gameState.setCurrentUser(logicManager.getUser());
         gameState.setLevels(game.getLevels());
+        gameState.setName(game.getName());
         Mario mario = new Mario();
         mario.setWorldY(7 * 48);
         mario.setCameraY(7 * 48);
@@ -131,6 +147,15 @@ public class GameStateController {
         gameState.setRemainingHeart(game.getHearts());
         gameState.setRemainingTime(gameState.getCurrentSection().getTime());
         gameState.setScore(0);
+    }
+    private void setGameStateDependencies(GameState gameState,LogicManager logicManager) {
+        gameState.setCurrentUser(logicManager.getUser());
+        Mario mario = gameState.getMario();
+        gameState.setCurrentLevel(gameState.getLevels()[gameState.getLevelNumber()-1]);
+        gameState.setCurrentSection(gameState.getCurrentLevel().getSections()[gameState.getSectionNumber()-1]);
+        gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(gameState));
+        gameState.setPaused(false);
+//        gameState.setRemainingTime(gameState.getCurrentSection().getTime());
     }
     private void setGameStateControllerDependencies(GameState gameState) {
 
@@ -176,5 +201,13 @@ public class GameStateController {
         }
         double PR = (progressLength / totalLength) * gameState.getCoins();
         return PR;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 }
