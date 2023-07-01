@@ -20,10 +20,6 @@ public class PlayerCollisionHandler implements CollisionHandler{
     private GameState gameState;
     private CollisionChecker collisionChecker;
     private Player player;
-    private Enemy[] enemies;
-    private Pipe[] pipes;
-    private Block[] blocks;
-    private BackGroundTile[][] backGroundTiles;
     private Rect blockRect = new Rect(0,48, 0,48);
     private Rect itemRect = new Rect(0,0,48,48);
     private Rect playerRect = new Rect(0,48, 0,48);
@@ -32,23 +28,24 @@ public class PlayerCollisionHandler implements CollisionHandler{
     private Rect checkpointRect = new Rect(0,48,0,48);
     private Rect backgrounTileRect = new Rect(0,48,0,48);
     //todo: improve this too
+    //too : test why blocks or pipes problem doesent apper
     private BlockUnlocker blockUnlocker;
     public PlayerCollisionHandler(GameState gameState) {
         this.gameState = gameState;
         collisionChecker = new CollisionDetector(gameState.getMario());
-        enemies = gameState.getCurrentSection().getEnemies();
-        pipes = gameState.getCurrentSection().getPipes();
-        blocks = gameState.getCurrentSection().getBlocks();
-        backGroundTiles = gameState.getCurrentSection().getBackgroundMap().getBackGroundTiles();
+//        enemies = gameState.getCurrentSection().getEnemies();
+//        pipes = gameState.getCurrentSection().getPipes();
+//        blocks = gameState.getCurrentSection().getBlocks();
+//        backGroundTiles = gameState.getCurrentSection().getBackgroundMap().getBackGroundTiles();
         this.player = gameState.getMario();
         player.setPlayerCollisionHandler(this);
         blockUnlocker = new BlockUnlocker();
 
     }
     public void updateSection(Section section) {
-        enemies = section.getEnemies();
-        pipes = section.getPipes();
-        blocks = section.getBlocks();
+//        enemies = section.getEnemies();
+//        pipes = section.getPipes();
+//        blocks = section.getBlocks();
     }
     public void applyCollisionEffects(){
         //todo : improve it
@@ -101,15 +98,15 @@ public class PlayerCollisionHandler implements CollisionHandler{
     }
     public void checkBlocksCollision(){
         playerRect.updatePositionAndSize(player.getWidth(), player.getHeight(),player.getWorldX(), player.getWorldY());
-        for (int i = 0; i < blocks.length ; i++) {
-            Block block = blocks[i];
+        for (int i = 0; i < gameState.getCurrentSection().getBlocks().length ; i++) {
+            Block block = gameState.getCurrentSection().getBlocks()[i];
             blockRect.updatePosition(block.getCol() * 48, block.getRow() * 48);
             if (collisionChecker.didCollide(playerRect, blockRect)) {
                 handelCollision(block.getCol() * Constant.BACKGROUND_TILE_SIZE, block.getRow() *
                         Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
                 if (block.getItem() != null || block.getClass() == CoinBlock.class
-                || block.getClass() == FullCoinBlock.class) {
-                    blockUnlocker.unlock(gameState,block,blocks,i);
+                        || block.getClass() == FullCoinBlock.class) {
+                    blockUnlocker.unlock(gameState,block,gameState.getCurrentSection().getBlocks(),i);
                 }
             }
             if (collisionChecker.returnSamePoints(playerRect,blockRect).equals("DOWN")) {
@@ -126,8 +123,8 @@ public class PlayerCollisionHandler implements CollisionHandler{
     }
     public void checkPipesCollision(){
         playerRect.updatePositionAndSize(player.getWidth(), player.getHeight(),player.getWorldX(), player.getWorldY());
-        if (pipes != null) {
-            for (Pipe pipe : pipes) {
+        if (gameState.getCurrentSection().getPipes() != null) {
+            for (Pipe pipe : gameState.getCurrentSection().getPipes()) {
                 pipeRect.updatePosition(pipe.getCol() * 48, pipe.getRow() * 48);
                 //todo give thebiigger rect first
                 if (collisionChecker.didCollide(playerRect, pipeRect)) {
@@ -147,9 +144,9 @@ public class PlayerCollisionHandler implements CollisionHandler{
             }
         }}
     public void checkEnemiesCollision(){
-        if (enemies != null) {
+        if (gameState.getCurrentSection().getEnemies() != null) {
             playerRect.updatePositionAndSize(player.getWidth(), player.getHeight(),player.getWorldX(), player.getWorldY());
-            for (Enemy enemy : enemies) {
+            for (Enemy enemy : gameState.getCurrentSection().getEnemies()) {
                 enemyRect.updatePosition(enemy.getWorldX(), enemy.getWorldY());
                 if (enemy.getOnTopOfBlock() && collisionChecker.didCollide(playerRect, enemyRect)) {
 //                    handelCollision(enemy.getWorldX(), enemy.getWorldY(), Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE);
@@ -174,9 +171,9 @@ public class PlayerCollisionHandler implements CollisionHandler{
     }
     public void checkBackgroundTilesCollision(){
         playerRect.updatePositionAndSize(player.getWidth(), player.getHeight(),player.getWorldX(), player.getWorldY());
-        for (int i = 0; i < backGroundTiles.length; i++){
-            for (int j = 0;j < backGroundTiles[i].length;j++) {
-                if (backGroundTiles[i][j].isSolid()){
+        for (int i = 0; i < gameState.getCurrentSection().getBackgroundMap().getBackGroundTiles().length; i++){
+            for (int j = 0;j < gameState.getCurrentSection().getBackgroundMap().getBackGroundTiles()[i].length;j++) {
+                if (gameState.getCurrentSection().getBackgroundMap().getBackGroundTiles()[i][j].isSolid()){
                     backgrounTileRect.updatePosition(j*48,i*48);
                     if(collisionChecker.didCollide(playerRect,backgrounTileRect)){
                         handelCollision(j*48,i*48,48,48);
@@ -196,11 +193,11 @@ public class PlayerCollisionHandler implements CollisionHandler{
             }
         }}
     public Pipe isOnTopOfTelePipe(){
-        if (pipes != null) {
-            for (Pipe pipe : pipes) {
+        if (gameState.getCurrentSection().getPipes() != null) {
+            for (Pipe pipe : gameState.getCurrentSection().getPipes()) {
                 if (player.getWorldX() >= (pipe.getCol()*Constant.BACKGROUND_TILE_SIZE)-(Constant.BACKGROUND_TILE_SIZE/2)
-                && player.getWorldX()+ player.getWidth() <= (pipe.getCol()*Constant.BACKGROUND_TILE_SIZE) +
-                pipeRect.getWidth() && player.getWorldY()+ player.getHeight() >= pipe.getRow() * Constant.BACKGROUND_TILE_SIZE) {
+                        && player.getWorldX()+ player.getWidth() <= (pipe.getCol()*Constant.BACKGROUND_TILE_SIZE) +
+                        pipeRect.getWidth() && player.getWorldY()+ player.getHeight() >= pipe.getRow() * Constant.BACKGROUND_TILE_SIZE) {
                     String s = pipe.getClass().getSimpleName();
                     if (s.equals("TelePlantPipe") || s.equals("SimpleTelePipe") ||
                             s.equals("SimpleSpawnPipe") || s.equals("SpawnPlantPipe")) {
@@ -218,30 +215,29 @@ public class PlayerCollisionHandler implements CollisionHandler{
     }
 
     public void handelCollision(int itemLeftWorldX, int itemTopWorldY,int itemWidth,int itemHeight) {
-        if (player.getVX() > 0 && itemLeftWorldX < player.getWorldX()+ player.getWidth()
-                && itemLeftWorldX+itemWidth  > player.getWorldX()+ player.getHeight()) {
+        if (player.getVX() > 0 && itemLeftWorldX < player.getWorldX() + player.getWidth()
+                && itemLeftWorldX + itemWidth > player.getWorldX() + player.getHeight()) {
             player.setVX(0);
         }
         if (player.getVX() < 0 && itemLeftWorldX < player.getWorldX()
-                && (itemLeftWorldX+itemWidth > player.getWorldX())) {
+                && (itemLeftWorldX + itemWidth > player.getWorldX())) {
             player.setVX(0);
         }
-        if (player.getVY() > 0 && itemTopWorldY+itemHeight > player.getWorldY() &&
+        if (player.getVY() > 0 && itemTopWorldY + itemHeight > player.getWorldY() &&
                 itemTopWorldY < player.getWorldY()) {
             player.setVY(-player.getVY());
-            if (player.isDuringJump()){
+            if (player.isDuringJump()) {
                 player.setDuringJump(false);
             }
         }
-        if (player.getVY() < 0 && itemTopWorldY < player.getWorldY()+ player.getHeight() &&
-                itemTopWorldY+itemHeight > player.getWorldY()+ player.getHeight()) {
+        if (player.getVY() < 0 && itemTopWorldY < player.getWorldY() + player.getHeight() &&
+                itemTopWorldY + itemHeight > player.getWorldY() + player.getHeight()) {
             player.setVY(0);
             player.setWorldY(itemTopWorldY - player.getHeight());
-            player.setCameraY(itemTopWorldY- player.getHeight());
-            if (player.isDuringJump()){
+            player.setCameraY(itemTopWorldY - player.getHeight());
+            if (player.isDuringJump()) {
                 player.setDuringJump(false);
             }
         }
     }
-
 }

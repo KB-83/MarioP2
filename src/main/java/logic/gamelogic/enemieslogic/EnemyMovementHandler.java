@@ -13,11 +13,14 @@ public class EnemyMovementHandler {
         this.gameState = gameState;
     }
     public void updateEnemiesPosition() {
+        if (gameState.getCurrentSection().getEnemies() == null){
+            return;
+        }
         for (Enemy enemy: gameState.getCurrentSection().getEnemies()) {
 //            enemy.setEnemyCollisionHandler(new EnemyCollisionHandler(gameState.getCurrentSection(),enemy));
             //todo : change enemy collision handler if section changed?
             if (!enemy.getClass().getSimpleName().equals("Plant")){
-                enemy.getEnemyCollisionHandler().setSection(gameState.getCurrentSection());
+                enemy.getEnemyCollisionHandler().setSection(gameState);
                 enemy.getEnemyCollisionHandler().applyCollisionEffects();
                 if (enemy.getOnTopOfBlock() == false) {
                     enemy.setVY(enemy.getVY()+(1.0/Constant.FPS* Gravity.MARIO_GAME));

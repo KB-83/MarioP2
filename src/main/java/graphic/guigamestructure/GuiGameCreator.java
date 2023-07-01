@@ -165,6 +165,9 @@ public class GuiGameCreator {
         return guiBlocks;
     }
     private static GuiEnemy[] createGuiEnemies(Enemy[] enemies){
+        if(enemies == null){
+            return null;
+        }
         GuiEnemy[] guiEnemies = new GuiEnemy[enemies.length];
         int index= 0;
         for (Enemy enemy: enemies) {

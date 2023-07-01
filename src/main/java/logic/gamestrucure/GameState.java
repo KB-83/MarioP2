@@ -1,7 +1,9 @@
 package logic.gamestrucure;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import logic.gamelogic.collisionlogic.BulletCollisionHandler;
 import logic.gamelogic.collisionlogic.PlayerCollisionHandler;
+import logic.gamelogic.collisionlogic.SwardCollisionHandler;
 import logic.gamelogic.playerlogic.PlayerItemEater;
 import logic.gamelogic.playerlogic.PlayerLifeChecker;
 import logic.levelstructure.Level;
@@ -9,8 +11,7 @@ import logic.levelstructure.Section;
 import logic.gamelogic.GameStateController;
 import logic.modelstructure.backgroundobject.CheckPoint;
 import logic.modelstructure.entity.player.Mario;
-import logic.modelstructure.entity.player.Player;
-import logic.sound.Sound;
+import util.Sound;
 import logic.userstructure.User;
 import util.Loop;
 
@@ -32,6 +33,10 @@ public class GameState {
     private Loop gameloop;
     @JsonIgnore
     private PlayerCollisionHandler playerCollisionHandler;
+    @JsonIgnore
+    private  SwardCollisionHandler swardCollisionHandler;
+    @JsonIgnore
+    private BulletCollisionHandler bulletCollisionHandler;
     @JsonIgnore
     private PlayerLifeChecker playerLifeChecker;
     @JsonIgnore
@@ -57,11 +62,15 @@ public class GameState {
         playerItemEater = new PlayerItemEater(this);
         playerLifeChecker = new PlayerLifeChecker(this);
         sound = new Sound("MAIN");
+        swardCollisionHandler = new SwardCollisionHandler(this);
+        bulletCollisionHandler = new BulletCollisionHandler(this);
     }
     public void setDefaultDependencies(){
         playerItemEater = new PlayerItemEater(this);
         playerLifeChecker = new PlayerLifeChecker(this);
         sound = new Sound("MAIN");
+        swardCollisionHandler = new SwardCollisionHandler(this);
+        bulletCollisionHandler = new BulletCollisionHandler(this);
     }
 //    public GameState(User user , Game game , Player player,GameStateController gameStateController) {
 //        currentUser = user;
@@ -183,6 +192,10 @@ public class GameState {
         this.playerCollisionHandler = playerCollisionHandler;
     }
 
+    public GameState(SwardCollisionHandler swardCollisionHandler) {
+        this.swardCollisionHandler = swardCollisionHandler;
+    }
+
     public Sound getSound() {
         return sound;
     }
@@ -239,6 +252,14 @@ public class GameState {
         this.playerLifeChecker = playerLifeChecker;
     }
 
+    public SwardCollisionHandler getSwardCollisionHandler() {
+        return swardCollisionHandler;
+    }
+
+    public void setSwardCollisionHandler(SwardCollisionHandler swardCollisionHandler) {
+        this.swardCollisionHandler = swardCollisionHandler;
+    }
+
     public String getName() {
         return name;
     }
@@ -247,4 +268,11 @@ public class GameState {
         this.name = name;
     }
 
+    public BulletCollisionHandler getBulletCollisionHandler() {
+        return bulletCollisionHandler;
+    }
+
+    public void setBulletCollisionHandler(BulletCollisionHandler bulletCollisionHandler) {
+        this.bulletCollisionHandler = bulletCollisionHandler;
+    }
 }

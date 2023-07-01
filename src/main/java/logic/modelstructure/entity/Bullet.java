@@ -13,6 +13,7 @@ public class Bullet extends Entity {
     private int startX;
     private Timer timer;
     private boolean isGoingRight;
+    private boolean didHeatBlock;
     public Bullet() {
         addActionListeners();
         lastTime = System.currentTimeMillis();
@@ -40,6 +41,13 @@ public class Bullet extends Entity {
                     setLastTime(System.currentTimeMillis());
                     timer.stop();
 
+                }
+                if (didHeatBlock){
+                    setVX(0);
+                    setLock(true);
+                    setLastTime(System.currentTimeMillis());
+                    timer.stop();
+                    didHeatBlock = false;
                 }
             }
         });
@@ -83,5 +91,13 @@ public class Bullet extends Entity {
 
     public void setGoingRight(boolean goingRight) {
         isGoingRight = goingRight;
+    }
+
+    public boolean isDidHeatBlock() {
+        return didHeatBlock;
+    }
+
+    public void setDidHeatBlock(boolean didHeatBlock) {
+        this.didHeatBlock = didHeatBlock;
     }
 }

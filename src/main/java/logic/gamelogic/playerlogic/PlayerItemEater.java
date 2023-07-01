@@ -2,8 +2,7 @@ package logic.gamelogic.playerlogic;
 
 import logic.gamestrucure.GameState;
 import logic.modelstructure.entity.item.Item;
-import logic.modelstructure.entity.item.Star;
-import logic.sound.Sound;
+import util.Sound;
 
 public class PlayerItemEater {
     private GameState gameState;

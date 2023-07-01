@@ -5,7 +5,7 @@ import logic.levelstructure.Section;
 import logic.modelstructure.backgroundobject.CheckPoint;
 import logic.modelstructure.entity.enemy.Enemy;
 import logic.modelstructure.entity.player.Player;
-import logic.sound.Sound;
+import util.Sound;
 import util.Constant;
 
 public class PlayerLifeChecker {

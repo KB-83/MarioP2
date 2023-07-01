@@ -41,11 +41,14 @@ public class Camera {
 //                        Constant.BACKGROUND_TILE_SIZE,null);
 //        }
 //        drawing enemies
-        for (GuiEnemy guiEnemy : guiGameState.getCurrentGuiSection().getGuiEnemies()){
+//        System.out.println("camera 44   "+);
+        if (guiGameState.getCurrentGuiSection().getGuiEnemies() != null) {
+            for (GuiEnemy guiEnemy : guiGameState.getCurrentGuiSection().getGuiEnemies()) {
 //            if(checkBound(enemy.getX(), enemy.getY())){
                 //draw enemy
-                g2.drawImage(guiEnemy.getCurrentImage(),guiEnemy.getWorldX()-minasXLength,guiEnemy.getWorldY(),Constant.BACKGROUND_TILE_SIZE,Constant.BACKGROUND_TILE_SIZE,null);
+                g2.drawImage(guiEnemy.getCurrentImage(), guiEnemy.getWorldX() - minasXLength, guiEnemy.getWorldY(), Constant.BACKGROUND_TILE_SIZE, Constant.BACKGROUND_TILE_SIZE, null);
             }
+        }
 //        }
 //        //paint blocks
 //        //todo: add all of this things to an array of background objects then you can add flag and bla bla ...

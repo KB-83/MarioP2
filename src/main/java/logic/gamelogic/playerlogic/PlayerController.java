@@ -1,4 +1,4 @@
-package logic.gamelogic;
+package logic.gamelogic.playerlogic;
 
 import logic.modelstructure.entity.player.Player;
 

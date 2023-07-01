@@ -46,6 +46,8 @@ public class GameStateController {
         // item
         itemMovementHandler.updateItemsPosition();
         gameState.getPlayerLifeChecker().checkIfHurt();
+        gameState.getSwardCollisionHandler().applyCollisionEffects();
+        gameState.getBulletCollisionHandler().applyCollisionEffects();
 
 
     }

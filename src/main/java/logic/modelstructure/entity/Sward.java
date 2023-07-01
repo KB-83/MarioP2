@@ -14,6 +14,7 @@ public class Sward extends Entity {
     private int startX;
     private Timer timer;
     private boolean isGoingRight;
+    private boolean isHeatBlock;
     public Sward() {
         addActionListeners();
         lastTime = System.currentTimeMillis();
@@ -56,13 +57,14 @@ public class Sward extends Entity {
                     }
                     setLastTime(System.currentTimeMillis());
                 }
-                if (getWorldX() < startX &&  didStartR){
+                if ((getWorldX() < startX &&  didStartR) || isHeatBlock){
                     i = 0;
                     setVX(0);
                     startDirection = 0;
                     setLock(true);
                     setLastTime(System.currentTimeMillis());
                     timer.stop();
+                    isHeatBlock = false;
                 }
                 if (getWorldX() > startX && !didStartR){
                     i = 0;
@@ -115,5 +117,13 @@ public class Sward extends Entity {
 
     public void setGoingRight(boolean goingRight) {
         isGoingRight = goingRight;
+    }
+
+    public boolean isHeatBlock() {
+        return isHeatBlock;
+    }
+
+    public void setHeatBlock(boolean heatBlock) {
+        isHeatBlock = heatBlock;
     }
 }

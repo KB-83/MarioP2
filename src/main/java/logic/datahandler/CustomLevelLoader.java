@@ -371,25 +371,26 @@ public class CustomLevelLoader extends JsonDeserializer<Level> {
                 }
             }
         }
-        Enemy[] newEnemies = new Enemy[section.getEnemies().length + plantsNumber];
-        for (int i = 0; i < section.getEnemies().length; i++) {
-            newEnemies[i] = section.getEnemies()[i];
-        }
-        int i = section.getEnemies().length;
-        if(section.getPipes() != null) {
-            for (Pipe pipe: section.getPipes()) {
-                String s = pipe.getClass().getSimpleName();
-                if(s.equals("SimplePlantPipe")) {
-                    newEnemies[i] = ((SimplePlantPipe)pipe).getPlant();
-                    i++;
-                }
-                else if(s.equals("TelePlantPipe")) {
-                    newEnemies[i] = ((TelePlantPipe)pipe).getPlant();
-                    i++;
+        if(section.getEnemies() != null) {
+            Enemy[] newEnemies = new Enemy[section.getEnemies().length + plantsNumber];
+            for (int i = 0; i < section.getEnemies().length; i++) {
+                newEnemies[i] = section.getEnemies()[i];
+            }
+            int i = section.getEnemies().length;
+            if (section.getPipes() != null) {
+                for (Pipe pipe : section.getPipes()) {
+                    String s = pipe.getClass().getSimpleName();
+                    if (s.equals("SimplePlantPipe")) {
+                        newEnemies[i] = ((SimplePlantPipe) pipe).getPlant();
+                        i++;
+                    } else if (s.equals("TelePlantPipe")) {
+                        newEnemies[i] = ((TelePlantPipe) pipe).getPlant();
+                        i++;
+                    }
                 }
             }
+            section.setEnemies(newEnemies);
         }
-        section.setEnemies(newEnemies);
     }
 
 

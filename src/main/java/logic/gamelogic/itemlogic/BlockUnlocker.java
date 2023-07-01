@@ -2,13 +2,11 @@ package logic.gamelogic.itemlogic;
 
 import logic.gamestrucure.GameState;
 import logic.modelstructure.backgroundobject.block.Block;
-import logic.modelstructure.backgroundobject.block.CoinBlock;
 import logic.modelstructure.backgroundobject.block.EmptyBlock;
 import logic.modelstructure.backgroundobject.block.FullCoinBlock;
-import logic.modelstructure.entity.item.Coin;
 import logic.modelstructure.entity.item.Mushroom;
 import logic.modelstructure.entity.item.Star;
-import logic.sound.Sound;
+import util.Sound;
 import util.Constant;
 
 import javax.swing.Timer;

@@ -1,5 +1,6 @@
 package logic.gamelogic.collisionlogic;
 
+import logic.gamestrucure.GameState;
 import logic.gamestrucure.gameworldoption.collision.CollisionChecker;
 import logic.gamestrucure.gameworldoption.collision.Rect;
 import logic.levelstructure.Section;
@@ -13,12 +14,9 @@ public class EnemyCollisionHandler{
 
         //todo : improve this
         public boolean isHeat;
+        private GameState gameState;
         private CollisionChecker collisionChecker;
         private Enemy enemy;
-        private Enemy[] enemies;
-        private Pipe[] pipes;
-        private Block[] blocks;
-        private BackGroundTile[][] backGroundTiles;
         private Rect blockRect = new Rect(0,48, 0,48);
         private Rect mainEnemyRect = new Rect(0,48, 0,48);
         private Rect enemyRect = new Rect(0,48, 0,48);
@@ -28,16 +26,17 @@ public class EnemyCollisionHandler{
             collisionChecker = new CollisionDetector(enemy);
             this.enemy = enemy;
         }
-        public void setSection(Section section) {
-            enemies = section.getEnemies();
-            pipes = section.getPipes();
-            blocks = section.getBlocks();
-            backGroundTiles = section.getBackgroundMap().getBackGroundTiles();
+        public void setSection(GameState gameState) {
+            this.gameState = gameState;
+//            enemies = section.getEnemies();
+//            pipes = section.getPipes();
+//            blocks = section.getBlocks();
+//            backGroundTiles = section.getBackgroundMap().getBackGroundTiles();
         }
         public void updateSection(Section section) {
-            enemies = section.getEnemies();
-            pipes = section.getPipes();
-            blocks = section.getBlocks();
+//            enemies = section.getEnemies();
+//            pipes = section.getPipes();
+//            blocks = section.getBlocks();
         }
         public void applyCollisionEffects(){
             // blocks effects
@@ -45,7 +44,7 @@ public class EnemyCollisionHandler{
             //todo : improve it
             enemy.setOnTopOfBlock(false);
                 mainEnemyRect.updatePosition(enemy.getWorldX(), enemy.getWorldY());
-                for (Block block : blocks) {
+                for (Block block : gameState.getCurrentSection().getBlocks()) {
                     blockRect.updatePosition(block.getCol() * 48, block.getRow() * 48);
                     if (collisionChecker.didCollide(mainEnemyRect, blockRect)) {
                         enemy.setVX(-enemy.getVX());
@@ -65,8 +64,8 @@ public class EnemyCollisionHandler{
 //            }
             //pipes
             mainEnemyRect.updatePosition(enemy.getWorldX(), enemy.getWorldY());
-            if (pipes != null) {
-                for (Pipe pipe : pipes) {
+            if (gameState.getCurrentSection().getPipes() != null) {
+                for (Pipe pipe : gameState.getCurrentSection().getPipes()) {
                     pipeRect.updatePosition(pipe.getCol() * 48, pipe.getRow() * 48);
 //                    //todo give thebiigger rect first
                     if (collisionChecker.didCollide(mainEnemyRect, pipeRect)) {
@@ -91,9 +90,9 @@ public class EnemyCollisionHandler{
                 }
             }
 //        enemies
-            if (enemies != null) {
+            if (gameState.getCurrentSection().getEnemies() != null) {
                 mainEnemyRect.updatePosition(enemy.getWorldX(), enemy.getWorldY());
-                for (Enemy enemy : enemies) {
+                for (Enemy enemy : gameState.getCurrentSection().getEnemies()) {
                     enemyRect.updatePosition(enemy.getWorldX(), enemy.getWorldY());
                     if (collisionChecker.didCollide(mainEnemyRect, enemyRect)) {
                         enemy.setVX(-enemy.getVX());
@@ -112,9 +111,9 @@ public class EnemyCollisionHandler{
             }
             //background tiles todo: give a bound to background tiles
             mainEnemyRect.updatePosition(enemy.getWorldX(), enemy.getWorldY());
-            for (int i = 0; i < backGroundTiles.length; i++){
-                for (int j = 0;j < backGroundTiles[i].length;j++) {
-                    if (backGroundTiles[i][j].isSolid()){
+            for (int i = 0; i <gameState.getCurrentSection().getBackgroundMap().getBackGroundTiles().length; i++){
+                for (int j = 0;j < gameState.getCurrentSection().getBackgroundMap().getBackGroundTiles()[i].length;j++) {
+                    if (gameState.getCurrentSection().getBackgroundMap().getBackGroundTiles()[i][j].isSolid()){
                         backgrounTileRect.updatePosition(j*48,i*48);
                         if(collisionChecker.didCollide(mainEnemyRect, backgrounTileRect)){
                             enemy.setVX(-enemy.getVX());

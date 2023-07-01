@@ -8,17 +8,20 @@
         "length" : 26,
         "time" : 100,
         "blocks" : [ {
-          "type" : "COINS",
+          "type" : "QUESTION",
           "x" : 10,
-          "y" : 4
+          "y" : 4,
+          "item" : "FLOWER"
         }, {
-          "type" : "COINS",
-          "x" : 11,
-          "y" : 4
-        }, {
-          "type" : "COINS",
+          "type" : "QUESTION",
           "x" : 12,
-          "y" : 4
+          "y" : 4,
+          "item" : "FLOWER"
+        }, {
+          "type" : "QUESTION",
+          "x" : 14,
+          "y" : 4,
+          "item" : "FLOWER"
         }, {
           "type" : "COIN",
           "x" : 16,
@@ -26,7 +29,7 @@
         }, {
           "type" : "SIMPLE",
           "x" : 18,
-          "y" : 4
+          "y" : 5
         } ],
         "enemies" : [ {
           "type" : "GOOMBA",
@@ -98,6 +101,18 @@
           }
         } ],
         "items" : [ {
+          "type" : "FLOWER",
+          "x" : 10,
+          "y" : 4
+        }, {
+          "type" : "FLOWER",
+          "x" : 12,
+          "y" : 4
+        }, {
+          "type" : "FLOWER",
+          "x" : 14,
+          "y" : 4
+        }, {
           "type" : "COIN",
           "x" : 16,
           "y" : 4
@@ -224,25 +239,21 @@
           "y" : 4
         }, {
           "type" : "EMPTY",
-          "x" : 11,
-          "y" : 4
-        }, {
-          "type" : "EMPTY",
           "x" : 12,
           "y" : 4
         }, {
-          "type" : "EMPTY",
+          "type" : "QUESTION",
+          "x" : 14,
+          "y" : 4,
+          "item" : "FLOWER"
+        }, {
+          "type" : "COIN",
           "x" : 16,
           "y" : 4
         }, {
           "type" : "SIMPLE",
           "x" : 18,
-          "y" : 4
-        } ],
-        "enemies" : [ {
-          "type" : "GOOMBA",
-          "x" : 14,
-          "y" : 0
+          "y" : 5
         } ],
         "pipes" : [ {
           "x" : 6,
@@ -276,11 +287,6 @@
               "x" : 17,
               "y" : 4
             } ],
-            "enemies" : [ {
-              "type" : "GOOMBA",
-              "x" : -53,
-              "y" : -1531
-            } ],
             "pipes" : [ {
               "x" : 20,
               "y" : 5,
@@ -296,6 +302,15 @@
               "type" : "SIMPLE"
             }
           }
+        } ],
+        "items" : [ {
+          "type" : "FLOWER",
+          "x" : 14,
+          "y" : 0
+        }, {
+          "type" : "COIN",
+          "x" : 16,
+          "y" : 0
         } ]
       }, {
         "length" : 23,
@@ -334,17 +349,9 @@
           "y" : 7
         } ],
         "enemies" : [ {
-          "type" : "GOOMBA",
-          "x" : 2,
-          "y" : 0
-        }, {
           "type" : "KOOPA",
-          "x" : -1,
-          "y" : 0
-        }, {
-          "type" : "SPINY",
-          "x" : 14,
-          "y" : 8
+          "x" : -43,
+          "y" : -1001
         } ],
         "pipes" : [ {
           "x" : 23,
@@ -378,34 +385,29 @@
           "type" : "SIMPLE",
           "x" : 21,
           "y" : 3
-        } ],
-        "enemies" : [ {
-          "type" : "BOWSER",
-          "x" : 20,
-          "y" : 0
         } ]
       } ]
     } ],
     "mario" : {
       "imageAddress" : "2Right1",
-      "worldX" : 641,
-      "worldY" : 231,
+      "worldX" : 929,
+      "worldY" : 206,
       "width" : 48,
       "height" : 96,
-      "cameraX" : 641,
-      "cameraY" : 231,
-      "duringJump" : false,
+      "cameraX" : 929,
+      "cameraY" : 206,
       "fire" : true,
       "mega" : false,
-      "onTopOfBlock" : false,
+      "duringJump" : false,
       "vx" : 0.0,
-      "vy" : 0.0
+      "vy" : 0.0,
+      "onTopOfBlock" : false
     },
     "marioState" : 2,
     "levelNumber" : 1,
     "sectionNumber" : 3,
-    "coins" : 15,
-    "score" : 100,
+    "coins" : 2,
+    "score" : 130,
     "remainingHeart" : 0,
     "remainingTime" : 1000,
     "paused" : true
