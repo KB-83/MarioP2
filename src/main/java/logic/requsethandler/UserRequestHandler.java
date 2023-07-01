@@ -81,13 +81,18 @@ public class UserRequestHandler {
 
     public void lastGameRequest (String gameName) {
         GameState gameState = null;
-//        for (GameState gameState1 :logicManager.getUser().getSavedGames()){
-//            if (gameName.equals(gameState1.getName())){
-//                gameState = gameState1;
-//                break;
-//            }
-//        }
-        gameState = user.getSavedGames()[0];
+        for (GameState gameState1 :logicManager.getUser().getSavedGames()){
+            if (gameName.equals(gameState1.getName())){
+                gameState = gameState1;
+                break;
+            }
+        }
+        if (gameState == null){
+            System.out.println("oops this game does not exist.");
+            System.out.println("our developers are working on it.");
+            System.out.println("please wait for 2 hours...");
+            return;
+        }
         // todo set game default
         if (gameState != null) {
             user.setCurrentGameState(gameState);

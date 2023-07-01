@@ -21,8 +21,8 @@ public class PauseFrame extends JFrame {
         soundButton = new JButton("Mute/unMute");
 
         saveGameAndExit.addActionListener(e -> {
-//            frame.getGraphicManager().getLogicManager().getUser().getCurrentGameState().
-//                    getGameStateController().checkPointRequest(saveCheckPoint.getText());
+            frame.getGraphicManager().getLogicManager().getUser().getCurrentGameState().
+                    getGameStateController().saveAndPauseRequest();
             setVisible(false);
         });
 

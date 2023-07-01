@@ -61,6 +61,7 @@ public class PlayerLifeChecker {
 
         else if (gameState.getMario().isMega()){
             gameState.getMario().setMega(false);
+            gameState.getMario().setHeight(Constant.BACKGROUND_TILE_SIZE);
             gameState.setMarioState(0);
         }
         sound.play();
@@ -86,6 +87,7 @@ public class PlayerLifeChecker {
         }
         gameState.getMario().setMega(false);
         gameState.getMario().setFire(false);
+        gameState.getMario().setHeight(Constant.BACKGROUND_TILE_SIZE);
         gameState.setMarioState(0);
         gameState.getMario().getPlayerRequestHandler().jumpRequest();
         CheckPoint checkPoint = null;

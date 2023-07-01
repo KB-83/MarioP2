@@ -50,9 +50,6 @@ public class GameStateController {
 
     }
     public void nextSection() {
-//        System.out.println(gameState.getLevelNumber()-1);
-//        System.out.println(game.getLevels()[gameState.getLevelNumber()-1].getSections()[gameState.getSectionNumber()-1].getLength());
-//        System.out.println(gameState.getSectionNumber() );
         if(gameState.getSectionNumber() < gameState.getLevels()[gameState.getLevelNumber()-1].getSections()[gameState.getSectionNumber()-1].getLength()) {
             gameState.setCurrentSection(gameState.getLevels()[gameState.getLevelNumber() - 1].getSections()[gameState.getSectionNumber() - 1 + 1]);
             gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(gameState));
@@ -150,7 +147,6 @@ public class GameStateController {
     }
     private void setGameStateDependencies(GameState gameState,LogicManager logicManager) {
         gameState.setCurrentUser(logicManager.getUser());
-        Mario mario = gameState.getMario();
         gameState.setCurrentLevel(gameState.getLevels()[gameState.getLevelNumber()-1]);
         gameState.setCurrentSection(gameState.getCurrentLevel().getSections()[gameState.getSectionNumber()-1]);
         gameState.setPlayerCollisionHandler(new PlayerCollisionHandler(gameState));
@@ -172,17 +168,51 @@ public class GameStateController {
                 gameState.getWaitingCheckpoint().setSaved(true);
                 gameState.setCoins((int) (gameState.getCoins() - PR));
                 gameState.setPaused(false);
-                GameState[] gameStates = {gameState};
-                gameState.getCurrentUser().setSavedGames(gameStates);
-                Saver.getSaver().saveUser(gameState.getCurrentUser(),false);
-                break;
+                GameState[] gameStates = gameState.getCurrentUser().getSavedGames();
+                for (int i = 0;i < gameStates.length ; i++){
+                    if (gameStates[i].getName().equals(gameState.getName())){
+                        gameStates[i] = gameState;
+                        gameState.getCurrentUser().setSavedGames(gameStates);
+                        Saver.getSaver().saveUser(gameState.getCurrentUser(),false);
+                        return;
+                    }
+                }
+                if (gameStates.length == 1){
+                    gameStates[1] = gameState;
+                    gameState.getCurrentUser().setSavedGames(gameStates);
+                    Saver.getSaver().saveUser(gameState.getCurrentUser(),false);
+                    return;
+                }
+                else if (gameStates.length == 2){
+                    gameStates[2] = gameState;
+                    gameState.getCurrentUser().setSavedGames(gameStates);
+                    Saver.getSaver().saveUser(gameState.getCurrentUser(),false);
+                    return;
+                }
             case "Get Coins":
                 gameState.setCoins((int) (gameState.getCoins()+ (PR/4)));
                 gameState.setWaitingCheckpoint(null);
                 gameState.getCurrentSection().setCheckPoint(null);
-//                bla bla
                 gameState.setPaused(false);
                 break;
+        }
+    }
+    public void saveAndPauseRequest(){
+        GameState[] gameStates = gameState.getCurrentUser().getSavedGames();
+        if (gameStates != null) {
+            for (int i = 0; i < gameStates.length; i++) {
+                if (gameStates[i].getName().equals(gameState.getName())) {
+                    gameStates[i] = gameState;
+                    gameState.getCurrentUser().setSavedGames(gameStates);
+                    Saver.getSaver().saveUser(gameState.getCurrentUser(), false);
+                    return;
+                }
+            }
+        }
+        if (gameStates == null){
+            gameStates = new GameState[]{gameState};
+            gameState.getCurrentUser().setSavedGames(gameStates);
+            Saver.getSaver().saveUser(gameState.getCurrentUser(),false);
         }
     }
     public double returnPR() {

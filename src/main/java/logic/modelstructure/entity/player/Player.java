@@ -92,9 +92,6 @@ public abstract class Player extends Entity {
         if (mega){
             setHeight(Constant.BACKGROUND_TILE_SIZE*2);
         }
-        else {
-            setHeight(Constant.BACKGROUND_TILE_SIZE);
-        }
     }
 
     public PlayerCollisionHandler getPlayerCollisionHandler() {

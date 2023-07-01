@@ -110,7 +110,9 @@ public class CustomLevelSaver extends JsonSerializer<Level> {
                 }
                 jsonGenerator.writeNumberField("x", block.getCol());
                 jsonGenerator.writeNumberField("y", (Constant.PANEL_ROWS - Constant.GROUND_BLOCKS - 1) - block.getRow());
-                writeItem(jsonGenerator, block.getItem());
+                if (block.getClass() != CoinBlock.class) {
+                    writeItem(jsonGenerator, block.getItem());
+                }
                 jsonGenerator.writeEndObject();
             }
             jsonGenerator.writeEndArray();
@@ -118,7 +120,7 @@ public class CustomLevelSaver extends JsonSerializer<Level> {
     }
 
     private void writeItem(JsonGenerator jsonGenerator, Item item) throws IOException {
-        if (item != null) {
+        if (item != null ) {
             String type = "";
 
             switch (item.getClass().getSimpleName()){

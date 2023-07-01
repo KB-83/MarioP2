@@ -15,7 +15,6 @@ import logic.userstructure.User;
 import util.Loop;
 
 public class GameState {
-    @JsonIgnore
     private String name;
     @JsonIgnore
     private GameStateController gameStateController;

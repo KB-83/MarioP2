@@ -1,5 +1,7 @@
 package graphic.panel;
 import logic.requsethandler.UserRequestHandler;
+import logic.userstructure.User;
+import util.Constant;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,7 +54,7 @@ public class LastGamesPanel extends MarioPanel {
         setLastGamesButtons();
     }
     public void setLastGamesButtons(){
-        ok.setBounds(200,550,50,50);
+        ok.setBounds(Constant.PANEL_WIDTH/2,550,50,50);
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,31 +76,45 @@ public class LastGamesPanel extends MarioPanel {
 //                        break;
 //                    }
 //                }
-                UserRequestHandler userRequestHandler = cardPanel.getFrame().getGraphicManager().getLogicManager().getUser().getUserRequestHandler();
+                String gameName = "";
+                for (JRadioButton button : lastGamesList){
+                    if (button != null && button.isSelected()){
+                        gameName = button.getText();
+                        break;
+                    }
+                }
+                if (gameName.equals("")){
+                    System.out.println("select a game!");
+                    return;
+                }
+//                UserRequestHandler userRequestHandler = cardPanel.getFrame().getGraphicManager().getLogicManager().getUser().getUserRequestHandler();
                 cardPanel.getCardLayout().show(cardPanel,"gamePanel");
                 cardPanel.getGamePanel().requestFocus();
-                cardPanel.getFrame().getGraphicManager().getUser().getUserRequestHandler().lastGameRequest("");
+                cardPanel.getFrame().getGraphicManager().getUser().getUserRequestHandler().lastGameRequest(gameName);
             }
         });
         add(ok);
-        setLastGamesOptions();
 
     }
-    private void setLastGamesOptions() {
+    public void setUserClearedDependencies(User user) {
         int x = 200;
-//        for (int i = 0;i < user.gameStatesList.size() ; i++){
-//            if(lastGamesList[i] != null){
-//                this.remove(lastGamesList[i]);
-//            }
-//            JRadioButton gameButton = new JRadioButton();
-//            lastGamesList[i] = gameButton;
-//            gameButton.setText(user.gameStatesList.get(i).massage);
-//            gameButton.setBounds(x,500,250,30);
-//            bg.add(gameButton);
-//            this.add(gameButton);
-//            x += 300;
-//        }
+        if (user.getSavedGames() == null) {
+            return;
+        }
+        for (int i = 0;i < user.getSavedGames().length; i++){
+            if(lastGamesList[i] != null){
+                this.remove(lastGamesList[i]);
+            }
+            JRadioButton gameButton = new JRadioButton();
+            lastGamesList[i] = gameButton;
+            gameButton.setText(user.getSavedGames()[i].getName());
+            gameButton.setBounds(x,500,250,30);
+            bg.add(gameButton);
+            this.add(gameButton);
+            x += 300;
+        }
     }
+
     private void saveInfo(){
 //        File file = new File(user.getUserName() + ".json");
 //        FileWriter fileWriter = null;

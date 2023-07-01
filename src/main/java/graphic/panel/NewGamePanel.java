@@ -4,6 +4,7 @@ import graphic.guigamestructure.GuiGameCreator;
 import logic.gamestrucure.Game;
 import logic.gamestrucure.GameState;
 import logic.requsethandler.UserRequestHandler;
+import logic.userstructure.User;
 import util.Constant;
 import util.Loop;
 
@@ -19,7 +20,6 @@ public class NewGamePanel extends MarioPanel {
     JButton back = new JButton("<-");
     JButton ok =new  JButton("ok");
     JButton delete =new  JButton("delete");
-    JTextArea newGameMassage = new JTextArea("newGameMassage");
 
     JRadioButton[] lastGamesList = new JRadioButton[3];
     NewGamePanel(PanelsManagerCard cardPanel) {
@@ -38,22 +38,6 @@ public class NewGamePanel extends MarioPanel {
         setLayout(null);
         setBackground(Color.red);
         setButtons();
-        ButtonGroup buttonGroup = new ButtonGroup();
-        JRadioButton hard = new JRadioButton("hard");
-        JRadioButton mid = new JRadioButton("mid");
-        JRadioButton low = new JRadioButton("low");
-        hard.setBounds(20+100,250,60,30);
-        mid.setBounds(120+100,250,100,30);
-        low.setBounds(220+100,250,100,30);
-        buttonGroup.add(hard);
-        buttonGroup.add(mid);
-        buttonGroup.add(low);
-        add(mid);
-        add(low);
-        add(hard);
-        newGameMassage.setForeground(Color.gray);
-        newGameMassage.setBounds(Constant.PANEL_WIDTH/2-350 ,550,250,50);
-        add(newGameMassage);
     }
     private void setButtons(){
         back.addActionListener(new ActionListener() {
@@ -86,12 +70,22 @@ public class NewGamePanel extends MarioPanel {
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String gameName = "";
+                for (JRadioButton button : lastGamesList){
+                    if (button != null && button.isSelected()){
+                        gameName = button.getText();
+                        break;
+                    }
+                }
+                if (gameName.equals("")){
+                    System.out.println("select a game!");
+                    return;
+                }
                 UserRequestHandler userRequestHandler = cardPanel.getFrame().getGraphicManager().getLogicManager().getUser().getUserRequestHandler();
                 //todo : do every thing
-                String s = "default";
                 //  pass this s to user request handler
                 // this process is like a request response process
-                GameState gameState = userRequestHandler.newGameRequest(s);
+                GameState gameState = userRequestHandler.newGameRequest(gameName);
                 cardPanel.getCardLayout().show(cardPanel,"gamePanel");
                 cardPanel.getGamePanel().requestFocus();
 //
@@ -112,22 +106,22 @@ public class NewGamePanel extends MarioPanel {
         });
         add(delete);
         add(ok);
-        setLastGamesOptions();
     }
-    public void setLastGamesOptions(){
-//        int x = 200;
-//        for (int i = 0;i < user.gameStatesList.size() ; i++){
-//            if(lastGamesList[i] != null){
-//                this.remove(lastGamesList[i]);
-//            }
-//            JRadioButton gameButton = new JRadioButton();
-//            lastGamesList[i] = gameButton;
-//            gameButton.setText(user.gameStatesList.get(i).massage);
-//            gameButton.setBounds(x,500,250,30);
-//            bg.add(gameButton);
-//            this.add(gameButton);
-//            x += 300;
+    public void setUserClearedDependencies(User user) {
+        int x = 200;
+        for (int i = 0;i < user.getGames().length; i++){
+            if(lastGamesList[i] != null){
+                this.remove(lastGamesList[i]);
+            }
+            JRadioButton gameButton = new JRadioButton();
+            lastGamesList[i] = gameButton;
+            gameButton.setText(user.getGames()[i].getName());
+            gameButton.setBounds(x,500,250,30);
+            bg.add(gameButton);
+            this.add(gameButton);
+            x += 300;
         }
+    }
 
     // TODO: change save and load paradime
 

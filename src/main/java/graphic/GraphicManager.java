@@ -12,13 +12,17 @@ public class GraphicManager {
         this.logicManager = logicManager;
         frame = new Frame(this);
     }
-
+    private void setPanelsDependencies(User user){
+        frame.getPanelsManagerCard().getLastGamesPanel().setUserClearedDependencies(user);
+        frame.getPanelsManagerCard().getNewGamePanel().setUserClearedDependencies(user);
+    }
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+        setPanelsDependencies(user);
     }
 
     public Frame getFrame() {

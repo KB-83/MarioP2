@@ -30,6 +30,7 @@ public class Loader {
         }
         try {
                 user = objectMapper.readValue(file, User.class);
+//            System.out.println("loader"  + user.getSavedGames()[0].getMario().getImageAddress());
             } catch (IOException e) {
             System.out.println("json mapping for this user is not right.\nsource: Loader class loadUser method.");
             e.printStackTrace();
